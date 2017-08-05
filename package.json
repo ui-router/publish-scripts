@@ -1,0 +1,32 @@
+{
+  "name": "@uirouter/publish-scripts",
+  "version": "1.0.0",
+  "description": "Helper scripts for publishing UI-Router projects",
+  "main": "x",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ui-router/publish-scripts.git"
+  },
+  "author": "Chris Thielen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ui-router/publish-scripts/issues"
+  },
+  "homepage": "https://github.com/ui-router/publish-scripts#readme",
+  "bin": {
+    "artifact_tagging": "./artifact_tagging.js",
+    "ensure_clean_master": "./ensure_clean_master.js",
+    "release": "./release.js",
+    "show_changelog": "./show_changelog.js",
+    "show_core_changelog": "./show_core_changelog.js",
+    "update_changelog": "./update_changelog.js",
+    "util": "./util.js"
+  },
+  "dependencies": {
+    "conventional-changelog": "^1.1.4",
+    "conventional-changelog-ui-router-core": "^1.4.1",
+    "git-semver-tags": "^1.2.1",
+    "readline-sync": "^1.4.7",
+    "shelljs": "^0.7.8"
+  }
+}

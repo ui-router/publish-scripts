@@ -1,0 +1,19 @@
+# common
+node_modules
+.DS_Store
+*~
+.tscache
+.baseDir.ts
+
+# webstorm files
+.idea
+idea-out
+*.iml
+*.ipr
+*.iws
+
+_doc
+_bundles
+lib
+lib-esm
+stats.html
