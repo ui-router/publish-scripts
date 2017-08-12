@@ -1,3 +1,12 @@
+## 1.0.3 (2017-08-12)
+[Compare `@uirouter/publish-scripts` versions 1.0.2 and 1.0.3](https://github.com/ui-router/publish-scripts/compare/1.0.2...1.0.3)
+
+### Bug Fixes
+
+* **show_core_changelog:** Use cwd to find the "core" working copy ([994c44c](https://github.com/ui-router/publish-scripts/commit/994c44c))
+
+
+
 ## 1.0.2 (2017-08-12)
 [Compare `@uirouter/publish-scripts` versions 1.0.1 and 1.0.2](https://github.com/ui-router/publish-scripts/compare/1.0.1...1.0.2)
 
