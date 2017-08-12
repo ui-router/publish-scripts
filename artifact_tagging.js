@@ -91,7 +91,7 @@ if (npm) {
   }
   
   _exec(`npm publish`);
-  _exec(`npm dist-tag add ${pkg.name}@${latest} latest`);
+  _exec(`npm dist-tag add ${pkg.name}@${latest[1]} latest`);
 }
 
 if (githubtag) {
