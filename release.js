@@ -1,16 +1,13 @@
-#!env node
-"use strict";
+#!/usr/bin/env node
 
-let version = require('../package.json').version;
-
+require('./util').packageDir();
 require('shelljs/global');
+
 let readlineSync = require('readline-sync');
-let fs = require('fs');
-let path = require('path');
 let util = require('./util');
 let _exec = util._exec;
 
-cd(path.join(__dirname, '..'));
+let version = require('../package.json').version;
 
 if (!readlineSync.keyInYN('Did you bump the version number in package.json?')) {
   process.exit(1);
@@ -29,13 +26,6 @@ if (!readlineSync.keyInYN('Ready to publish?')) {
 }
 
 util.ensureCleanMaster('master');
-
-_exec('npm run package');
-
-// publish to npm first
 _exec(`npm publish`);
-
-// then tag and push tag
 _exec(`git tag ${version}`);
 _exec(`git push origin ${version}`);
-_exec(`npm run artifacts`);

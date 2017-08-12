@@ -1,5 +1,6 @@
-#!env node
-"use strict";
+#!/usr/bin/env node
+
+require('./util').packageDir();
 
 var gitSemverTags = require('git-semver-tags');
 var shelljs = require('shelljs');
@@ -8,13 +9,15 @@ var fs = require('fs');
 
 var CORE_PKG = `@uirouter/core`;
 var ALT_CORE_PKG = `ui-router-core`;
-var CORE_DIR = path.join(__dirname, "..", "..", 'core');
-var SHOWCHANGELOG_SCRIPT = path.join(CORE_DIR, "scripts", "show_changelog.js");
+var CORE_DIR = path.join(__dirname, "..", 'core');
+var SHOWCHANGELOG_SCRIPT = path.join(CORE_DIR, "node_modules", ".bin", "show_changelog");
 
-var currentPackage = require('../package.json');
-if (!currentPackage.dependencies || (!currentPackage.dependencies[CORE_PKG] && !currentPackage[ALT_CORE_PKG])) {
-  console.error(stringify(currentPackage.dependencies));
-  throw new Error("No dependency on " + CORE_PKG + " found in package.json.")
+var pkgPath = path.resolve('./package.json');
+var pkg = JSON.parse(fs.readFileSync(pkgPath));
+
+if (!pkg.dependencies || (!pkg.dependencies[CORE_PKG] && !pkg[ALT_CORE_PKG])) {
+  console.error(stringify(pkg.dependencies));
+  throw new Error(`No dependency on ${CORE_PKG} found in ${pkgPath}`)
 }
 
 if (!fs.existsSync(CORE_DIR)) {
@@ -53,7 +56,6 @@ gitSemverTags(function (err, val) {
     fromTag = prevDep.replace(/[=~^]/, "");
   }
 
-  let pkg = require("../package.json");
   let currentDep = pkg.dependencies[CORE_PKG] || pkg.dependencies[ALT_CORE_PKG];
   var toTag = currentDep.replace(/[=~^]/g, "");
 

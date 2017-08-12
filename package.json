@@ -16,6 +16,7 @@
   "bin": {
     "artifact_tagging": "./artifact_tagging.js",
     "ensure_clean_master": "./ensure_clean_master.js",
+    "modify_sourcemap_paths": "./modify_sourcemap_paths.js",
     "release": "./release.js",
     "show_changelog": "./show_changelog.js",
     "show_core_changelog": "./show_core_changelog.js",
@@ -25,6 +26,7 @@
   "dependencies": {
     "conventional-changelog": "^1.1.4",
     "conventional-changelog-ui-router-core": "^1.4.1",
+    "find-parent-dir": "^0.3.0",
     "git-semver-tags": "^1.2.1",
     "readline-sync": "^1.4.7",
     "shelljs": "^0.7.8"

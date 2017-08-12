@@ -1,7 +1,13 @@
 "use strict";
 
+const findParentDir = require('find-parent-dir');
+const fs = require('fs');
 require('shelljs/global');
-let fs = require('fs');
+
+function packageDir() {
+  const packageDir = findParentDir.sync(process.cwd(), 'package.json');
+  cd(packageDir);
+}
 
 function ensureCleanMaster(branch) {
   branch = branch || 'master';
@@ -35,5 +41,6 @@ module.exports = {
   _exec: _exec,
   asJson: asJson,
   assertDir: assertDir,
-  assertFile: assertFile
+  assertFile: assertFile,
+  packageDir: packageDir,
 };

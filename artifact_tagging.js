@@ -1,25 +1,25 @@
-#!env node
-"use strict";
+#!/usr/bin/env node
 
-const CONFIG = require('./artifacts.json');
+const util = require('./util');
+util.packageDir();
+
+const shx = require('shelljs');
+const readlineSync = require('readline-sync');
+const fs = require('fs');
+const path = require('path');
+let _exec = util._exec;
+_exec = console.log.bind(console);
+
+const CONFIG = JSON.parse(fs.readFileSync('./artifacts.json'));
 const COMMIT_ARTIFACTS = CONFIG.ARTIFACTS;
 
-let shx = require('shelljs');
-let readlineSync = require('readline-sync');
-let fs = require('fs');
-let path = require('path');
-let util = require('./util');
-let _exec = util._exec;
+const pkg = JSON.parse(fs.readFileSync('./package.json'));
+const version = pkg.version;
 
-let pkg = require('../package.json');
-let version = pkg.version;
-
-shx.cd(path.join(__dirname, '..'));
-
-var widen = false, npm = false, githubtag = false;
-var coreDep = pkg.dependencies['@uirouter/core'];
-var isNarrow = /^[[=~]?(\d.*)/.exec(coreDep);
-var widenedDep = isNarrow && '^' + isNarrow[1];
+let widen = false, npm = false, githubtag = false;
+let coreDep = pkg.dependencies['@uirouter/core'];
+let isNarrow = /^[[=~]?(\d.*)/.exec(coreDep);
+let widenedDep = isNarrow && '^' + isNarrow[1];
 
 if (isNarrow && readlineSync.keyInYN('Widen @uirouter/core dependency from ' + coreDep + ' to ' + widenedDep + '?')) {
   widen = false;
@@ -38,16 +38,16 @@ if (!npm && !githubtag) {
   process.exit(1);
 }
 
-var label = githubtag && npm ? "npm package and github tag" : npm ? "npm package" : "github tag";
+const label = githubtag && npm ? "npm package and github tag" : npm ? "npm package" : "github tag";
 
 const YYYYMMDD = (function() {
-  var date = new Date();
-  var year = date.getFullYear();
+  const date = new Date();
+  const year = date.getFullYear();
 
-  var month = date.getMonth() + 1;
+  let month = date.getMonth() + 1;
   month = (month < 10 ? "0" : "") + month;
 
-  var day  = date.getDate();
+  let day  = date.getDate();
   day = (day < 10 ? "0" : "") + day;
 
   return year + month + day;
