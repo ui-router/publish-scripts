@@ -9,7 +9,7 @@ var fs = require('fs');
 
 var CORE_PKG = `@uirouter/core`;
 var ALT_CORE_PKG = `ui-router-core`;
-var CORE_DIR = path.join(__dirname, "..", 'core');
+var CORE_DIR = path.join(process.cwd(), "..", 'core');
 var SHOWCHANGELOG_SCRIPT = path.join(CORE_DIR, "node_modules", ".bin", "show_changelog");
 
 var pkgPath = path.resolve('./package.json');
