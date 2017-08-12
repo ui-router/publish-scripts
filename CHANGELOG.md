@@ -1,3 +1,12 @@
+## 1.0.4 (2017-08-12)
+[Compare `@uirouter/publish-scripts` versions 1.0.3 and 1.0.4](https://github.com/ui-router/publish-scripts/compare/1.0.3...1.0.4)
+
+### Bug Fixes
+
+* **artifact_tagging:** re-enable publishing (disable dryrun) ([37b1cfc](https://github.com/ui-router/publish-scripts/commit/37b1cfc))
+
+
+
 ## 1.0.3 (2017-08-12)
 [Compare `@uirouter/publish-scripts` versions 1.0.2 and 1.0.3](https://github.com/ui-router/publish-scripts/compare/1.0.2...1.0.3)
 
