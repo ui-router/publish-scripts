@@ -1,3 +1,12 @@
+## 1.0.5 (2017-08-12)
+[Compare `@uirouter/publish-scripts` versions 1.0.4 and 1.0.5](https://github.com/ui-router/publish-scripts/compare/1.0.4...1.0.5)
+
+### Bug Fixes
+
+* **artifact_tagging:** Correctly reset 'latest' tag ([1115be6](https://github.com/ui-router/publish-scripts/commit/1115be6))
+
+
+
 ## 1.0.4 (2017-08-12)
 [Compare `@uirouter/publish-scripts` versions 1.0.3 and 1.0.4](https://github.com/ui-router/publish-scripts/compare/1.0.3...1.0.4)
 
