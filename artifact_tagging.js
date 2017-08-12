@@ -8,7 +8,6 @@ const readlineSync = require('readline-sync');
 const fs = require('fs');
 const path = require('path');
 let _exec = util._exec;
-_exec = console.log.bind(console);
 
 const CONFIG = JSON.parse(fs.readFileSync('./artifacts.json'));
 const COMMIT_ARTIFACTS = CONFIG.ARTIFACTS;
