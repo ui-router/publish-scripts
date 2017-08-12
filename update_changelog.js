@@ -4,7 +4,7 @@ require('./util').packageDir();
 require('shelljs/global');
 
 const path = require('path');
-const fs = require('path');
+const fs = require('fs');
 const pkg = JSON.parse(fs.readFileSync('package.json'));
 const _exec = require('./util')._exec;
 
