@@ -3,11 +3,12 @@
 require('./util').packageDir();
 require('shelljs/global');
 
-let readlineSync = require('readline-sync');
-let util = require('./util');
-let _exec = util._exec;
+const readlineSync = require('readline-sync');
+const fs = require('fs');
+const util = require('./util');
+const _exec = util._exec;
 
-let version = require('../package.json').version;
+let version = JSON.parse(fs.readFileSync('./package.json')).version;
 
 if (!readlineSync.keyInYN('Did you bump the version number in package.json?')) {
   process.exit(1);
