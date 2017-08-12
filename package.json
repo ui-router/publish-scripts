@@ -13,6 +13,9 @@
     "url": "https://github.com/ui-router/publish-scripts/issues"
   },
   "homepage": "https://github.com/ui-router/publish-scripts#readme",
+  "scripts": {
+    "release": "node ./release.js"
+  },
   "bin": {
     "artifact_tagging": "./artifact_tagging.js",
     "ensure_clean_master": "./ensure_clean_master.js",
