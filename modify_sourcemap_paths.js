@@ -20,7 +20,9 @@ const files = globs
 files.forEach(file => {
   const data = JSON.parse(fs.readFileSync(file));
   if (Array.isArray(data.sources)) {
-    data.sources = data.sources.map(source => source.replace(/^(?:\.\.\/)*src/, pkg.name));
+    data.sources = data.sources
+      .map(source => source.replace(/^(?:\.\.\/)*src/, pkg.name))
+      .map(source => source.replace(/^(?:\.\.\/)*node_modules\/@uirouter/, '@uirouter'));
     fs.writeFileSync(file, JSON.stringify(data));
   }
 });
