@@ -1,3 +1,12 @@
+## `@uirouter/publish-scripts` 1.0.6 (2017-08-13)
+[Compare `@uirouter/publish-scripts` versions 1.0.5 and 1.0.6](https://github.com/ui-router/publish-scripts/compare/1.0.5...1.0.6)
+
+### Bug Fixes
+
+* **sourcemap:** rewrite ../node_modules/[@uirouter](https://github.com/uirouter) paths ([553d27f](https://github.com/ui-router/publish-scripts/commit/553d27f))
+
+
+
 ## 1.0.5 (2017-08-12)
 [Compare `@uirouter/publish-scripts` versions 1.0.4 and 1.0.5](https://github.com/ui-router/publish-scripts/compare/1.0.4...1.0.5)
 
