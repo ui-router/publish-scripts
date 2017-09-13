@@ -1,6 +1,6 @@
 {
   "name": "@uirouter/publish-scripts",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Helper scripts for publishing UI-Router projects",
   "main": "x",
   "repository": {
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "conventional-changelog": "^1.1.4",
-    "conventional-changelog-ui-router-core": "file:../conventional-changelog-ui-router-core",
+    "conventional-changelog-ui-router-core": "^1.4.2",
     "find-parent-dir": "^0.3.0",
     "git-semver-tags": "^1.2.1",
     "readline-sync": "^1.4.7",

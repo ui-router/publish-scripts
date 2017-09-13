@@ -1,3 +1,12 @@
+## 1.0.7 (2017-09-13)
+[Compare `@uirouter/publish-scripts` versions 1.0.6 and 1.0.7](https://github.com/ui-router/publish-scripts/compare/1.0.6...1.0.7)
+
+### Bug Fixes
+
+* **build:** Fix dep on conventional-changelog-ui-router-core ([e90d091](https://github.com/ui-router/publish-scripts/commit/e90d091))
+
+
+
 ## `@uirouter/publish-scripts` 1.0.6 (2017-08-13)
 [Compare `@uirouter/publish-scripts` versions 1.0.5 and 1.0.6](https://github.com/ui-router/publish-scripts/compare/1.0.5...1.0.6)
 
