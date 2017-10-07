@@ -12,7 +12,7 @@ const _exec = require('./util')._exec;
 echo('Updating CHANGELOG...');
 cp('CHANGELOG.md', 'CHANGELOG.bak');
 _exec('./node_modules/.bin/show_changelog >> CHANGELOG.new');
-if (args[0] !== '--no-core') {
+if (args[0] === '--include-core') {
   _exec('./node_modules/.bin/show_core_changelog >> CHANGELOG.new');
 }
 _exec('cat CHANGELOG.new CHANGELOG.bak > CHANGELOG.md');
