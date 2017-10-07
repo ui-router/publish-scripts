@@ -1,3 +1,12 @@
+## 1.0.8 (2017-10-07)
+[Compare `@uirouter/publish-scripts` versions 1.0.7 and 1.0.8](https://github.com/ui-router/publish-scripts/compare/1.0.7...1.0.8)
+
+### Features
+
+* **update_changelog:** Add --no-core toggle to disable processing uirouter/core changelog ([b343db7](https://github.com/ui-router/publish-scripts/commit/b343db7))
+
+
+
 ## 1.0.7 (2017-09-13)
 [Compare `@uirouter/publish-scripts` versions 1.0.6 and 1.0.7](https://github.com/ui-router/publish-scripts/compare/1.0.6...1.0.7)
 
