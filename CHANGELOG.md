@@ -1,3 +1,12 @@
+## 1.0.9 (2017-10-07)
+[Compare `@uirouter/publish-scripts` versions 1.0.8 and 1.0.9](https://github.com/ui-router/publish-scripts/compare/1.0.8...1.0.9)
+
+### Features
+
+* **update_changelog:** change cmd line arg from --no-core opt-out to --include-core opt-in ([69b20e5](https://github.com/ui-router/publish-scripts/commit/69b20e5))
+
+
+
 ## 1.0.8 (2017-10-07)
 [Compare `@uirouter/publish-scripts` versions 1.0.7 and 1.0.8](https://github.com/ui-router/publish-scripts/compare/1.0.7...1.0.8)
 
