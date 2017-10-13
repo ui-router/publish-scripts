@@ -34,6 +34,6 @@
     "git-semver-tags": "^1.2.1",
     "readline-sync": "^1.4.7",
     "shelljs": "^0.7.8",
-    "tweak-sourcemap-paths": "^0.0.1"
+    "tweak-sourcemap-paths": "^0.0.2"
   }
 }
