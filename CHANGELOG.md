@@ -1,3 +1,12 @@
+## 1.1.1 (2017-10-13)
+[Compare `@uirouter/publish-scripts` versions 1.1.0 and 1.1.1](https://github.com/ui-router/publish-scripts/compare/1.1.0...1.1.1)
+
+### Features
+
+* **sourcemap:** upgrade to tweak-sourcemap-paths 0.0.2 ([aa3e0b2](https://github.com/ui-router/publish-scripts/commit/aa3e0b2))
+
+
+
 # 1.1.0 (2017-10-13)
 [Compare `@uirouter/publish-scripts` versions 1.0.9 and 1.1.0](https://github.com/ui-router/publish-scripts/compare/1.0.9...1.1.0)
 
