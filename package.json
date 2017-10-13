@@ -33,6 +33,7 @@
     "find-parent-dir": "^0.3.0",
     "git-semver-tags": "^1.2.1",
     "readline-sync": "^1.4.7",
-    "shelljs": "^0.7.8"
+    "shelljs": "^0.7.8",
+    "tweak-sourcemap-paths": "^0.0.1"
   }
 }
