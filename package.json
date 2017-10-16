@@ -14,7 +14,6 @@
   },
   "homepage": "https://github.com/ui-router/publish-scripts#readme",
   "scripts": {
-    "changelog": "node ./.update_changelog.js",
     "release": "node ./release.js"
   },
   "bin": {
