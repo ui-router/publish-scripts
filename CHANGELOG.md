@@ -1,3 +1,15 @@
+# 2.0.0 (2017-10-16)
+[Compare `@uirouter/publish-scripts` versions 1.1.1 and 2.0.0](https://github.com/ui-router/publish-scripts/compare/1.1.1...2.0.0)
+
+### Features
+
+* **changelog:** improve changelog generation scripts ([12298ad](https://github.com/ui-router/publish-scripts/commit/12298ad))
+* **release:** Add post-install steps ([9a3377c](https://github.com/ui-router/publish-scripts/commit/9a3377c))
+* **release:** Automate more steps in release.js ([d963f9d](https://github.com/ui-router/publish-scripts/commit/d963f9d))
+
+
+
+
 ## 1.1.1 (2017-10-13)
 [Compare `@uirouter/publish-scripts` versions 1.1.0 and 1.1.1](https://github.com/ui-router/publish-scripts/compare/1.1.0...1.1.1)
 
