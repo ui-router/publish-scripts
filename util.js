@@ -17,12 +17,16 @@ function ensureCleanMaster(branch) {
     throw new Error('Working copy is dirty, aborting');
 }
 
-function _exec(command) {
-  echo(command);
-  echo();
-  var result = exec(command);
+function _exec(command, silent) {
+  if (!silent) {
+    echo(command);
+    echo();
+  }
+  var result = exec(command, { silent: !!silent });
   if (result.code === 0) return result;
+  echo(`cwd: ${process.cwd()}`);
   echo(`Aborting; non-zero return value (${result.code}) from: ${command}`);
+  console.error(result.stderr);
   exit(result.code)
 }
 
