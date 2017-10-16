@@ -1,3 +1,13 @@
+## 2.0.1 (2017-10-16)
+[Compare `@uirouter/publish-scripts` versions 2.0.0 and 2.0.1](https://github.com/ui-router/publish-scripts/compare/2.0.0...2.0.1)
+
+### Features
+
+* **changelog:** Remove update_changelog in favor of release.js ([7dcd45d](https://github.com/ui-router/publish-scripts/commit/7dcd45d))
+
+
+
+
 # 2.0.0 (2017-10-16)
 [Compare `@uirouter/publish-scripts` versions 1.1.1 and 2.0.0](https://github.com/ui-router/publish-scripts/compare/1.1.1...2.0.0)
 
