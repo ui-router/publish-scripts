@@ -1,3 +1,13 @@
+## 2.0.3 (2017-10-17)
+[Compare `@uirouter/publish-scripts` versions 2.0.2 and 2.0.3](https://github.com/ui-router/publish-scripts/compare/2.0.2...2.0.3)
+
+### Features
+
+* **run:** Add npm-run-all package ([1dd0a6c](https://github.com/ui-router/publish-scripts/commit/1dd0a6c))
+
+
+
+
 ## 2.0.2 (2017-10-17)
 [Compare `@uirouter/publish-scripts` versions 2.0.1 and 2.0.2](https://github.com/ui-router/publish-scripts/compare/2.0.1...2.0.2)
 
