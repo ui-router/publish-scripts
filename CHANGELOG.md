@@ -1,3 +1,13 @@
+## 2.0.4 (2017-10-17)
+[Compare `@uirouter/publish-scripts` versions 2.0.3 and 2.0.4](https://github.com/ui-router/publish-scripts/compare/2.0.3...2.0.4)
+
+### Bug Fixes
+
+* **show_changelog:** silence popd() output ([45a0c5a](https://github.com/ui-router/publish-scripts/commit/45a0c5a))
+
+
+
+
 ## 2.0.3 (2017-10-17)
 [Compare `@uirouter/publish-scripts` versions 2.0.2 and 2.0.3](https://github.com/ui-router/publish-scripts/compare/2.0.2...2.0.3)
 
