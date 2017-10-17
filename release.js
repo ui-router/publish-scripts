@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const semver = require('semver');
 const packageJson = JSON.parse(fs.readFileSync('package.json'));
+const modifiedFiles = [];
 
 const yargs = require('yargs')
     .option('dryrun', {
@@ -48,6 +49,14 @@ if (versionBump !== 'none') {
 
   packageJson.version = version;
   fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
+  modifiedFiles.push('package.json');
+
+  if (yargs.argv.bower) {
+    const bowerJson = fs.readFileSync('bower.json');
+    bowerJson.version = version;
+    fs.writeFileSync('bower.json', JSON.stringify(bowerJson, null, 2));
+    modifiedFiles.push('bower.json');
+  }
 }
 
 
@@ -68,17 +77,24 @@ if (readlineSync.keyInYN('\n\nUpdate CHANGELOG?')) {
 
   let fullChangelog = fs.readFileSync('CHANGELOG.md');
   fs.writeFileSync('CHANGELOG.md', changelog + '\n' + fullChangelog);
+  modifiedFiles.push('CHANGELOG.md');
+}
+
+
+// Run tests
+if (readlineSync.keyInYN('Run tests?')) {
+  _exec('npm test')
 }
 
 
 // Commit and push changes
 if (!readlineSync.keyInYN('Ready to publish?')) {
-  console.log('\n\nUndo changes:\n\ngit checkout CHANGELOG.md package.json\n\n');
+  console.log(`\n\nRun this command to undo changes:\n\ngit checkout ${modifiedFiles.join(' ')}\n\n`);
   process.exit(1);
 }
 
 if (!yargs.argv.dryrun) {
-_exec(`git ci -m ${version} package.json CHANGELOG.md`);
+  _exec(`git ci -m ${version} ${modifiedFiles.join(' ')}`);
 }
 
 if (!yargs.argv.dryrun) {
