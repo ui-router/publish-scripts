@@ -1,3 +1,13 @@
+## 2.0.2 (2017-10-17)
+[Compare `@uirouter/publish-scripts` versions 2.0.1 and 2.0.2](https://github.com/ui-router/publish-scripts/compare/2.0.1...2.0.2)
+
+### Features
+
+* **publish:** Update bower.json, if it exists ([2c0547b](https://github.com/ui-router/publish-scripts/commit/2c0547b))
+
+
+
+
 ## 2.0.1 (2017-10-16)
 [Compare `@uirouter/publish-scripts` versions 2.0.0 and 2.0.1](https://github.com/ui-router/publish-scripts/compare/2.0.0...2.0.1)
 
