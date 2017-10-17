@@ -63,7 +63,7 @@ if (versionBump !== 'none') {
 // Generate changelog
 let changelog;
 if (readlineSync.keyInYN('\n\nUpdate CHANGELOG?')) {
-  const depsArg = yargs.argv.deps ? `--deps ${yargs.argv.deps}` : '';
+  const depsArg = yargs.argv.deps ? `--deps ${yargs.argv.deps.join(' ')}` : '';
   const show_changelog = path.resolve(__dirname, 'show_changelog.js');
 
   changelog = _exec(`${show_changelog} ${depsArg}`, true).stdout;
