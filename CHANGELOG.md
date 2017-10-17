@@ -1,3 +1,13 @@
+## 2.0.5 (2017-10-17)
+[Compare `@uirouter/publish-scripts` versions 2.0.4 and 2.0.5](https://github.com/ui-router/publish-scripts/compare/2.0.4...2.0.5)
+
+### Bug Fixes
+
+* **release:** Fix args processing for multiple deps ([f0d1d68](https://github.com/ui-router/publish-scripts/commit/f0d1d68))
+
+
+
+
 ## 2.0.4 (2017-10-17)
 [Compare `@uirouter/publish-scripts` versions 2.0.3 and 2.0.4](https://github.com/ui-router/publish-scripts/compare/2.0.3...2.0.4)
 
