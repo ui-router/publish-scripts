@@ -48,13 +48,13 @@ if (versionBump !== 'none') {
   console.log(`Bumping version: ${version}`);
 
   packageJson.version = version;
-  fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
+  fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2) + "\n");
   modifiedFiles.push('package.json');
 
   if (yargs.argv.bower) {
     const bowerJson = fs.readFileSync('bower.json');
     bowerJson.version = version;
-    fs.writeFileSync('bower.json', JSON.stringify(bowerJson, null, 2));
+    fs.writeFileSync('bower.json', JSON.stringify(bowerJson, null, 2) + "\n");
     modifiedFiles.push('bower.json');
   }
 }
