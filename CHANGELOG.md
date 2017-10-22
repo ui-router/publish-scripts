@@ -1,3 +1,13 @@
+## 2.0.6 (2017-10-22)
+[Compare `@uirouter/publish-scripts` versions 2.0.5 and 2.0.6](https://github.com/ui-router/publish-scripts/compare/2.0.5...2.0.6)
+
+### Bug Fixes
+
+* **changelog:** Add newline to end of package.json ([ad345d0](https://github.com/ui-router/publish-scripts/commit/ad345d0))
+
+
+
+
 ## 2.0.5 (2017-10-17)
 [Compare `@uirouter/publish-scripts` versions 2.0.4 and 2.0.5](https://github.com/ui-router/publish-scripts/compare/2.0.4...2.0.5)
 
