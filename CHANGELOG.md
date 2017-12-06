@@ -1,3 +1,13 @@
+## 2.0.7 (2017-12-06)
+[Compare `@uirouter/publish-scripts` versions 2.0.6 and 2.0.7](https://github.com/ui-router/publish-scripts/compare/2.0.6...2.0.7)
+
+### Bug Fixes
+
+* **scripts:** remove broken update_changelog.js script entry from package.json ([dad1222](https://github.com/ui-router/publish-scripts/commit/dad1222))
+
+
+
+
 ## 2.0.6 (2017-10-22)
 [Compare `@uirouter/publish-scripts` versions 2.0.5 and 2.0.6](https://github.com/ui-router/publish-scripts/compare/2.0.5...2.0.6)
 
