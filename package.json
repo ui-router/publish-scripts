@@ -22,7 +22,6 @@
     "modify_sourcemap_paths": "./modify_sourcemap_paths.js",
     "release": "./release.js",
     "show_changelog": "./show_changelog.js",
-    "update_changelog": "./update_changelog.js",
     "util": "./util.js"
   },
   "dependencies": {
