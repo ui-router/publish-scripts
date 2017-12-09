@@ -94,7 +94,7 @@ if (!readlineSync.keyInYN('Ready to publish?')) {
 }
 
 if (!yargs.argv.dryrun) {
-  _exec(`git ci -m ${version} ${modifiedFiles.join(' ')}`);
+  _exec(`git commit -m ${version} ${modifiedFiles.join(' ')}`);
 }
 
 if (!yargs.argv.dryrun) {
