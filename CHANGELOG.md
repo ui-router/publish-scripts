@@ -1,3 +1,13 @@
+## 2.0.8 (2017-12-09)
+[Compare `@uirouter/publish-scripts` versions 2.0.7 and 2.0.8](https://github.com/ui-router/publish-scripts/compare/2.0.7...2.0.8)
+
+### Bug Fixes
+
+* **release:** Use git commit instead of git ci ([2ce1506](https://github.com/ui-router/publish-scripts/commit/2ce1506))
+
+
+
+
 ## 2.0.7 (2017-12-06)
 [Compare `@uirouter/publish-scripts` versions 2.0.6 and 2.0.7](https://github.com/ui-router/publish-scripts/compare/2.0.6...2.0.7)
 
