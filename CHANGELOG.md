@@ -1,3 +1,13 @@
+# 2.1.0 (2017-12-26)
+[Compare `@uirouter/publish-scripts` versions 2.0.8 and 2.1.0](https://github.com/ui-router/publish-scripts/compare/2.0.8...2.1.0)
+
+### Features
+
+* **test:** add test_downstream_projects script ([c8790a8](https://github.com/ui-router/publish-scripts/commit/c8790a8))
+
+
+
+
 ## 2.0.8 (2017-12-09)
 [Compare `@uirouter/publish-scripts` versions 2.0.7 and 2.0.8](https://github.com/ui-router/publish-scripts/compare/2.0.7...2.0.8)
 
