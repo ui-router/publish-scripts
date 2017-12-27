@@ -11,9 +11,15 @@ const pkgjson = JSON.parse(fs.readFileSync('package.json'));
 
 const DOWNSTREAMS_PATH = path.resolve(PKG_DIR, 'downstream_projects');
 const UPSTREAM_PKGS = (process.env.UPSTREAM_PKGS || '').split(',').filter(x => x).concat(pkgjson.name);
+const DOWNSTREAM_PKGS = (process.env.DOWNSTREAM_PKGS || '').split(',').filter(x => x);
 
 function forEachDownstream(callback) {
   Object.keys(config).forEach(key => {
+    if (DOWNSTREAM_PKGS.length && DOWNSTREAM_PKGS.indexOf(key) === -1) {
+      console.log(key + ' not in DOWNSTREAM_PKGS, skipping...');
+      return;
+    }
+
     const projectPath = path.resolve(DOWNSTREAMS_PATH, key);
     if (!fs.existsSync(projectPath)) {
       process.chdir(DOWNSTREAMS_PATH);
@@ -60,6 +66,13 @@ function installDeps() {
 
 function runTests() {
   util._exec(`UPSTREAM_PKGS="${UPSTREAM_PKGS.join(',')}" npm test`);
+
+  const downstreamPkgJson = JSON.parse(fs.readFileSync('package.json'));
+  const hasDownstreamTests = downstreamPkgJson.scripts && !!downstreamPkgJson.scripts['test:downstream'];
+
+  if (hasDownstreamTests) {
+    util._exec(`UPSTREAM_PKGS="${UPSTREAM_PKGS.join(',')}" npm run test:downstream`);
+  }
 }
 
 makeWorkingCopy();
