@@ -1,3 +1,13 @@
+## 2.1.2 (2017-12-27)
+[Compare `@uirouter/publish-scripts` versions 2.1.1 and 2.1.2](https://github.com/ui-router/publish-scripts/compare/2.1.1...2.1.2)
+
+### Bug Fixes
+
+* **downstream:** define giturl variable before use ([eed79ee](https://github.com/ui-router/publish-scripts/commit/eed79ee))
+
+
+
+
 ## 2.1.1 (2017-12-27)
 [Compare `@uirouter/publish-scripts` versions 2.1.0 and 2.1.1](https://github.com/ui-router/publish-scripts/compare/2.1.0...2.1.1)
 
