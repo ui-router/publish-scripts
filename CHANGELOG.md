@@ -1,3 +1,13 @@
+# 2.2.0 (2017-12-27)
+[Compare `@uirouter/publish-scripts` versions 2.1.2 and 2.2.0](https://github.com/ui-router/publish-scripts/compare/2.1.2...2.2.0)
+
+### Features
+
+* **yalc:** Add publish_yalc_package script for travis scripts ([349cc57](https://github.com/ui-router/publish-scripts/commit/349cc57))
+
+
+
+
 ## 2.1.2 (2017-12-27)
 [Compare `@uirouter/publish-scripts` versions 2.1.1 and 2.1.2](https://github.com/ui-router/publish-scripts/compare/2.1.1...2.1.2)
 
