@@ -17,6 +17,7 @@ function forEachDownstream(callback) {
     const projectPath = path.resolve(DOWNSTREAMS_PATH, key);
     if (!fs.existsSync(projectPath)) {
       process.chdir(DOWNSTREAMS_PATH);
+      const giturl = config[key];
       console.log('cloning ' + giturl);
       util._exec('git clone '+ giturl + ' ' + key);
     }
