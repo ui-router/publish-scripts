@@ -23,6 +23,7 @@
     "release": "./release.js",
     "show_changelog": "./show_changelog.js",
     "test_downstream_projects": "./test_downstream_projects.js",
+    "publish_yalc_package": "./publish_yalc_package.js",
     "util": "./util.js"
   },
   "dependencies": {
