@@ -1,3 +1,13 @@
+## 2.2.1 (2017-12-27)
+[Compare `@uirouter/publish-scripts` versions 2.2.0 and 2.2.1](https://github.com/ui-router/publish-scripts/compare/2.2.0...2.2.1)
+
+### Features
+
+* **downstream:** Only test downstreams from DOWNSTREAM_PKGS env variable (if set) ([8fc540d](https://github.com/ui-router/publish-scripts/commit/8fc540d))
+
+
+
+
 # 2.2.0 (2017-12-27)
 [Compare `@uirouter/publish-scripts` versions 2.1.2 and 2.2.0](https://github.com/ui-router/publish-scripts/compare/2.1.2...2.2.0)
 
