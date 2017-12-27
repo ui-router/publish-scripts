@@ -1,3 +1,13 @@
+## 2.1.1 (2017-12-27)
+[Compare `@uirouter/publish-scripts` versions 2.1.0 and 2.1.1](https://github.com/ui-router/publish-scripts/compare/2.1.0...2.1.1)
+
+### Features
+
+* **downstream:** enable yalc add of grandparent upstream (core -> angular -> sample-app-angular) ([6c12618](https://github.com/ui-router/publish-scripts/commit/6c12618))
+
+
+
+
 # 2.1.0 (2017-12-26)
 [Compare `@uirouter/publish-scripts` versions 2.0.8 and 2.1.0](https://github.com/ui-router/publish-scripts/compare/2.0.8...2.1.0)
 
