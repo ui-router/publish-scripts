@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const fs = require('fs');
+const path = require('path');
 const util = require('./util');
 
 const ORIG_DIR = process.cwd();
@@ -9,7 +10,7 @@ function publishYalcPackage(installDir, githubUrl) {
     throw new Error('Usage: publish_yalc_package [INSTALL_DIR] [GITHUB_URL]');
   }
 
-  if (!fs.existsSync(installDir)) {
+  if (!fs.existsSync(path.join(installDir, '.git'))) {
     util._exec('git clone '+ githubUrl + ' ' + installDir);
   }
 
