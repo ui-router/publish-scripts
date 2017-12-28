@@ -1,3 +1,13 @@
+## 2.2.2 (2017-12-28)
+[Compare `@uirouter/publish-scripts` versions 2.2.1 and 2.2.2](https://github.com/ui-router/publish-scripts/compare/2.2.1...2.2.2)
+
+### Bug Fixes
+
+* **publish_yalc:** Check if directory/.git exists, not just directory. ([0db29b7](https://github.com/ui-router/publish-scripts/commit/0db29b7))
+
+
+
+
 ## 2.2.1 (2017-12-27)
 [Compare `@uirouter/publish-scripts` versions 2.2.0 and 2.2.1](https://github.com/ui-router/publish-scripts/compare/2.2.0...2.2.1)
 
