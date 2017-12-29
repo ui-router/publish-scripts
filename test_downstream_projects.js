@@ -9,7 +9,7 @@ const PKG_DIR = process.cwd();
 const config = JSON.parse(fs.readFileSync('downstream_projects.json'));
 const pkgjson = JSON.parse(fs.readFileSync('package.json'));
 
-const DOWNSTREAMS_PATH = path.resolve(PKG_DIR, 'downstream_projects');
+const DOWNSTREAMS_PATH = path.resolve(PKG_DIR, '.downstream_cache');
 const UPSTREAM_PKGS = (process.env.UPSTREAM_PKGS || '').split(',').filter(x => x).concat(pkgjson.name);
 const DOWNSTREAM_PKGS = (process.env.DOWNSTREAM_PKGS || '').split(',').filter(x => x);
 
@@ -36,7 +36,7 @@ function forEachDownstream(callback) {
 function makeWorkingCopy() {
   process.chdir(PKG_DIR);
   if (!fs.existsSync(DOWNSTREAMS_PATH)) {
-    console.log('making downstream_projects working directory');
+    console.log('making .downstream_cache working directory');
     fs.mkdirSync(DOWNSTREAMS_PATH);
   }
 }
