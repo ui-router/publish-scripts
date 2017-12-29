@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
+const publishYalcPackage = require('./publish_yalc_package');
 const util = require('./util');
 util.packageDir();
 const PKG_DIR = process.cwd();
@@ -16,20 +17,12 @@ const DOWNSTREAM_PKGS = (process.env.DOWNSTREAM_PKGS || '').split(',').filter(x 
 function forEachDownstream(callback) {
   Object.keys(config).forEach(key => {
     if (DOWNSTREAM_PKGS.length && DOWNSTREAM_PKGS.indexOf(key) === -1) {
-      console.log(key + ' not in DOWNSTREAM_PKGS, skipping...');
+      console.log(callback.constructor.name + ": " + key + ' not in DOWNSTREAM_PKGS, skipping...');
       return;
     }
 
-    const projectPath = path.resolve(DOWNSTREAMS_PATH, key);
-    if (!fs.existsSync(projectPath)) {
-      process.chdir(DOWNSTREAMS_PATH);
-      const giturl = config[key];
-      console.log('cloning ' + giturl);
-      util._exec('git clone '+ giturl + ' ' + key);
-    }
-    process.chdir(projectPath);
-
-    callback();
+    process.chdir(path.resolve(DOWNSTREAMS_PATH, key));
+    callback(key, config[key]);
   });
 }
 
@@ -47,20 +40,16 @@ function localPublish() {
   util._exec('yalc publish');
 }
 
-function getCleanMaster() {
-  console.log('cleaning ' + process.cwd());
-  util._exec('git fetch origin');
-  util._exec('git reset --hard origin/master');
-  util._exec('git clean --force -d');
+function initializeDownstreams() {
+  Object.keys(config).forEach(key => {
+    const installTargetDir = path.resolve(DOWNSTREAMS_PATH, key);
+    const installSource = config[key];
+    const flags = { noBuild: true, noPublish: true };
+    publishYalcPackage(installTargetDir, installSource, flags);
+  });
 }
 
-function revertLocalChanges() {
-  util._exec('git reset --hard origin/master');
-  util._exec('git clean --force -d');
-}
-
-function installDeps() {
-  util._exec('yarn install --check-files');
+function installUpstreamDeps() {
   UPSTREAM_PKGS.forEach(upstream => util._exec('yalc add ' + upstream));
 }
 
@@ -75,11 +64,27 @@ function runTests() {
   }
 }
 
+function revertLocalChanges(key, source) {
+  const isRemoteSource = source[0] !== '.';
+  const ref = isRemoteSource ? 'origin/master' : 'master';
+  util._exec(`git reset --hard ${ref}`);
+  util._exec('git clean --force -d');
+}
+
+console.log(`      ===> Making working copy <===`);
 makeWorkingCopy();
+
+console.log(`      ===> Publishing ${pkgjson.name} to yalc registry <===`);
 localPublish();
 
-forEachDownstream(getCleanMaster);
-forEachDownstream(installDeps);
-forEachDownstream(runTests);
-forEachDownstream(revertLocalChanges);
+console.log(`      ===> Fetching downstream projects and their dependencies <===`);
+initializeDownstreams();
 
+console.log(`      ===> Installing freshly built upstream packages <===`);
+forEachDownstream(installUpstreamDeps);
+
+console.log(`      ===> Running downstream tests <===`);
+forEachDownstream(runTests);
+
+console.log(`      ===> Cleaning downstream projects <===`);
+forEachDownstream(revertLocalChanges);
