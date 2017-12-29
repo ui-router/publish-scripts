@@ -1,3 +1,8 @@
+## 2.2.3 (2017-12-29)
+[Compare `@uirouter/publish-scripts` versions 2.2.2 and 2.2.3](https://github.com/ui-router/publish-scripts/compare/2.2.2...2.2.3)
+
+
+
 ## 2.2.2 (2017-12-28)
 [Compare `@uirouter/publish-scripts` versions 2.2.1 and 2.2.2](https://github.com/ui-router/publish-scripts/compare/2.2.1...2.2.2)
 
