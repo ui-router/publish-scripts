@@ -1,3 +1,13 @@
+## 2.2.4 (2017-12-30)
+[Compare `@uirouter/publish-scripts` versions 2.2.3 and 2.2.4](https://github.com/ui-router/publish-scripts/compare/2.2.3...2.2.4)
+
+### Features
+
+* **publish_yalc:** Support fetching from local directories (not github) and wire publish_yalc logic into test downstream script ([8a38dfb](https://github.com/ui-router/publish-scripts/commit/8a38dfb))
+
+
+
+
 ## 2.2.3 (2017-12-29)
 [Compare `@uirouter/publish-scripts` versions 2.2.2 and 2.2.3](https://github.com/ui-router/publish-scripts/compare/2.2.2...2.2.3)
 
