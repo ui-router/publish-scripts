@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const tmp = require('tmp');
+const shelljs = require('shelljs');
 
 const publishYalcPackage = require('./publish_yalc_package');
 const util = require('./util');
@@ -10,7 +12,10 @@ const PKG_DIR = process.cwd();
 const config = JSON.parse(fs.readFileSync('downstream_projects.json'));
 const pkgjson = JSON.parse(fs.readFileSync('package.json'));
 
-const DOWNSTREAMS_PATH = path.resolve(PKG_DIR, '.downstream_cache');
+const DOWNSTREAM_CACHE = path.resolve(PKG_DIR, '.downstream_cache');
+const TEMP = tmp.dirSync();
+const TEMP_DIR = TEMP.name;
+
 const UPSTREAM_PKGS = (process.env.UPSTREAM_PKGS || '').split(',').filter(x => x).concat(pkgjson.name);
 const DOWNSTREAM_PKGS = (process.env.DOWNSTREAM_PKGS || '').split(',').filter(x => x);
 
@@ -21,16 +26,15 @@ function forEachDownstream(callback) {
       return;
     }
 
-    process.chdir(path.resolve(DOWNSTREAMS_PATH, key));
+    process.chdir(path.resolve(DOWNSTREAM_CACHE, key));
     callback(key, config[key]);
   });
 }
 
-function makeWorkingCopy() {
-  process.chdir(PKG_DIR);
-  if (!fs.existsSync(DOWNSTREAMS_PATH)) {
+function makeDownstreamCache() {
+  if (!fs.existsSync(DOWNSTREAM_CACHE)) {
     console.log('making .downstream_cache working directory');
-    fs.mkdirSync(DOWNSTREAMS_PATH);
+    fs.mkdirSync(DOWNSTREAM_CACHE);
   }
 }
 
@@ -38,15 +42,6 @@ function localPublish() {
   process.chdir(PKG_DIR);
   console.log('Publishing using yalc...');
   util._exec('yalc publish');
-}
-
-function initializeDownstreams() {
-  Object.keys(config).forEach(key => {
-    const installTargetDir = path.resolve(DOWNSTREAMS_PATH, key);
-    const installSource = config[key];
-    const flags = { noBuild: true, noPublish: true };
-    publishYalcPackage(installTargetDir, installSource, flags);
-  });
 }
 
 function installUpstreamDeps() {
@@ -64,27 +59,56 @@ function runTests() {
   }
 }
 
-function revertLocalChanges(key, source) {
+function revertLocalChanges(source) {
   const isRemoteSource = source[0] !== '.';
   const ref = isRemoteSource ? 'origin/master' : 'master';
   util._exec(`git reset --hard ${ref}`);
   util._exec('git clean --force -d');
 }
 
-console.log(`      ===> Making working copy <===`);
-makeWorkingCopy();
+try {
+  console.log(`      ===> Making .downstream_cache working directory <===`);
+  makeDownstreamCache();
 
-console.log(`      ===> Publishing ${pkgjson.name} to yalc registry <===`);
-localPublish();
+  console.log(`      ===> Publishing ${pkgjson.name} to yalc registry <===`);
+  localPublish();
 
-console.log(`      ===> Fetching downstream projects and their dependencies <===`);
-initializeDownstreams();
+  Object.keys(config).forEach(key => {
+    if (DOWNSTREAM_PKGS.length && DOWNSTREAM_PKGS.indexOf(key) === -1) {
+      console.log(callback.constructor.name + ": " + key + ' not in DOWNSTREAM_PKGS, skipping...');
+      return;
+    }
 
-console.log(`      ===> Installing freshly built upstream packages <===`);
-forEachDownstream(installUpstreamDeps);
+    const DOWNSTREAM_PACKAGE_DIR = path.resolve(DOWNSTREAM_CACHE, key);
+    process.chdir(PKG_DIR);
 
-console.log(`      ===> Running downstream tests <===`);
-forEachDownstream(runTests);
+    console.log(`      ===> Fetching downstream project '${key}' and its dependencies <===`);
+    const installTargetDir = DOWNSTREAM_PACKAGE_DIR;
+    const installSource = config[key];
+    const flags = { noBuild: true, noPublish: true };
+    publishYalcPackage(installTargetDir, installSource, flags);
 
-console.log(`      ===> Cleaning downstream projects <===`);
-forEachDownstream(revertLocalChanges);
+    console.log(`      ===> Installing freshly built upstream packages <===`);
+    process.chdir(DOWNSTREAM_PACKAGE_DIR);
+    installUpstreamDeps();
+
+    const DOWNSTREAM_PACKAGE_TEMP_DIR = path.resolve(TEMP_DIR, path.basename(DOWNSTREAM_PACKAGE_DIR));
+    try {
+      console.log(`      ===> Moving downstream project '${key}' to temp dir '${TEMP_DIR}' <===`);
+      shelljs.mv(DOWNSTREAM_PACKAGE_DIR, TEMP_DIR);
+
+      console.log(`      ===> Running downstream tests <===`);
+      process.chdir(DOWNSTREAM_PACKAGE_TEMP_DIR);
+      runTests();
+    } finally {
+      console.log(`      ===> Moving downstream project '${key}' back from temp dir <===`);
+      shelljs.mv(DOWNSTREAM_PACKAGE_TEMP_DIR, DOWNSTREAM_CACHE);
+    }
+
+    console.log(`      ===> Cleaning downstream project '${key}' <===`);
+    process.chdir(DOWNSTREAM_PACKAGE_DIR);
+    revertLocalChanges(installSource);
+  });
+} finally {
+  shelljs.rm('-rf', TEMP_DIR)
+}
