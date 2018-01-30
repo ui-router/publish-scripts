@@ -2,6 +2,7 @@
 
 require('./util').packageDir();
 require('shelljs/global');
+const open = require('open');
 
 const readlineSync = require('readline-sync');
 const shelljs = require('shelljs');
@@ -118,7 +119,8 @@ githuburl = githuburl && githuburl.replace(/^git\+/, '').replace(/\.git$/, '');
 if (githuburl) {
   if (changelog) {
     const haspbcopy = shelljs.exec(`which pbcopy`, true).code === 0;
-    console.log(`\n\n1) Update the GitHub tag with release notes/CHANGELOG`);
+    console.log(`\n\n1) Update the GitHub release with the release notes/CHANGELOG`);
+    console.log(`\n   (Make sure you see "\u2714 Existing tag")`);
 
     if (haspbcopy) {
       fs.writeFileSync('CHANGELOG.tmp', changelog);
@@ -129,7 +131,8 @@ if (githuburl) {
       console.log('CHANGELOG:\n\n');
       console.log(changelog);
     }
-    console.log(`\n${githuburl}/releases/tag/${version}`);
+    console.log(`\n${githuburl}/releases/edit/${version}`);
+    open(`${githuburl}/releases/edit/${version}`);
   }
 
   console.log(`\n\n2) Check for milestones`);
