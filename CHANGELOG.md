@@ -1,3 +1,13 @@
+## 2.2.6 (2018-01-30)
+[Compare `@uirouter/publish-scripts` versions 2.2.5 and 2.2.6](https://github.com/ui-router/publish-scripts/compare/2.2.5...2.2.6)
+
+### Features
+
+* **release:** open github tag in browser to update changelog after publishing ([9f202e9](https://github.com/ui-router/publish-scripts/commit/9f202e9))
+
+
+
+
 ## 2.2.5 (2018-01-30)
 [Compare `@uirouter/publish-scripts` versions 2.2.4 and 2.2.5](https://github.com/ui-router/publish-scripts/compare/2.2.4...2.2.5)
 
