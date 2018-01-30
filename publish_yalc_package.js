@@ -10,6 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 const shelljs = require('shelljs');
+const tmp = require('tmp');
 const util = require('./util');
 
 const ORIG_DIR = process.cwd();
@@ -71,17 +72,28 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
   // Update dependencies
   util._exec('yarn install --check-files');
 
-  if (!flags.noBuild) {
-    // Build package
-    const pkgJson = JSON.parse(fs.readFileSync('package.json'));
-    if (pkgJson.scripts && pkgJson.scripts.build) {
-      util._exec('npm run build');
-    }
-  }
+  const TEMP = tmp.dirSync();
+  const TEMP_DIR = TEMP.name;
+  const BUILD_TEMP_DIR = path.resolve(TEMP_DIR, path.basename(installTargetDir));
+  try {
+    shelljs.mv(installTargetDir, TEMP_DIR);
+    process.chdir(BUILD_TEMP_DIR);
 
-  if (!flags.noPublish) {
-    // Publish to local yalc registry
-    util._exec('yalc publish');
+    if (!flags.noBuild) {
+      // Build package
+      const pkgJson = JSON.parse(fs.readFileSync('package.json'));
+      if (pkgJson.scripts && pkgJson.scripts.build) {
+        util._exec('npm run build');
+      }
+    }
+
+    if (!flags.noPublish) {
+      // Publish to local yalc registry
+      util._exec('yalc publish');
+    }
+  } finally {
+    shelljs.mv(BUILD_TEMP_DIR, installTargetDir);
+    shelljs.rm('-rf', TEMP_DIR);
   }
 
   process.chdir(ORIG_DIR);
