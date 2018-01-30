@@ -75,7 +75,7 @@ try {
 
   Object.keys(config).forEach(key => {
     if (DOWNSTREAM_PKGS.length && DOWNSTREAM_PKGS.indexOf(key) === -1) {
-      console.log(callback.constructor.name + ": " + key + ' not in DOWNSTREAM_PKGS, skipping...');
+      console.log(`${key} not in DOWNSTREAM_PKGS, skipping...`);
       return;
     }
 
