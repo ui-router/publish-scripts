@@ -1,3 +1,13 @@
+## 2.2.8 (2018-01-30)
+[Compare `@uirouter/publish-scripts` versions 2.2.7 and 2.2.8](https://github.com/ui-router/publish-scripts/compare/2.2.7...2.2.8)
+
+### Bug Fixes
+
+* **test_downstream_projects:** fix null pointer when skipping downstream projects ([7cd497b](https://github.com/ui-router/publish-scripts/commit/7cd497b))
+
+
+
+
 ## 2.2.7 (2018-01-30)
 [Compare `@uirouter/publish-scripts` versions 2.2.6 and 2.2.7](https://github.com/ui-router/publish-scripts/compare/2.2.6...2.2.7)
 
