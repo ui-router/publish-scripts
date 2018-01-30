@@ -1,3 +1,13 @@
+## 2.2.7 (2018-01-30)
+[Compare `@uirouter/publish-scripts` versions 2.2.6 and 2.2.7](https://github.com/ui-router/publish-scripts/compare/2.2.6...2.2.7)
+
+### Features
+
+* **publish_yalc_package:** Build packages in temp directory before publishing ([8df5b99](https://github.com/ui-router/publish-scripts/commit/8df5b99))
+
+
+
+
 ## 2.2.6 (2018-01-30)
 [Compare `@uirouter/publish-scripts` versions 2.2.5 and 2.2.6](https://github.com/ui-router/publish-scripts/compare/2.2.5...2.2.6)
 
