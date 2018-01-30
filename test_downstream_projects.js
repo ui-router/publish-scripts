@@ -50,7 +50,9 @@ function installUpstreamDeps() {
 
 function runTests() {
   util._exec(`UPSTREAM_PKGS="${UPSTREAM_PKGS.join(',')}" npm test`);
+}
 
+function runDownstreamTests() {
   const downstreamPkgJson = JSON.parse(fs.readFileSync('package.json'));
   const hasDownstreamTests = downstreamPkgJson.scripts && !!downstreamPkgJson.scripts['test:downstream'];
 
@@ -97,13 +99,17 @@ try {
       console.log(`      ===> Moving downstream project '${key}' to temp dir '${TEMP_DIR}' <===`);
       shelljs.mv(DOWNSTREAM_PACKAGE_DIR, TEMP_DIR);
 
-      console.log(`      ===> Running downstream tests <===`);
+      console.log(`      ===> Running '${key}' tests <===`);
       process.chdir(DOWNSTREAM_PACKAGE_TEMP_DIR);
       runTests();
     } finally {
       console.log(`      ===> Moving downstream project '${key}' back from temp dir <===`);
       shelljs.mv(DOWNSTREAM_PACKAGE_TEMP_DIR, DOWNSTREAM_CACHE);
     }
+
+    console.log(`      ===> Running '${key}' downstream tests <===`);
+    process.chdir(DOWNSTREAM_PACKAGE_DIR);
+    runDownstreamTests();
 
     console.log(`      ===> Cleaning downstream project '${key}' <===`);
     process.chdir(DOWNSTREAM_PACKAGE_DIR);
