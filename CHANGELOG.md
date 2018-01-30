@@ -1,3 +1,13 @@
+## 2.2.9 (2018-01-30)
+[Compare `@uirouter/publish-scripts` versions 2.2.8 and 2.2.9](https://github.com/ui-router/publish-scripts/compare/2.2.8...2.2.9)
+
+### Bug Fixes
+
+* **test_downstream_projects:** Run tests and downstream tests separately.  Switch back to .downstream_cache dir before prepping nested downstream projects ([742ffe4](https://github.com/ui-router/publish-scripts/commit/742ffe4))
+
+
+
+
 ## 2.2.8 (2018-01-30)
 [Compare `@uirouter/publish-scripts` versions 2.2.7 and 2.2.8](https://github.com/ui-router/publish-scripts/compare/2.2.7...2.2.8)
 
