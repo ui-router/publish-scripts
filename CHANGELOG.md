@@ -1,3 +1,13 @@
+## 2.2.5 (2018-01-30)
+[Compare `@uirouter/publish-scripts` versions 2.2.4 and 2.2.5](https://github.com/ui-router/publish-scripts/compare/2.2.4...2.2.5)
+
+### Features
+
+* **test:downstream:** Move downstream projects into temp dir before running tests ([5a85e33](https://github.com/ui-router/publish-scripts/commit/5a85e33))
+
+
+
+
 ## 2.2.4 (2017-12-30)
 [Compare `@uirouter/publish-scripts` versions 2.2.3 and 2.2.4](https://github.com/ui-router/publish-scripts/compare/2.2.3...2.2.4)
 
