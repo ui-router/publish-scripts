@@ -27,7 +27,7 @@ let options = {
   preset: 'ui-router-core'
 };
 
-const context = {}, gitOpts = {};
+const context = {}, gitOpts = { merges: null };
 const to = yargs.argv.to;
 const from = yargs.argv.from;
 const deps = yargs.argv.deps || [];
