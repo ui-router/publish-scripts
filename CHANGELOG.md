@@ -1,3 +1,13 @@
+## 2.2.10 (2018-01-31)
+[Compare `@uirouter/publish-scripts` versions 2.2.9 and 2.2.10](https://github.com/ui-router/publish-scripts/compare/2.2.9...2.2.10)
+
+### Bug Fixes
+
+* **show_changelog:** use merges: null so commit messages from manually merged PRs are processed ([102b794](https://github.com/ui-router/publish-scripts/commit/102b794))
+
+
+
+
 ## 2.2.9 (2018-01-30)
 [Compare `@uirouter/publish-scripts` versions 2.2.8 and 2.2.9](https://github.com/ui-router/publish-scripts/compare/2.2.8...2.2.9)
 
