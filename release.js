@@ -143,3 +143,9 @@ if (githuburl) {
   console.log("Could not determine github URL from package.json")
 }
 
+// Generate docs
+util.packageDir();
+if (fs.existsSync('typedoc.json') && readlineSync.keyInYN('Generate docs?')) {
+  _exec('generate_docs');
+  _exec('publish_docs');
+}

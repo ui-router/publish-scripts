@@ -41,6 +41,11 @@
     "shx": "^0.2.2",
     "tmp": "^0.0.33",
     "tweak-sourcemap-paths": "0.0.3",
+    "typedoc": "0.8.0",
+    "typedoc-plugin-external-module-name": "1.1.1",
+    "typedoc-plugin-internal-external": "1.0.10",
+    "typedoc-plugin-ui-router": "1.0.6",
+    "ui-router-typedoc-themes": "1.0.2",
     "yargs": "^9.0.1"
   }
 }
