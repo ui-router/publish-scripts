@@ -17,6 +17,8 @@ const ORIG_DIR = process.cwd();
 
 function publishYalcPackage(installTargetDir, installSource, flags) {
   flags = flags || {};
+  const branch = flags.branch || 'origin/master';
+
   if (!installTargetDir || !installSource) {
     throw new Error('Usage: publish_yalc_package [INSTALL_DIR] [GITHUB_URL|LOCAL_DIR]');
   }
@@ -29,7 +31,7 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
   // Create directory and clone git repo
   if (!fs.existsSync(path.join(installTargetDir, '.git'))) {
     if (isRemoteSource) {
-      util._exec(`git clone --depth 3 ${installSource} ${installTargetDir}`);
+      util._exec(`git clone ${installSource} ${installTargetDir}`);
     } else {
       shelljs.rm('-rf', installTargetDir);
       shelljs.cp('-r', installSourceDir, installTargetDir);
@@ -43,7 +45,7 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
   if (isRemoteSource) {
     process.chdir(installTargetDir);
     util._exec('git fetch origin');
-    util._exec('git reset --hard origin/master');
+    util._exec(`git reset --hard ${branch}`);
     util._exec('git clean --force -d');
   } else {
     // Create a tmp dir with a copy of the current package contents
@@ -70,7 +72,9 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
   }
 
   // Update dependencies
-  util._exec('yarn install --check-files');
+  if (!flags.noInstall) {
+    util._exec('yarn install --check-files');
+  }
 
   const TEMP = tmp.dirSync();
   const TEMP_DIR = TEMP.name;

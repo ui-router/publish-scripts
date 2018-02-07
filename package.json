@@ -19,11 +19,13 @@
   "bin": {
     "artifact_tagging": "./artifact_tagging.js",
     "ensure_clean_master": "./ensure_clean_master.js",
+    "generate_docs": "./generate_docs.js",
     "modify_sourcemap_paths": "./modify_sourcemap_paths.js",
+    "publish_docs": "./publish_docs.js",
+    "publish_yalc_package": "./publish_yalc_package.js",
     "release": "./release.js",
     "show_changelog": "./show_changelog.js",
     "test_downstream_projects": "./test_downstream_projects.js",
-    "publish_yalc_package": "./publish_yalc_package.js",
     "util": "./util.js"
   },
   "dependencies": {
@@ -31,6 +33,7 @@
     "conventional-changelog-ui-router-core": "^1.4.2",
     "find-parent-dir": "^0.3.0",
     "git-semver-tags": "^1.2.1",
+    "lodash": "^4.17.5",
     "npm-run-all": "^4.1.1",
     "open": "^0.0.5",
     "readline-sync": "^1.4.7",
