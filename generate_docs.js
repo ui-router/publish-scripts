@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 const publishYalcPackage = require('./publish_yalc_package');
 const util = require('./util');
 util.packageDir();
@@ -22,8 +21,8 @@ if (missing) {
 
 const includes = CONFIG.typedoc.include || [];
 includes.forEach(include => {
-  const { package, repo } = include;
-  const flags = { noBuild: true, noPublish: true, noInstall: true };
+  const { branch, package, repo } = include;
+  const flags = { noBuild: true, noPublish: true, noInstall: true, branch: branch };
   const versionline = _exec(`yarn list --pattern ${package}`).stdout.split(/[\r\n]+/).find(line => line.includes(package));
   const version = /.*\@([^@]*)/.exec(versionline)[1];
 
