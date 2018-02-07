@@ -1,3 +1,14 @@
+# 2.3.0 (2018-02-07)
+[Compare `@uirouter/publish-scripts` versions 2.2.10 and 2.3.0](https://github.com/ui-router/publish-scripts/compare/2.2.10...2.3.0)
+
+### Features
+
+* **docs:** Add generate_docs script to generate typedoc documentation ([58afc88](https://github.com/ui-router/publish-scripts/commit/58afc88))
+* **docs:** Add publish_docs script to publish typedoc documentation to http://ui-router.github.io/ ([7192f29](https://github.com/ui-router/publish-scripts/commit/7192f29))
+
+
+
+
 ## 2.2.10 (2018-01-31)
 [Compare `@uirouter/publish-scripts` versions 2.2.9 and 2.2.10](https://github.com/ui-router/publish-scripts/compare/2.2.9...2.2.10)
 
