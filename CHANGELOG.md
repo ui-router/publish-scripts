@@ -1,3 +1,13 @@
+## 2.3.1 (2018-02-07)
+[Compare `@uirouter/publish-scripts` versions 2.3.0 and 2.3.1](https://github.com/ui-router/publish-scripts/compare/2.3.0...2.3.1)
+
+### Features
+
+* **docs:** Enable 'branch' override for included doc repos (like uirouter/core) ([05ca568](https://github.com/ui-router/publish-scripts/commit/05ca568))
+
+
+
+
 # 2.3.0 (2018-02-07)
 [Compare `@uirouter/publish-scripts` versions 2.2.10 and 2.3.0](https://github.com/ui-router/publish-scripts/compare/2.2.10...2.3.0)
 
