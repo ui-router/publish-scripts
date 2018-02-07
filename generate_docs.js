@@ -23,11 +23,11 @@ const includes = CONFIG.typedoc.include || [];
 includes.forEach(include => {
   const { branch, package, repo } = include;
   const flags = { noBuild: true, noPublish: true, noInstall: true, branch: branch };
-  const versionline = _exec(`yarn list --pattern ${package}`).stdout.split(/[\r\n]+/).find(line => line.includes(package));
-  const version = /.*\@([^@]*)/.exec(versionline)[1];
 
-  if (version) {
-    flags.branch = version;
+  if (!branch) {
+    const versionline = _exec(`yarn list --pattern ${package}`).stdout.split(/[\r\n]+/).find(line => line.includes(package));
+    const version = /.*\@([^@]*)/.exec(versionline)[1];
+    flags.branch = version ? version : flags.branch;
   }
 
   publishYalcPackage(path.join('.downstream_cache', package), repo, flags);
