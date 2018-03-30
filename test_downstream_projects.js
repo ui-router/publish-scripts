@@ -4,7 +4,9 @@ const path = require('path');
 const tmp = require('tmp');
 const shelljs = require('shelljs');
 
+const nodeCleanup = require('node-cleanup');
 const publishYalcPackage = require('./publish_yalc_package');
+
 const util = require('./util');
 util.packageDir();
 const PKG_DIR = process.cwd();
@@ -12,24 +14,12 @@ const PKG_DIR = process.cwd();
 const config = JSON.parse(fs.readFileSync('downstream_projects.json'));
 const pkgjson = JSON.parse(fs.readFileSync('package.json'));
 
-const DOWNSTREAM_CACHE = path.resolve(PKG_DIR, '.downstream_cache');
-const TEMP = tmp.dirSync();
-const TEMP_DIR = TEMP.name;
-
-const UPSTREAM_PKGS = (process.env.UPSTREAM_PKGS || '').split(',').filter(x => x).concat(pkgjson.name);
 const DOWNSTREAM_PKGS = (process.env.DOWNSTREAM_PKGS || '').split(',').filter(x => x);
 
-function forEachDownstream(callback) {
-  Object.keys(config).forEach(key => {
-    if (DOWNSTREAM_PKGS.length && DOWNSTREAM_PKGS.indexOf(key) === -1) {
-      console.log(callback.constructor.name + ": " + key + ' not in DOWNSTREAM_PKGS, skipping...');
-      return;
-    }
-
-    process.chdir(path.resolve(DOWNSTREAM_CACHE, key));
-    callback(key, config[key]);
-  });
-}
+const TEMP = tmp.dirSync();
+const TEMP_DIR = TEMP.name;
+const TEMP_DOWNSTREAM_CACHE = path.resolve(TEMP_DIR, '.downstream_cache');
+const DOWNSTREAM_CACHE = path.resolve(PKG_DIR, '.downstream_cache');
 
 function makeDownstreamCache() {
   if (!fs.existsSync(DOWNSTREAM_CACHE)) {
@@ -38,27 +28,19 @@ function makeDownstreamCache() {
   }
 }
 
-function localPublish() {
-  process.chdir(PKG_DIR);
+function localPublish(packageDir) {
+  packageDir = packageDir || PKG_DIR;
+  process.chdir(packageDir);
   console.log('Publishing using yalc...');
   util._exec('yalc publish');
 }
 
-function installUpstreamDeps() {
-  UPSTREAM_PKGS.forEach(upstream => util._exec('yalc add ' + upstream));
+function installUpstreamDeps(upstreamPackages) {
+  upstreamPackages.forEach(upstream => util._exec('yalc add ' + upstream));
 }
 
 function runTests() {
-  util._exec(`UPSTREAM_PKGS="${UPSTREAM_PKGS.join(',')}" npm test`);
-}
-
-function runDownstreamTests() {
-  const downstreamPkgJson = JSON.parse(fs.readFileSync('package.json'));
-  const hasDownstreamTests = downstreamPkgJson.scripts && !!downstreamPkgJson.scripts['test:downstream'];
-
-  if (hasDownstreamTests) {
-    util._exec(`UPSTREAM_PKGS="${UPSTREAM_PKGS.join(',')}" npm run test:downstream`);
-  }
+  util._exec(`npm test`);
 }
 
 function revertLocalChanges(source) {
@@ -68,53 +50,97 @@ function revertLocalChanges(source) {
   util._exec('git clean --force -d');
 }
 
-try {
-  console.log(`      ===> Making .downstream_cache working directory <===`);
-  makeDownstreamCache();
+function fetchDownstreamProjects(downstreamConfig, prefix, downstreamTreeNode) {
+  prefix = prefix || "";
 
-  console.log(`      ===> Publishing ${pkgjson.name} to yalc registry <===`);
-  localPublish();
+  Object.keys(downstreamConfig).forEach(key => {
+    const installDir = prefix ? `${prefix}.${key}` : key;
 
-  Object.keys(config).forEach(key => {
-    if (DOWNSTREAM_PKGS.length && DOWNSTREAM_PKGS.indexOf(key) === -1) {
-      console.log(`${key} not in DOWNSTREAM_PKGS, skipping...`);
-      return;
+    console.log(`      ===> Fetching downstream project to '${installDir}' <===`);
+    const installSource = downstreamConfig[key];
+    const isFile = /^\./.exec(installSource);
+    const installSourcePath = prefix ? path.resolve(DOWNSTREAM_CACHE, prefix, installSource) : path.resolve(PKG_DIR, installSource);
+    const installSourceForYalc = isFile ? './' + path.relative(process.cwd(), installSourcePath) : installSource;
+    const flags = { noBuild: true, noPublish: true, noInstall: true };
+    publishYalcPackage(path.resolve(DOWNSTREAM_CACHE, installDir), installSourceForYalc, flags);
+
+    const children = {};
+    downstreamTreeNode[key] = { installDir, installSource, children };
+
+    const nestedDownstreamConfigPath = path.resolve(DOWNSTREAM_CACHE, installDir, 'downstream_projects.json');
+    if (fs.existsSync(nestedDownstreamConfigPath)) {
+      const nestedDownstreamConfig = JSON.parse(fs.readFileSync(nestedDownstreamConfigPath));
+      fetchDownstreamProjects(nestedDownstreamConfig, installDir, children);
     }
-
-    const DOWNSTREAM_PACKAGE_DIR = path.resolve(DOWNSTREAM_CACHE, key);
-    process.chdir(PKG_DIR);
-
-    console.log(`      ===> Fetching downstream project '${key}' and its dependencies <===`);
-    const installTargetDir = DOWNSTREAM_PACKAGE_DIR;
-    const installSource = config[key];
-    const flags = { noBuild: true, noPublish: true };
-    publishYalcPackage(installTargetDir, installSource, flags);
-
-    console.log(`      ===> Installing freshly built upstream packages <===`);
-    process.chdir(DOWNSTREAM_PACKAGE_DIR);
-    installUpstreamDeps();
-
-    const DOWNSTREAM_PACKAGE_TEMP_DIR = path.resolve(TEMP_DIR, path.basename(DOWNSTREAM_PACKAGE_DIR));
-    try {
-      console.log(`      ===> Moving downstream project '${key}' to temp dir '${TEMP_DIR}' <===`);
-      shelljs.mv(DOWNSTREAM_PACKAGE_DIR, TEMP_DIR);
-
-      console.log(`      ===> Running '${key}' tests <===`);
-      process.chdir(DOWNSTREAM_PACKAGE_TEMP_DIR);
-      runTests();
-    } finally {
-      console.log(`      ===> Moving downstream project '${key}' back from temp dir <===`);
-      shelljs.mv(DOWNSTREAM_PACKAGE_TEMP_DIR, DOWNSTREAM_CACHE);
-    }
-
-    console.log(`      ===> Running '${key}' downstream tests <===`);
-    process.chdir(DOWNSTREAM_PACKAGE_DIR);
-    runDownstreamTests();
-
-    console.log(`      ===> Cleaning downstream project '${key}' <===`);
-    process.chdir(DOWNSTREAM_PACKAGE_DIR);
-    revertLocalChanges(installSource);
   });
-} finally {
-  shelljs.rm('-rf', TEMP_DIR)
 }
+
+function getDownstreamInstallDirs(downstreamTreeNode) {
+  const children = Object.keys(downstreamTreeNode.children);
+  const childrenInstallDirs = children.map(key => getDownstreamInstallDirs(downstreamTreeNode.children[key]));
+  return [downstreamTreeNode.installDir]
+      .concat(childrenInstallDirs)
+      .reduce((acc, arr) => acc.concat(arr), [])
+      .filter(x => !!x);
+}
+
+function installDependencies(downstreamInstallDirs) {
+  const yarnWorkspacePackageJsonPath = path.resolve(DOWNSTREAM_CACHE, "package.json");
+  const yarnWorkspacePackageJson = {
+    private: true,
+    "workspaces": {
+      "packages": downstreamInstallDirs,
+      "nohoist": [
+        "**/webpack",
+        "**/karma-webpack",
+      ]
+    }
+  };
+
+  fs.writeFileSync(yarnWorkspacePackageJsonPath, JSON.stringify(yarnWorkspacePackageJson, null, 2));
+  process.chdir(DOWNSTREAM_CACHE);
+  util._exec('yarn && yarn upgrade');
+}
+
+function runDownstreamTests(key, upstreamPackages, downstreamTreeNode) {
+  if (DOWNSTREAM_PKGS.length && DOWNSTREAM_PKGS.indexOf(key) === -1) {
+    console.log(`${key} not in DOWNSTREAM_PKGS, skipping...`);
+    return;
+  }
+
+  process.chdir(TEMP_DOWNSTREAM_CACHE);
+
+  console.log(`      ===> Running '${key}' tests <===`);
+  console.log(`      ===> Installing freshly built upstream packages <===`);
+  process.chdir(downstreamTreeNode.installDir);
+  installUpstreamDeps(upstreamPackages);
+  runTests();
+  revertLocalChanges(downstreamTreeNode.installSource);
+}
+
+console.log(`      ===> Creating .downstream_cache working directory <===`);
+makeDownstreamCache();
+
+console.log(`      ===> Publishing ${pkgjson.name} to yalc registry <===`);
+localPublish();
+
+console.log(`      ===> Fetching downstream projects <===`);
+const tree = { children: {} };
+fetchDownstreamProjects(config, "", tree.children);
+
+console.log(`      ===> Installing downstream dependencies <===`);
+const downstreamDirs = getDownstreamInstallDirs(tree);
+installDependencies(downstreamDirs);
+
+console.log(`      ===> Moving working directory to temp dir ${TEMP_DIR} <===`);
+shelljs.mv(DOWNSTREAM_CACHE, TEMP_DIR);
+
+nodeCleanup(() => {
+  shelljs.mv(TEMP_DOWNSTREAM_CACHE, PKG_DIR);
+});
+
+console.log(`      ===> Running downstream tests <===`);
+Object.keys(tree.children).forEach(key => {
+  console.log(`      ===> Running tests for '${key}' <===`);
+  runDownstreamTests(key, [pkgjson.name], tree.children[key]);
+});

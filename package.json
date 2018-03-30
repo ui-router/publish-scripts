@@ -34,6 +34,7 @@
     "find-parent-dir": "^0.3.0",
     "git-semver-tags": "^1.2.1",
     "lodash": "^4.17.5",
+    "node-cleanup": "^2.1.2",
     "npm-run-all": "^4.1.1",
     "open": "^0.0.5",
     "readline-sync": "^1.4.7",
