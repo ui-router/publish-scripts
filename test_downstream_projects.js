@@ -4,6 +4,12 @@ const path = require('path');
 const tmp = require('tmp');
 const shelljs = require('shelljs');
 
+const yargs = require('yargs')
+    .option('workspace', {
+      alias: 'ws',
+      description: 'use yarn workspace to save space',
+    });
+
 const nodeCleanup = require('node-cleanup');
 const publishYalcPackage = require('./publish_yalc_package');
 
@@ -31,8 +37,8 @@ function makeDownstreamCache() {
 function localPublish(packageDir) {
   packageDir = packageDir || PKG_DIR;
   process.chdir(packageDir);
-  console.log('Publishing using yalc...');
-  util._exec('yalc publish');
+  console.log(`Building ${packageDir} and publishing using yalc...`);
+  util._exec('yarn build && yalc publish');
 }
 
 function installUpstreamDeps(upstreamPackages) {
@@ -84,7 +90,7 @@ function getDownstreamInstallDirs(downstreamTreeNode) {
       .filter(x => !!x);
 }
 
-function installDependencies(downstreamInstallDirs) {
+function installWorkspaceDependencies(downstreamInstallDirs) {
   const yarnWorkspacePackageJsonPath = path.resolve(DOWNSTREAM_CACHE, "package.json");
   const yarnWorkspacePackageJson = {
     private: true,
@@ -102,7 +108,7 @@ function installDependencies(downstreamInstallDirs) {
   util._exec('yarn && yarn upgrade');
 }
 
-function runDownstreamTests(key, upstreamPackages, downstreamTreeNode) {
+function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLog) {
   if (DOWNSTREAM_PKGS.length && DOWNSTREAM_PKGS.indexOf(key) === -1) {
     console.log(`${key} not in DOWNSTREAM_PKGS, skipping...`);
     return;
@@ -110,12 +116,39 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode) {
 
   process.chdir(TEMP_DOWNSTREAM_CACHE);
 
-  console.log(`      ===> Running '${key}' tests <===`);
-  console.log(`      ===> Installing freshly built upstream packages <===`);
+  const name = downstreamTreeNode.installDir;
+
+  console.log(`      ===> '${name}': prepping tests <===`);
   process.chdir(downstreamTreeNode.installDir);
+
+  if (!yargs.argv.workspace) {
+    console.log(`      ===> '${name}': Installing  dependencies <===`);
+    util._exec('yarn && yarn upgrade');
+  }
+
+  console.log(`      ===> '${name}': Installing freshly built upstream packages <===`);
   installUpstreamDeps(upstreamPackages);
+
+  console.log(`      ===> '${name}': Running tests <===`);
   runTests();
+
+  successLog.push(key);
+
+  console.log(`      ===> '${name}': Reverting working copy <===`);
   revertLocalChanges(downstreamTreeNode.installSource);
+
+
+  const downstreamChildren = Object.keys(downstreamTreeNode.children || {});
+  if (downstreamChildren.length) {
+    const thisPkg = JSON.parse(fs.readFileSync('package.json')).name;
+    const upstreams = upstreamPackages.concat(thisPkg);
+
+    localPublish(process.cwd());
+
+    downstreamChildren.forEach(child => {
+      runDownstreamTests(child, upstreams, downstreamTreeNode.children[child], successLog);
+    });
+  }
 }
 
 console.log(`      ===> Creating .downstream_cache working directory <===`);
@@ -128,19 +161,23 @@ console.log(`      ===> Fetching downstream projects <===`);
 const tree = { children: {} };
 fetchDownstreamProjects(config, "", tree.children);
 
-console.log(`      ===> Installing downstream dependencies <===`);
-const downstreamDirs = getDownstreamInstallDirs(tree);
-installDependencies(downstreamDirs);
+if (yargs.argv.workspace) {
+  console.log(`      ===> Installing downstream dependencies <===`);
+  const downstreamDirs = getDownstreamInstallDirs(tree);
+  installWorkspaceDependencies(downstreamDirs);
+}
 
 console.log(`      ===> Moving working directory to temp dir ${TEMP_DIR} <===`);
 shelljs.mv(DOWNSTREAM_CACHE, TEMP_DIR);
 
+const successLog = [];
 nodeCleanup(() => {
   shelljs.mv(TEMP_DOWNSTREAM_CACHE, PKG_DIR);
+  console.log("Successfully ran downstream tests for: " + successLog.join(', '));
 });
 
 console.log(`      ===> Running downstream tests <===`);
 Object.keys(tree.children).forEach(key => {
-  console.log(`      ===> Running tests for '${key}' <===`);
-  runDownstreamTests(key, [pkgjson.name], tree.children[key]);
+  runDownstreamTests(key, [pkgjson.name], tree.children[key], successLog);
 });
+
