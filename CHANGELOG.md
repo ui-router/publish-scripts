@@ -1,3 +1,14 @@
+## 2.3.2 (2018-03-30)
+[Compare `@uirouter/publish-scripts` versions 2.3.1 and 2.3.2](https://github.com/ui-router/publish-scripts/compare/2.3.1...2.3.2)
+
+### Features
+
+* **test_downstream_projects:** Add command line toggle for yarn workspaces ([a6ce2ce](https://github.com/ui-router/publish-scripts/commit/a6ce2ce))
+* **test_downstream_projects:** Support yarn workspaces ([dc56ebb](https://github.com/ui-router/publish-scripts/commit/dc56ebb))
+
+
+
+
 ## 2.3.1 (2018-02-07)
 [Compare `@uirouter/publish-scripts` versions 2.3.0 and 2.3.1](https://github.com/ui-router/publish-scripts/compare/2.3.0...2.3.1)
 
