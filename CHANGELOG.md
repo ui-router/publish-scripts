@@ -1,3 +1,13 @@
+## 2.3.3 (2018-04-12)
+[Compare `@uirouter/publish-scripts` versions 2.3.2 and 2.3.3](https://github.com/ui-router/publish-scripts/compare/2.3.2...2.3.3)
+
+### Features
+
+* **test_downstream_projects:** Support 'projects' and 'nohoist' keys in downstream_projects.json ([f860f61](https://github.com/ui-router/publish-scripts/commit/f860f61))
+
+
+
+
 ## 2.3.2 (2018-03-30)
 [Compare `@uirouter/publish-scripts` versions 2.3.1 and 2.3.2](https://github.com/ui-router/publish-scripts/compare/2.3.1...2.3.2)
 
