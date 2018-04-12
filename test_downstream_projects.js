@@ -19,6 +19,8 @@ const PKG_DIR = process.cwd();
 
 const config = JSON.parse(fs.readFileSync('downstream_projects.json'));
 const pkgjson = JSON.parse(fs.readFileSync('package.json'));
+const projects = config.projects || config;
+const nohoist = (config.projects && config.nohoist) || [];
 
 const DOWNSTREAM_PKGS = (process.env.DOWNSTREAM_PKGS || '').split(',').filter(x => x);
 
@@ -96,10 +98,7 @@ function installWorkspaceDependencies(downstreamInstallDirs) {
     private: true,
     "workspaces": {
       "packages": downstreamInstallDirs,
-      "nohoist": [
-        "**/webpack",
-        "**/karma-webpack",
-      ]
+      "nohoist": nohoist.concat([ "**/webpack", "**/karma-webpack", ])
     }
   };
 
@@ -159,7 +158,7 @@ localPublish();
 
 console.log(`      ===> Fetching downstream projects <===`);
 const tree = { children: {} };
-fetchDownstreamProjects(config, "", tree.children);
+fetchDownstreamProjects(projects, "", tree.children);
 
 if (yargs.argv.workspace) {
   console.log(`      ===> Installing downstream dependencies <===`);
