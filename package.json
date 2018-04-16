@@ -47,6 +47,6 @@
     "typedoc-plugin-internal-external": "1.0.10",
     "typedoc-plugin-ui-router": "1.0.6",
     "ui-router-typedoc-themes": "1.0.2",
-    "yargs": "^9.0.1"
+    "yargs": "^11.0.0"
   }
 }
