@@ -40,11 +40,11 @@ function localPublish(packageDir) {
   packageDir = packageDir || PKG_DIR;
   process.chdir(packageDir);
   console.log(`Building ${packageDir} and publishing using yalc...`);
-  util._exec('yarn build && yalc publish');
+  util._exec('yarn build && npx yalc publish');
 }
 
 function installUpstreamDeps(upstreamPackages) {
-  upstreamPackages.forEach(upstream => util._exec('yalc add ' + upstream));
+  upstreamPackages.forEach(upstream => util._exec('npx yalc add ' + upstream));
 }
 
 function runTests() {

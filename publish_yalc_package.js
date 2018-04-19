@@ -93,7 +93,7 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
 
     if (!flags.noPublish) {
       // Publish to local yalc registry
-      util._exec('yalc publish');
+      util._exec('npx yalc publish');
     }
   } finally {
     shelljs.mv(BUILD_TEMP_DIR, installTargetDir);
