@@ -37,10 +37,10 @@ if (missing) {
 shelljs.mkdir('-p', DOCGEN_PACKAGE_DIR);
 // Register hook to cleanup temp dir
 nodeCleanup(() => {
-  // const symlinks = fs.readdirSync(DOCGEN_DIR)
-  //   .filter(file => fs.lstatSync(file).isSymbolicLink());
-  // symlinks.forEach(file => fs.unlinkSync(file));
-  // shelljs.rm('-rf', DOCGEN_DIR);
+  const symlinks = fs.readdirSync(DOCGEN_DIR)
+    .filter(file => fs.lstatSync(file).isSymbolicLink());
+  symlinks.forEach(file => fs.unlinkSync(file));
+  shelljs.rm('-rf', DOCGEN_DIR);
 });
 
 // Fetch all included packages (i.e., core module) to .downstream_cache
