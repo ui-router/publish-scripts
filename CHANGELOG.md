@@ -1,3 +1,13 @@
+## 2.3.5 (2018-04-20)
+[Compare `@uirouter/publish-scripts` versions 2.3.4 and 2.3.5](https://github.com/ui-router/publish-scripts/compare/2.3.4...2.3.5)
+
+### Bug Fixes
+
+* **generate_docs:** use git checkout (not git co) ([4d0928c](https://github.com/ui-router/publish-scripts/commit/4d0928c))
+
+
+
+
 ## 2.3.4 (2018-04-20)
 [Compare `@uirouter/publish-scripts` versions 2.3.3 and 2.3.4](https://github.com/ui-router/publish-scripts/compare/2.3.3...2.3.4)
 
