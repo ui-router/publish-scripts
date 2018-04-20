@@ -1,3 +1,19 @@
+## 2.3.4 (2018-04-20)
+[Compare `@uirouter/publish-scripts` versions 2.3.3 and 2.3.4](https://github.com/ui-router/publish-scripts/compare/2.3.3...2.3.4)
+
+### Bug Fixes
+
+* **test_downstream_projects:** make yalc a dependency of publish-scripts, use npx to call it ([de59d18](https://github.com/ui-router/publish-scripts/commit/de59d18))
+
+
+### Features
+
+* **generate_docs:** update to typedoc 0.11.x and move sources to temp dir to get proper git urls ([3abfe07](https://github.com/ui-router/publish-scripts/commit/3abfe07))
+* **publish_yalc_package:** do not move to temp dir when unnecessary ([05b7f6e](https://github.com/ui-router/publish-scripts/commit/05b7f6e))
+
+
+
+
 ## 2.3.3 (2018-04-12)
 [Compare `@uirouter/publish-scripts` versions 2.3.2 and 2.3.3](https://github.com/ui-router/publish-scripts/compare/2.3.2...2.3.3)
 
