@@ -72,7 +72,7 @@ fs.readdirSync(path.join(PACKAGE_DIR, 'node_modules')).forEach(module => {
 // re-hydrate current package using .git dir
 shelljs.cp('-r', path.join(PACKAGE_DIR, '.git'), DOCGEN_PACKAGE_DIR);
 process.chdir(DOCGEN_PACKAGE_DIR);
-shelljs.exec("git co .");
+shelljs.exec("git checkout .");
 
 // create command line
 const typedocOptions = TYPEDOC_CONFIG.typedoc.generateOptions || {};
