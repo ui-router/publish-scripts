@@ -79,25 +79,27 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
   const TEMP = tmp.dirSync();
   const TEMP_DIR = TEMP.name;
   const BUILD_TEMP_DIR = path.resolve(TEMP_DIR, path.basename(installTargetDir));
-  try {
-    shelljs.mv(installTargetDir, TEMP_DIR);
-    process.chdir(BUILD_TEMP_DIR);
+  if (!flags.noBuild || !flags.noPublish) {
+    try {
+      shelljs.mv(installTargetDir, TEMP_DIR);
+      process.chdir(BUILD_TEMP_DIR);
 
-    if (!flags.noBuild) {
-      // Build package
-      const pkgJson = JSON.parse(fs.readFileSync('package.json'));
-      if (pkgJson.scripts && pkgJson.scripts.build) {
-        util._exec('npm run build');
+      if (!flags.noBuild) {
+        // Build package
+        const pkgJson = JSON.parse(fs.readFileSync('package.json'));
+        if (pkgJson.scripts && pkgJson.scripts.build) {
+          util._exec('npm run build');
+        }
       }
-    }
 
-    if (!flags.noPublish) {
-      // Publish to local yalc registry
-      util._exec('npx yalc publish');
+      if (!flags.noPublish) {
+        // Publish to local yalc registry
+        util._exec('npx yalc publish');
+      }
+    } finally {
+      shelljs.mv(BUILD_TEMP_DIR, installTargetDir);
+      shelljs.rm('-rf', TEMP_DIR);
     }
-  } finally {
-    shelljs.mv(BUILD_TEMP_DIR, installTargetDir);
-    shelljs.rm('-rf', TEMP_DIR);
   }
 
   process.chdir(ORIG_DIR);
