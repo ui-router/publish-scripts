@@ -1,3 +1,13 @@
+## 2.3.6 (2018-04-20)
+[Compare `@uirouter/publish-scripts` versions 2.3.5 and 2.3.6](https://github.com/ui-router/publish-scripts/compare/2.3.5...2.3.6)
+
+### Bug Fixes
+
+* **generate_docs:** clean up temp directory ([f10ca7b](https://github.com/ui-router/publish-scripts/commit/f10ca7b))
+
+
+
+
 ## 2.3.5 (2018-04-20)
 [Compare `@uirouter/publish-scripts` versions 2.3.4 and 2.3.5](https://github.com/ui-router/publish-scripts/compare/2.3.4...2.3.5)
 
