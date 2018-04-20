@@ -4,6 +4,7 @@ node_modules
 *~
 .tscache
 .baseDir.ts
+yarn-error.log
 
 # webstorm files
 .idea
