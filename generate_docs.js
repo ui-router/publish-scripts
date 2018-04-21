@@ -23,7 +23,7 @@ const TYPEDOC_CONFIG = JSON.parse(fs.readFileSync('./typedoc.json'));
 const PACKAGE_DIR = process.cwd();
 const DOWNSTREAM_CACHE = path.join(PACKAGE_DIR, '.downstream_cache');
 const IS_TRAVIS = !!process.env.TRAVIS;
-const DOCGEN_DIR = IS_TRAVIS ? path.join('~', '.docgen') ? tmp.dirSync().name;
+const DOCGEN_DIR = IS_TRAVIS ? path.join('~', '.docgen') : tmp.dirSync().name;
 const DOCGEN_PACKAGE_DIR = path.join(DOCGEN_DIR, kebob(PACKAGE_JSON.name));
 
 const requiredKeys = [ 'typedoc', 'typedoc.generateOptions' ];
