@@ -23,12 +23,8 @@ const TYPEDOC_CONFIG = JSON.parse(fs.readFileSync('./typedoc.json'));
 const PACKAGE_DIR = process.cwd();
 const DOWNSTREAM_CACHE = path.join(PACKAGE_DIR, '.downstream_cache');
 const IS_TRAVIS = !!process.env.TRAVIS;
-const DOCGEN_DIR = IS_TRAVIS ? path.join('~', '.docgen') : tmp.dirSync().name;
+const DOCGEN_DIR = tmp.dirSync().name;
 const DOCGEN_PACKAGE_DIR = path.join(DOCGEN_DIR, kebob(PACKAGE_JSON.name));
-
-if (IS_TRAVIS) {
-  fs.mkdirSync(path.join('~', '.docgen'));
-}
 
 const requiredKeys = [ 'typedoc', 'typedoc.generateOptions' ];
 const missing = requiredKeys.find(key => !has(TYPEDOC_CONFIG, key));
@@ -61,7 +57,7 @@ includes.forEach(include => {
   }
 
   publishYalcPackage(path.join(DOWNSTREAM_CACHE, package), repo, flags);
-  shelljs.ln(path.join(DOWNSTREAM_CACHE, package), path.join(DOCGEN_DIR, kebob(package)));
+  shelljs.ln('-s', path.join(DOWNSTREAM_CACHE, package), path.join(DOCGEN_DIR, kebob(package)));
 });
 
 // symlink node_modules, package.json, typedoc.json into temp dir
