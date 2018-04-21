@@ -1,3 +1,13 @@
+## 2.3.10 (2018-04-21)
+[Compare `@uirouter/publish-scripts` versions 2.3.9 and 2.3.10](https://github.com/ui-router/publish-scripts/compare/2.3.9...2.3.10)
+
+### Bug Fixes
+
+* **generate_docs:** fix travis: use symlink, not hard link when generating docs ([d74c101](https://github.com/ui-router/publish-scripts/commit/d74c101))
+
+
+
+
 ## 2.3.9 (2018-04-21)
 [Compare `@uirouter/publish-scripts` versions 2.3.8 and 2.3.9](https://github.com/ui-router/publish-scripts/compare/2.3.8...2.3.9)
 
