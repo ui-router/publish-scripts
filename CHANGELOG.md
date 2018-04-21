@@ -1,3 +1,13 @@
+## 2.3.11 (2018-04-21)
+[Compare `@uirouter/publish-scripts` versions 2.3.10 and 2.3.11](https://github.com/ui-router/publish-scripts/compare/2.3.10...2.3.11)
+
+### Bug Fixes
+
+* **generate_docs:** fix travis: support yalc versions by matching and stripping the '-ha5hcod3' suffix ([2e9d9d7](https://github.com/ui-router/publish-scripts/commit/2e9d9d7))
+
+
+
+
 ## 2.3.10 (2018-04-21)
 [Compare `@uirouter/publish-scripts` versions 2.3.9 and 2.3.10](https://github.com/ui-router/publish-scripts/compare/2.3.9...2.3.10)
 
