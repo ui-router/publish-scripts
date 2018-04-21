@@ -1,3 +1,13 @@
+## 2.3.7 (2018-04-21)
+[Compare `@uirouter/publish-scripts` versions 2.3.6 and 2.3.7](https://github.com/ui-router/publish-scripts/compare/2.3.6...2.3.7)
+
+### Features
+
+* **generate_docs:** Attempt to fix travis: use ~/.docgen instead of temp dir ([77d06ef](https://github.com/ui-router/publish-scripts/commit/77d06ef))
+
+
+
+
 ## 2.3.6 (2018-04-20)
 [Compare `@uirouter/publish-scripts` versions 2.3.5 and 2.3.6](https://github.com/ui-router/publish-scripts/compare/2.3.5...2.3.6)
 
