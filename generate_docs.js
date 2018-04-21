@@ -26,6 +26,10 @@ const IS_TRAVIS = !!process.env.TRAVIS;
 const DOCGEN_DIR = IS_TRAVIS ? path.join('~', '.docgen') : tmp.dirSync().name;
 const DOCGEN_PACKAGE_DIR = path.join(DOCGEN_DIR, kebob(PACKAGE_JSON.name));
 
+if (IS_TRAVIS) {
+  fs.mkdirSync(path.join('~', '.docgen'));
+}
+
 const requiredKeys = [ 'typedoc', 'typedoc.generateOptions' ];
 const missing = requiredKeys.find(key => !has(TYPEDOC_CONFIG, key));
 if (missing) {
