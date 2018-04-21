@@ -22,7 +22,6 @@ const TS_CONFIG = JSON.parse(fs.readFileSync('./tsconfig.json'));
 const TYPEDOC_CONFIG = JSON.parse(fs.readFileSync('./typedoc.json'));
 const PACKAGE_DIR = process.cwd();
 const DOWNSTREAM_CACHE = path.join(PACKAGE_DIR, '.downstream_cache');
-const IS_TRAVIS = !!process.env.TRAVIS;
 const DOCGEN_DIR = tmp.dirSync().name;
 const DOCGEN_PACKAGE_DIR = path.join(DOCGEN_DIR, kebob(PACKAGE_JSON.name));
 
@@ -51,8 +50,13 @@ includes.forEach(include => {
   const flags = { noBuild: true, noPublish: true, noInstall: true, branch: branch };
 
   if (!branch) {
-    const versionline = _exec(`yarn list --pattern ${package}`).stdout.split(/[\r\n]+/).find(line => line.includes(package));
-    const version = /.*\@([^@]*)/.exec(versionline)[ 1 ];
+    const versionline = _exec(`yarn list --pattern ${package}`).stdout
+        .split(/[\r\n]+/).find(line => line.includes(package));
+    const match = /.*\@(([^@]*?)(-[a-zA-Z0-9]{8})?$)/.exec(versionline);
+    const version = match[2];
+    console.log({ versionline });
+    console.log({ match });
+    console.log({ version });
     flags.branch = version ? version : flags.branch;
   }
 
