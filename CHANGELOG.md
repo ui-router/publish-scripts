@@ -1,3 +1,13 @@
+## 2.3.12 (2018-04-29)
+[Compare `@uirouter/publish-scripts` versions 2.3.11 and 2.3.12](https://github.com/ui-router/publish-scripts/compare/2.3.11...2.3.12)
+
+### Bug Fixes
+
+* **test_downstream_projects:** Do not 'yarn upgrade' downstream projects ([05ec93b](https://github.com/ui-router/publish-scripts/commit/05ec93b))
+
+
+
+
 ## 2.3.11 (2018-04-21)
 [Compare `@uirouter/publish-scripts` versions 2.3.10 and 2.3.11](https://github.com/ui-router/publish-scripts/compare/2.3.10...2.3.11)
 
