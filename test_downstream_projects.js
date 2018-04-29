@@ -104,7 +104,7 @@ function installWorkspaceDependencies(downstreamInstallDirs) {
 
   fs.writeFileSync(yarnWorkspacePackageJsonPath, JSON.stringify(yarnWorkspacePackageJson, null, 2));
   process.chdir(DOWNSTREAM_CACHE);
-  util._exec('yarn && yarn upgrade');
+  util._exec('yarn');
 }
 
 function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLog) {
@@ -122,7 +122,7 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
 
   if (!yargs.argv.workspace) {
     console.log(`      ===> '${name}': Installing  dependencies <===`);
-    util._exec('yarn && yarn upgrade');
+    util._exec('yarn');
   }
 
   console.log(`      ===> '${name}': Installing freshly built upstream packages <===`);
