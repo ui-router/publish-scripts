@@ -1,3 +1,13 @@
+## 2.3.13 (2018-05-03)
+[Compare `@uirouter/publish-scripts` versions 2.3.12 and 2.3.13](https://github.com/ui-router/publish-scripts/compare/2.3.12...2.3.13)
+
+### Bug Fixes
+
+* **generate_docs:** don't symlink included projects. clone directly to temp dir ([506dbbf](https://github.com/ui-router/publish-scripts/commit/506dbbf))
+
+
+
+
 ## 2.3.12 (2018-04-29)
 [Compare `@uirouter/publish-scripts` versions 2.3.11 and 2.3.12](https://github.com/ui-router/publish-scripts/compare/2.3.11...2.3.12)
 
