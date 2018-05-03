@@ -60,8 +60,7 @@ includes.forEach(include => {
     flags.branch = version ? version : flags.branch;
   }
 
-  publishYalcPackage(path.join(DOWNSTREAM_CACHE, package), repo, flags);
-  shelljs.ln('-s', path.join(DOWNSTREAM_CACHE, package), path.join(DOCGEN_DIR, kebob(package)));
+  publishYalcPackage(path.join(DOCGEN_DIR, kebob(package)), repo, flags);
 });
 
 // symlink node_modules, package.json, typedoc.json into temp dir
