@@ -37,7 +37,7 @@ shelljs.mkdir('-p', DOCGEN_PACKAGE_DIR);
 // Register hook to cleanup temp dir
 nodeCleanup(() => {
   const symlinks = fs.readdirSync(DOCGEN_DIR)
-    .filter(file => fs.lstatSync(file).isSymbolicLink());
+      .filter(file => fs.lstatSync(file).isSymbolicLink());
   symlinks.forEach(file => fs.unlinkSync(file));
   shelljs.rm('-rf', DOCGEN_DIR);
 });
@@ -53,7 +53,7 @@ includes.forEach(include => {
     const versionline = _exec(`yarn list --pattern ${package}`).stdout
         .split(/[\r\n]+/).find(line => line.includes(package));
     const match = /.*\@(([^@]*?)(-[a-zA-Z0-9]{8})?$)/.exec(versionline);
-    const version = match[2];
+    const version = match[ 2 ];
     console.log({ versionline });
     console.log({ match });
     console.log({ version });
@@ -86,13 +86,25 @@ const cmdLineOpts = Object.keys(typedocOptions)
     .join(" ");
 
 process.chdir(DOCGEN_DIR);
+
+const possibleEs6LibPaths = [
+  'node_modules/typedoc/node_modules/typescript/lib/lib.es6.d.ts',
+  'node_modules/typescript/lib/lib.es6.d.ts',
+].map(libPath => path.join(PACKAGE_DIR, libPath));
+
+const es6LibPath = possibleEs6LibPaths.find(libPath => fs.existsSync(libPath));
+
+if (!es6LibPath) {
+  throw new Error(`Couldn't find lib.es6.d.ts at ${possibleEs6LibPaths.join(' nor ')}`);
+}
+
 const files = []
     .concat(TYPEDOC_CONFIG.files || [])
     .concat(TS_CONFIG.files.map(x => path.join(DOCGEN_PACKAGE_DIR, x)))
     .concat(includes.map(x => path.join(DOCGEN_DIR, kebob(x.package), x.entry)))
     .map(x => `${path.normalize(x)}`)
     .map(x => `./${path.relative(DOCGEN_DIR, x)}`)
-    .concat(path.join(PACKAGE_DIR, 'node_modules/typedoc/node_modules/typescript/lib/lib.es6.d.ts'));
+    .concat(es6LibPath);
 
 // run typedoc command
 _exec(`npx typedoc ${cmdLineOpts} ${files.join(' ')}`);
