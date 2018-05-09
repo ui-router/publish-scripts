@@ -47,6 +47,15 @@ function installUpstreamDeps(upstreamPackages) {
   upstreamPackages.forEach(upstream => {
     util._exec('npx yalc add ' + upstream);
   });
+
+  upstreamPackages.forEach(upstream => {
+    const package = JSON.parse(fs.readFileSync('package.json'));
+    const yalcDep = package.dependencies[upstream] || package.devDependencies[upstream];
+    package.resolutions = package.resolutions || {};
+    package.resolutions[upstream] = yalcDep;
+    fs.writeFileSync('package.json', JSON.stringify(package, null, 2));
+  });
+
   // Install updated deps from the upstream
   // If local changes point to a new version of @uirouter/core, for example
   util._exec('npx yarn');
