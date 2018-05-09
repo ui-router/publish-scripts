@@ -1,3 +1,13 @@
+## 2.3.14 (2018-05-09)
+[Compare `@uirouter/publish-scripts` versions 2.3.13 and 2.3.14](https://github.com/ui-router/publish-scripts/compare/2.3.13...2.3.14)
+
+### Bug Fixes
+
+* **test_downstream_projects:** run 'yarn' after installing upstreams to get updated upstream dependencies ([9c711ee](https://github.com/ui-router/publish-scripts/commit/9c711ee))
+
+
+
+
 ## 2.3.13 (2018-05-03)
 [Compare `@uirouter/publish-scripts` versions 2.3.12 and 2.3.13](https://github.com/ui-router/publish-scripts/compare/2.3.12...2.3.13)
 
