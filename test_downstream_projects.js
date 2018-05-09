@@ -44,7 +44,12 @@ function localPublish(packageDir) {
 }
 
 function installUpstreamDeps(upstreamPackages) {
-  upstreamPackages.forEach(upstream => util._exec('npx yalc add ' + upstream));
+  upstreamPackages.forEach(upstream => {
+    util._exec('npx yalc add ' + upstream);
+  });
+  // Install updated deps from the upstream
+  // If local changes point to a new version of @uirouter/core, for example
+  util._exec('npx yarn');
 }
 
 function runTests() {
