@@ -1,3 +1,13 @@
+## 2.3.17 (2018-05-09)
+[Compare `@uirouter/publish-scripts` versions 2.3.16 and 2.3.17](https://github.com/ui-router/publish-scripts/compare/2.3.16...2.3.17)
+
+### Bug Fixes
+
+* **test_downstream_projects:** Use yarn resolution rules to avoid duplicate dependencies of UPSTREAM_PKGS installed via yalc ([0e8891c](https://github.com/ui-router/publish-scripts/commit/0e8891c))
+
+
+
+
 ## 2.3.16 (2018-05-09)
 [Compare `@uirouter/publish-scripts` versions 2.3.15 and 2.3.16](https://github.com/ui-router/publish-scripts/compare/2.3.15...2.3.16)
 
