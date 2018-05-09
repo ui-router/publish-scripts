@@ -1,3 +1,13 @@
+## 2.3.15 (2018-05-09)
+[Compare `@uirouter/publish-scripts` versions 2.3.14 and 2.3.15](https://github.com/ui-router/publish-scripts/compare/2.3.14...2.3.15)
+
+### Bug Fixes
+
+* **generate_docs:** Load lib.es6.d.ts from either typescript/lib or typedoc/node_modules/typescript/lib, whichever is found ([fd63486](https://github.com/ui-router/publish-scripts/commit/fd63486))
+
+
+
+
 ## 2.3.14 (2018-05-09)
 [Compare `@uirouter/publish-scripts` versions 2.3.13 and 2.3.14](https://github.com/ui-router/publish-scripts/compare/2.3.13...2.3.14)
 
