@@ -1,3 +1,13 @@
+## 2.3.18 (2018-05-13)
+[Compare `@uirouter/publish-scripts` versions 2.3.17 and 2.3.18](https://github.com/ui-router/publish-scripts/compare/2.3.17...2.3.18)
+
+### Bug Fixes
+
+* **test_downstream_projects:** Fix testing multiple levels of yalc'd packages by deyalcing the package.json before yalc publish. ([dc83c7c](https://github.com/ui-router/publish-scripts/commit/dc83c7c))
+
+
+
+
 ## 2.3.17 (2018-05-09)
 [Compare `@uirouter/publish-scripts` versions 2.3.16 and 2.3.17](https://github.com/ui-router/publish-scripts/compare/2.3.16...2.3.17)
 
