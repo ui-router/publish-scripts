@@ -1,3 +1,13 @@
+## 2.3.22 (2019-01-09)
+[Compare `@uirouter/publish-scripts` versions 2.3.21 and 2.3.22](https://github.com/ui-router/publish-scripts/compare/2.3.21...2.3.22)
+
+### Features
+
+* **test:downstream:** Support folding of output in travis ci ([66bd430](https://github.com/ui-router/publish-scripts/commit/66bd430))
+
+
+
+
 ## 2.3.21 (2018-09-15)
 [Compare `@uirouter/publish-scripts` versions 2.3.20 and 2.3.21](https://github.com/ui-router/publish-scripts/compare/2.3.20...2.3.21)
 
