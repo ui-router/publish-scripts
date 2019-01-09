@@ -1,3 +1,13 @@
+## 2.3.23 (2019-01-09)
+[Compare `@uirouter/publish-scripts` versions 2.3.22 and 2.3.23](https://github.com/ui-router/publish-scripts/compare/2.3.22...2.3.23)
+
+### Bug Fixes
+
+* **test_downstream_projects:** hopefully fix travis folding by not emitting whitespaces ([0a9c74f](https://github.com/ui-router/publish-scripts/commit/0a9c74f))
+
+
+
+
 ## 2.3.22 (2019-01-09)
 [Compare `@uirouter/publish-scripts` versions 2.3.21 and 2.3.22](https://github.com/ui-router/publish-scripts/compare/2.3.21...2.3.22)
 
