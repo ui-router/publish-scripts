@@ -14,9 +14,9 @@ const yargs = require('yargs')
 const nodeCleanup = require('node-cleanup');
 const publishYalcPackage = require('./publish_yalc_package');
 const foldStart = (message) => {
-  IS_TRAVIS && console.log('travis_fold:start:' + message);
+  IS_TRAVIS && console.log('travis_fold:start:' + message.replace(/\s+/g, '.'));
   console.log(message);
-  return () => IS_TRAVIS && console.log('travis_fold:end:' + message);
+  return () => IS_TRAVIS && console.log('travis_fold:end:' + message.replace(/\s+/g, '.'));
 };
 let foldEnd = () => null;
 
@@ -171,7 +171,7 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
 
   const name = downstreamTreeNode.installDir;
 
-  foldEnd = foldStart(`           ===> Running downstream tests: '${name}' <===`)
+  foldEnd = foldStart(`Running downstream tests: '${name}'`)
 
   console.log(`           ===> '${name}': prepping tests <===`);
   process.chdir(downstreamTreeNode.installDir);
@@ -199,7 +199,7 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
     const thisPkg = JSON.parse(fs.readFileSync('package.json')).name;
     const upstreams = upstreamPackages.concat(thisPkg);
 
-    foldEnd = foldStart(`           ===> Local Yalc Publish: ${process.cwd()} <===`);
+    foldEnd = foldStart(`Local Yalc Publish: ${process.cwd().replace(/.*\//, '')}`);
     localPublish(process.cwd());
     foldEnd();
 
@@ -212,17 +212,17 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
 console.log(`           ===> Creating .downstream_cache working directory <===`);
 makeDownstreamCache();
 
-foldEnd = foldStart(`           ===> Publishing ${pkgjson.name} to yalc registry <===`);
+foldEnd = foldStart(`Publishing ${pkgjson.name} to yalc registry`);
 localPublish();
 foldEnd();
 
-foldEnd = foldStart(`           ===> Fetching downstream projects <===`);
+foldEnd = foldStart(`Fetching downstream projects`);
 const tree = { children: {} };
 fetchDownstreamProjects(projects, "", tree.children);
 foldEnd();
 
 if (yargs.argv.workspace) {
-  foldEnd = foldStart(`           ===> Installing downstream dependencies <===`);
+  foldEnd = foldStart(`Installing downstream dependencies`);
   const downstreamDirs = getDownstreamInstallDirs(tree);
   installWorkspaceDependencies(downstreamDirs);
   foldEnd();
