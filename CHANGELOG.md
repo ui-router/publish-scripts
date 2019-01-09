@@ -1,3 +1,13 @@
+## 2.3.24 (2019-01-09)
+[Compare `@uirouter/publish-scripts` versions 2.3.23 and 2.3.24](https://github.com/ui-router/publish-scripts/compare/2.3.23...2.3.24)
+
+### Bug Fixes
+
+* **test_downstream_projects:** Fix for packages with only dependencies or devDependencies block ([93bf0aa](https://github.com/ui-router/publish-scripts/commit/93bf0aa))
+
+
+
+
 ## 2.3.23 (2019-01-09)
 [Compare `@uirouter/publish-scripts` versions 2.3.22 and 2.3.23](https://github.com/ui-router/publish-scripts/compare/2.3.22...2.3.23)
 
