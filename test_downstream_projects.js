@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const tmp = require('tmp');
 const shelljs = require('shelljs');
+const IS_TRAVIS = !!process.env.TRAVIS;
 
 const yargs = require('yargs')
     .option('workspace', {
@@ -12,6 +13,12 @@ const yargs = require('yargs')
 
 const nodeCleanup = require('node-cleanup');
 const publishYalcPackage = require('./publish_yalc_package');
+const foldStart = (message) => {
+  IS_TRAVIS && console.log('travis_fold:start:' + message);
+  console.log(message);
+  return () => IS_TRAVIS && console.log('travis_fold:end:' + message);
+};
+let foldEnd = () => null;
 
 const util = require('./util');
 util.packageDir();
@@ -164,6 +171,8 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
 
   const name = downstreamTreeNode.installDir;
 
+  foldEnd = foldStart(`           ===> Running downstream tests: '${name}' <===`)
+
   console.log(`           ===> '${name}': prepping tests <===`);
   process.chdir(downstreamTreeNode.installDir);
 
@@ -183,13 +192,16 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
   console.log(`           ===> '${name}': Reverting working copy <===`);
   revertLocalChanges(downstreamTreeNode.installSource);
 
+  foldEnd();
 
   const downstreamChildren = Object.keys(downstreamTreeNode.children || {});
   if (downstreamChildren.length) {
     const thisPkg = JSON.parse(fs.readFileSync('package.json')).name;
     const upstreams = upstreamPackages.concat(thisPkg);
 
+    foldEnd = foldStart(`           ===> Local Yalc Publish: ${process.cwd()} <===`);
     localPublish(process.cwd());
+    foldEnd();
 
     downstreamChildren.forEach(child => {
       runDownstreamTests(child, upstreams, downstreamTreeNode.children[child], successLog);
@@ -200,17 +212,20 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
 console.log(`           ===> Creating .downstream_cache working directory <===`);
 makeDownstreamCache();
 
-console.log(`           ===> Publishing ${pkgjson.name} to yalc registry <===`);
+foldEnd = foldStart(`           ===> Publishing ${pkgjson.name} to yalc registry <===`);
 localPublish();
+foldEnd();
 
-console.log(`           ===> Fetching downstream projects <===`);
+foldEnd = foldStart(`           ===> Fetching downstream projects <===`);
 const tree = { children: {} };
 fetchDownstreamProjects(projects, "", tree.children);
+foldEnd();
 
 if (yargs.argv.workspace) {
-  console.log(`           ===> Installing downstream dependencies <===`);
+  foldEnd = foldStart(`           ===> Installing downstream dependencies <===`);
   const downstreamDirs = getDownstreamInstallDirs(tree);
   installWorkspaceDependencies(downstreamDirs);
+  foldEnd();
 }
 
 console.log(`           ===> Moving working directory to temp dir ${TEMP_DIR} <===`);
