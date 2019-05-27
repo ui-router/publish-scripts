@@ -643,14 +643,10 @@ globby@^5.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-graceful-fs@^4.1.15:
+graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.15"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
   integrity sha512-6uHUhOPEBgQ24HM+r6b/QwWfZq+yiFcipKFrOFiBEnWdy5sdzYoi+pJeQaPI5qOLRFqWmAXUPQNsielzdLoecA==
-
-graceful-fs@^4.1.2, graceful-fs@^4.1.6:
-  version "4.1.11"
-  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
 handlebars@^4.0.2, handlebars@^4.0.6:
   version "4.0.11"
@@ -1778,9 +1774,9 @@ y18n@^3.2.1:
   resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.0.tgz#95ef94f85ecc81d007c264e190a120f0a3c8566b"
 
 yalc@^1.0.0-pre.27:
-  version "1.0.0-pre.27"
-  resolved "https://registry.yarnpkg.com/yalc/-/yalc-1.0.0-pre.27.tgz#ebc85f1e22772e21122e4e062a0a1671795019b7"
-  integrity sha512-PyXf4XtnQIOXgoW3HLnf5Mg3wH8g5q25HmCEgCzlcie0gui6xAGLxnoU4BSCDIAU4vbbrtKE8FJuZPhigaaphg==
+  version "1.0.0-pre.28"
+  resolved "https://registry.yarnpkg.com/yalc/-/yalc-1.0.0-pre.28.tgz#436073e83eaaeb62fb79cc10ac462ee3f28a0504"
+  integrity sha512-Vnr8HxvNqf5ENRK0Mql31A1bG18Tv4+mOePDYmBSc1pSd6KzTca80omG8QCAl/e6HfePPgSkfviYN8yxpYY9vQ==
   dependencies:
     del "^2.2.2"
     fs-extra "^4.0.2"
