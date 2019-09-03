@@ -1,3 +1,13 @@
+## 2.3.26 (2019-09-03)
+[Compare `@uirouter/publish-scripts` versions 2.3.25 and 2.3.26](https://github.com/ui-router/publish-scripts/compare/2.3.25...2.3.26)
+
+### Features
+
+* **package): (package:** update dependencies conventional-changelog[@3](https://github.com/3).1.10, git-semver-tags[@3](https://github.com/3).0.0, lodash[@4](https://github.com/4).17.15, open[@6](https://github.com/6).4.0, readline-sync[@1](https://github.com/1).4.10, tmp[@0](https://github.com/0).1.0, typedoc[@0](https://github.com/0).15.0, typedoc-plugin-external-module-name[@2](https://github.com/2).1.0, typedoc-plugin-internal-external[@2](https://github.com/2).0.2, yalc[@1](https://github.com/1).0.0-pre.34, yargs[@14](https://github.com/14).0.0 ([b0cc01e](https://github.com/ui-router/publish-scripts/commit/b0cc01e))
+
+
+
+
 ## 2.3.25 (2019-01-17)
 [Compare `@uirouter/publish-scripts` versions 2.3.24 and 2.3.25](https://github.com/ui-router/publish-scripts/compare/2.3.24...2.3.25)
 
