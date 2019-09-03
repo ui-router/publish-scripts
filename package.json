@@ -29,25 +29,25 @@
     "util": "./util.js"
   },
   "dependencies": {
-    "conventional-changelog": "^3.0.5",
+    "conventional-changelog": "^3.1.10",
     "conventional-changelog-ui-router-core": "^1.4.2",
     "find-parent-dir": "^0.3.0",
-    "git-semver-tags": "^2.0.2",
-    "lodash": "^4.17.11",
+    "git-semver-tags": "^3.0.0",
+    "lodash": "^4.17.15",
     "node-cleanup": "^2.1.2",
     "npm-run-all": "^4.1.5",
-    "open": "^0.0.5",
-    "readline-sync": "^1.4.7",
+    "open": "^6.4.0",
+    "readline-sync": "^1.4.10",
     "shelljs": "^0.8.3",
     "shx": "^0.3.1",
-    "tmp": "^0.0.33",
+    "tmp": "^0.1.0",
     "tweak-sourcemap-paths": "0.0.3",
-    "typedoc": "0.14.2",
-    "typedoc-plugin-external-module-name": "2.0.0",
-    "typedoc-plugin-internal-external": "2.0.1",
+    "typedoc": "0.15.0",
+    "typedoc-plugin-external-module-name": "2.1.0",
+    "typedoc-plugin-internal-external": "2.0.2",
     "typedoc-plugin-ui-router": "2.0.0",
     "ui-router-typedoc-themes": "1.0.2",
-    "yalc": "^1.0.0-pre.27",
-    "yargs": "^12.0.5"
+    "yalc": "^1.0.0-pre.34",
+    "yargs": "^14.0.0"
   }
 }
