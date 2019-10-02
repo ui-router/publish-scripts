@@ -1,3 +1,13 @@
+## 2.3.27 (2019-10-02)
+[Compare `@uirouter/publish-scripts` versions 2.3.26 and 2.3.27](https://github.com/ui-router/publish-scripts/compare/2.3.26...2.3.27)
+
+### Features
+
+* **release:** Write changelog to a temp file so it can be edited while the release script is paused ([9cce8fd](https://github.com/ui-router/publish-scripts/commit/9cce8fd))
+
+
+
+
 ## 2.3.26 (2019-09-03)
 [Compare `@uirouter/publish-scripts` versions 2.3.25 and 2.3.26](https://github.com/ui-router/publish-scripts/compare/2.3.25...2.3.26)
 
