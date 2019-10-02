@@ -72,12 +72,18 @@ if (readlineSync.keyInYN('\n\nUpdate CHANGELOG?')) {
   console.log('CHANGELOG:\n\n');
   console.log(changelog);
 
+  const tempChangelogFile = `CHANGELOG.md.${version}`;
+  fs.writeFileSync(tempChangelogFile, changelog);
+
+  console.log(`Wrote changelog to temp file: ${tempChangelogFile}`);
   if (!readlineSync.keyInYN('Does the CHANGELOG look OK?')) {
     process.exit(1);
   }
 
   let fullChangelog = fs.readFileSync('CHANGELOG.md');
-  fs.writeFileSync('CHANGELOG.md', changelog + '\n' + fullChangelog);
+  let newChangelog = fs.readFileSync(tempChangelogFile);
+  fs.writeFileSync('CHANGELOG.md', newChangelog + '\n' + fullChangelog);
+  fs.unlinkSync(tempChangelogFile);
   modifiedFiles.push('CHANGELOG.md');
 }
 
