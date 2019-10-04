@@ -80,9 +80,9 @@ if (readlineSync.keyInYN('\n\nUpdate CHANGELOG?')) {
     process.exit(1);
   }
 
-  let fullChangelog = fs.readFileSync('CHANGELOG.md');
-  let newChangelog = fs.readFileSync(tempChangelogFile);
-  fs.writeFileSync('CHANGELOG.md', newChangelog + '\n' + fullChangelog);
+  let existingChangelog = fs.readFileSync('CHANGELOG.md');
+  changelog = fs.readFileSync(tempChangelogFile);
+  fs.writeFileSync('CHANGELOG.md', changelog + '\n' + existingChangelog);
   fs.unlinkSync(tempChangelogFile);
   modifiedFiles.push('CHANGELOG.md');
 }
