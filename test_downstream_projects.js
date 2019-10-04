@@ -53,6 +53,7 @@ function localPublish(packageDir) {
   // Un-yalc any deps in the package.json (after building, but before yalc publishing)
   const packageString = fs.readFileSync('package.json');
   const package = JSON.parse(packageString);
+  const distDir =  !!package.distDir || '.';
   const { resolutions = {}, dependencies = {}, devDependencies = {} } = package;
 
   const yalcLockfile = fs.existsSync('yalc.lock') ? JSON.parse(fs.readFileSync('yalc.lock')) : {};
@@ -75,7 +76,9 @@ function localPublish(packageDir) {
     fs.writeFileSync('package.json', JSON.stringify(package, null, 2));
   }
 
+  shelljs.pushd(distDir);
   util._exec('npx yalc publish');
+  shelljs.popd();
 
   if (yalcPackages.length) {
     console.log(`           ===> Restoring yalc'd manifest ${packageDir}/package.json <===`)

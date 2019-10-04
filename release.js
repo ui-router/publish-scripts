@@ -111,7 +111,10 @@ if (!yargs.argv.dryrun) {
 
 // Publish to NPM and push to github
 if (!yargs.argv.dryrun) {
+  const distDir = packageJson.distDir || '.';
+  shelljs.pushd(distDir);
   _exec(`npm publish`);
+  shelljs.popd();
   _exec(`git tag ${version}`);
   _exec(`git push origin master`);
   _exec(`git push origin ${version}`);

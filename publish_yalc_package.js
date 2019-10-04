@@ -92,9 +92,13 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
         }
       }
 
+      // If ngPackage is found in package.json, the directory to be published is actually ./dist
+      const distDir = !!pkgJson.distDir || '.';
       if (!flags.noPublish) {
+        shelljs.pushd(distDir);
         // Publish to local yalc registry
         util._exec('npx yalc publish');
+        shelljs.popd();
       }
     } finally {
       shelljs.mv(BUILD_TEMP_DIR, installTargetDir);
