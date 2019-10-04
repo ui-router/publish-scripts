@@ -100,7 +100,12 @@ function showDepChangelog(dependency) {
     shelljs.pushd(tmpdir);
     shelljs.config.silent = false;
     console.log(`\n`);
+    console.log(`---`);
+    console.log(`\n`);
     console.log(`### Updated \`${dependency}\` from ${from} to ${to}`);
+    console.log(`\n`);
+    console.log(`Changelog for \`${dependency}\`:`);
+    console.log(`\n`);
     let depChangelog = _exec(`node ${scriptPath} --from ${from} --to ${to}`, true).stdout.trim();
     console.log(depChangelog.split(/[\r\n]/).slice(1).join('\n'));
   } finally {
