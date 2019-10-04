@@ -1,3 +1,15 @@
+## 2.3.28 (2019-10-04)
+[Compare `@uirouter/publish-scripts` versions 2.3.27 and 2.3.28](https://github.com/ui-router/publish-scripts/compare/2.3.27...2.3.28)
+
+### Features
+
+* **publish:** support package publishing from a subdirectory ([b609066](https://github.com/ui-router/publish-scripts/commit/b609066))
+* **release:** put correct changelog on clipboard ([3ffa4b4](https://github.com/ui-router/publish-scripts/commit/3ffa4b4))
+* **show_changelog:** Put an -HR- between changelogs for upstream projects ([8d10df0](https://github.com/ui-router/publish-scripts/commit/8d10df0))
+
+
+
+
 ## 2.3.27 (2019-10-02)
 [Compare `@uirouter/publish-scripts` versions 2.3.26 and 2.3.27](https://github.com/ui-router/publish-scripts/compare/2.3.26...2.3.27)
 
