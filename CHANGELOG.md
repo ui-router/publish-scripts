@@ -1,3 +1,20 @@
+## 2.3.30 (2019-10-06)
+[Compare `@uirouter/publish-scripts` versions 2.3.29 and 2.3.30](https://github.com/ui-router/publish-scripts/compare/2.3.29...2.3.30)
+
+### Bug Fixes
+
+* **check_peer_dependencies:** fix logging when a peerdep solution has been found ([f03bc04](https://github.com/ui-router/publish-scripts/commit/f03bc04))
+
+
+### Features
+
+* **check_peer_dependencies:** Added a script which checks that all peer dependencies are satisfied ([63e6c97](https://github.com/ui-router/publish-scripts/commit/63e6c97))
+* **check_peer_dependencies:** when checking peer deps, ignore package if it's been installed using yalc ([fc62d5b](https://github.com/ui-router/publish-scripts/commit/fc62d5b))
+* **test_downstream_projects:** Install peer dependencies in downstream projects ([153c024](https://github.com/ui-router/publish-scripts/commit/153c024))
+
+
+
+
 ## 2.3.29 (2019-10-06)
 [Compare `@uirouter/publish-scripts` versions 2.3.28 and 2.3.29](https://github.com/ui-router/publish-scripts/compare/2.3.28...2.3.29)
 
