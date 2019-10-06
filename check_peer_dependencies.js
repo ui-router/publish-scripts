@@ -42,7 +42,8 @@ const readFile = filename => JSON.parse(fs.readFileSync(filename).toString('utf-
 const visitedDeps = [];
 const peerDeps = [];
 
-checkInstalledPackage(readFile(PACKAGEJSON));
+const rootPackageJson = readFile(PACKAGEJSON);
+checkInstalledPackage(rootPackageJson);
 
 function getDependencies(packageJson) {
   const { name, dependencies = {}, peerDependencies = {} } = packageJson;
@@ -61,7 +62,10 @@ function checkInstalledPackage(packageJson) {
   }
   visitedDeps.push(name);
 
-  peerDependencies.forEach(peer => peerDeps.push({ ...peer, depender: `${packageJson.name}@${packageJson.version}` }));
+  peerDependencies.forEach(peer => {
+    peerDeps.push({ ...peer, depender: `${packageJson.name}@${packageJson.version}` });
+  });
+
   dependencies.forEach(dependency => {
     const dependencyName = dependency.name;
     const installedPkgDir = `${NODEMODULES}/${dependencyName}`;
@@ -72,7 +76,9 @@ function checkInstalledPackage(packageJson) {
 }
 
 console.log('Peer Dependencies:');
-peerDeps.forEach(dep => console.log(`${dep.depender} requires ${dep.name} ${dep.version}`));
+peerDeps.forEach(dep => {
+  return console.log(`${dep.depender} requires ${dep.name} ${dep.version}`);
+});
 console.log('');
 
 const missingPeers = [];
@@ -98,6 +104,13 @@ function checkPeerDependency(peerDependency) {
 
   const installedVersion = readFile(pkgJsonFile).version;
 
+  const declaredVersion = rootPackageJson.dependencies && rootPackageJson.dependencies[peerDependency.name];
+  // ignore peer dependencies for yalc'd packages
+  if (/file:\.yalc/.exec(declaredVersion)) {
+    console.log(`${peerDependency.depender} depends on ${peerDependency.name} ${peerDependency.version}, but ignoring because ${peerDependency.name} is yalc'd`).
+    return;
+  }
+
   if (!semver.satisfies(installedVersion, peerDependency.version)) {
     handleIncorrectPeerDependency(peerDependency, installedVersion);
   }
@@ -111,6 +124,8 @@ if (missingPeers.length || incorrectPeers.length) {
   incorrectPeers.forEach(peer =>
       console.error(`Incorrect peer dependency: ${peer.name}@${peer.installedVersion} installed but ${peer.depender} requires ${peer.version}.`));
   console.error();
+} else {
+  console.log('No problems found.')
 }
 
 function semverReverseSort(a, b) {
@@ -134,10 +149,12 @@ function findPossibleResolution(packageName, allPeerDeps, isMissing = false) {
 
   const foundVer = availableVersions.find(ver => requiredPeerVersions.every(peerVer => semver.satisfies(ver, peerVer.version)));
   if (!foundVer) {
-    console.error(`Unable to find a version for ${packageName} that satisfies the following peerDependencies:`);
+    const errorPrefix = `Unable to find a version of ${packageName} that satisfies the following peerDependencies:`;
+    console.error();
+    console.error(errorPrefix);
     requiredPeerVersions.forEach(peer => console.error(`${peer.depender} requires ${peer.name} ${peer.version}`));
-    throw new Error(`Unable to find a version for ${packageName} that satisfies ` +
-        `the following peerDependencies: ${requiredPeerVersions.map(x => x.version).join()}`);
+    console.error();
+    throw new Error(`${errorPrefix} ${requiredPeerVersions.map(x => x.version).join()}`);
   }
 
   console.log(`found ${packageName}@${foundVer} which satisfies ${requiredPeerVersions.join(',')}`);
