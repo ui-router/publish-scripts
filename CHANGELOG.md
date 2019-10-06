@@ -1,3 +1,13 @@
+## 2.3.29 (2019-10-06)
+[Compare `@uirouter/publish-scripts` versions 2.3.28 and 2.3.29](https://github.com/ui-router/publish-scripts/compare/2.3.28...2.3.29)
+
+### Bug Fixes
+
+* **publish:** fix logic for getting the package distDir ([cea3c04](https://github.com/ui-router/publish-scripts/commit/cea3c04))
+
+
+
+
 ## 2.3.28 (2019-10-04)
 [Compare `@uirouter/publish-scripts` versions 2.3.27 and 2.3.28](https://github.com/ui-router/publish-scripts/compare/2.3.27...2.3.28)
 
