@@ -18,6 +18,7 @@
   },
   "bin": {
     "artifact_tagging": "./artifact_tagging.js",
+    "check_peer_dependencies": "./check_peer_dependencies.js",
     "ensure_clean_master": "./ensure_clean_master.js",
     "generate_docs": "./generate_docs.js",
     "modify_sourcemap_paths": "./modify_sourcemap_paths.js",
