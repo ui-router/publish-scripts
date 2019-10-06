@@ -102,6 +102,7 @@ function installUpstreamDeps(upstreamPackages) {
   // Install updated deps from the upstream
   // If local changes point to a new version of @uirouter/core, for example
   util._exec('npx yarn');
+  util._exec('npx check_peer_dependencies --yarn --install');
 }
 
 function runTests() {
