@@ -93,7 +93,7 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
       }
 
       // If ngPackage is found in package.json, the directory to be published is actually ./dist
-      const distDir = !!pkgJson.distDir || '.';
+      const distDir = pkgJson.distDir || '.';
       if (!flags.noPublish) {
         shelljs.pushd(distDir);
         // Publish to local yalc registry
