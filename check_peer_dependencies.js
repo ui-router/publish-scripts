@@ -104,11 +104,10 @@ function checkPeerDependency(peerDependency) {
 
   const installedVersion = readFile(pkgJsonFile).version;
 
-  const declaredVersion = rootPackageJson.dependencies && rootPackageJson.dependencies[peerDependency.name];
+  const declaredVersion = rootPackageJson.dependencies && rootPackageJson.dependencies[ peerDependency.name ];
   // ignore peer dependencies for yalc'd packages
   if (/file:\.yalc/.exec(declaredVersion)) {
-    console.log(`${peerDependency.depender} depends on ${peerDependency.name} ${peerDependency.version}, but ignoring because ${peerDependency.name} is yalc'd`).
-    return;
+    console.log(`${peerDependency.depender} depends on ${peerDependency.name} ${peerDependency.version}, but ignoring because ${peerDependency.name} is yalc'd`).return;
   }
 
   if (!semver.satisfies(installedVersion, peerDependency.version)) {
@@ -157,7 +156,7 @@ function findPossibleResolution(packageName, allPeerDeps, isMissing = false) {
     throw new Error(`${errorPrefix} ${requiredPeerVersions.map(x => x.version).join()}`);
   }
 
-  console.log(`found ${packageName}@${foundVer} which satisfies ${requiredPeerVersions.join(',')}`);
+  console.log(`found ${packageName}@${foundVer} which satisfies ${requiredPeerVersions.map(x => x.version).join(',')}`);
 
   (isMissing ? adds : upgrades).push(`${packageName}@${foundVer}`);
 }
