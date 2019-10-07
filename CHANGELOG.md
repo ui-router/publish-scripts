@@ -1,3 +1,13 @@
+## 2.3.31 (2019-10-07)
+[Compare `@uirouter/publish-scripts` versions 2.3.30 and 2.3.31](https://github.com/ui-router/publish-scripts/compare/2.3.30...2.3.31)
+
+### Bug Fixes
+
+* **check_peer_dependencies:** fix typo :facepalm: ([110048f](https://github.com/ui-router/publish-scripts/commit/110048f))
+
+
+
+
 ## 2.3.30 (2019-10-06)
 [Compare `@uirouter/publish-scripts` versions 2.3.29 and 2.3.30](https://github.com/ui-router/publish-scripts/compare/2.3.29...2.3.30)
 
