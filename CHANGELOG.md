@@ -1,3 +1,13 @@
+## 2.3.32 (2019-10-07)
+[Compare `@uirouter/publish-scripts` versions 2.3.31 and 2.3.32](https://github.com/ui-router/publish-scripts/compare/2.3.31...2.3.32)
+
+### Bug Fixes
+
+* **publish_yalc_package:** move pkgJson parsing out of conditional block ([1d4bb2d](https://github.com/ui-router/publish-scripts/commit/1d4bb2d))
+
+
+
+
 ## 2.3.31 (2019-10-07)
 [Compare `@uirouter/publish-scripts` versions 2.3.30 and 2.3.31](https://github.com/ui-router/publish-scripts/compare/2.3.30...2.3.31)
 
