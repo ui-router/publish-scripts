@@ -84,9 +84,9 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
       shelljs.mv(installTargetDir, TEMP_DIR);
       process.chdir(BUILD_TEMP_DIR);
 
+      const pkgJson = JSON.parse(fs.readFileSync('package.json'));
       if (!flags.noBuild) {
         // Build package
-        const pkgJson = JSON.parse(fs.readFileSync('package.json'));
         if (pkgJson.scripts && pkgJson.scripts.build) {
           util._exec('npm run build');
         }
