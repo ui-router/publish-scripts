@@ -107,7 +107,8 @@ function checkPeerDependency(peerDependency) {
   const declaredVersion = rootPackageJson.dependencies && rootPackageJson.dependencies[ peerDependency.name ];
   // ignore peer dependencies for yalc'd packages
   if (/file:\.yalc/.exec(declaredVersion)) {
-    console.log(`${peerDependency.depender} depends on ${peerDependency.name} ${peerDependency.version}, but ignoring because ${peerDependency.name} is yalc'd`).return;
+    console.log(`${peerDependency.depender} depends on ${peerDependency.name} ${peerDependency.version}, but ignoring because ${peerDependency.name} is yalc'd`);
+    return;
   }
 
   if (!semver.satisfies(installedVersion, peerDependency.version)) {
