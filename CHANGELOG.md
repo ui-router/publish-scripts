@@ -1,3 +1,13 @@
+## 2.3.33 (2019-10-08)
+[Compare `@uirouter/publish-scripts` versions 2.3.32 and 2.3.33](https://github.com/ui-router/publish-scripts/compare/2.3.32...2.3.33)
+
+### Bug Fixes
+
+* **release:** After 'git commit', then run 'git add' in case Prettier formatted them ([28fe683](https://github.com/ui-router/publish-scripts/commit/28fe683))
+
+
+
+
 ## 2.3.32 (2019-10-07)
 [Compare `@uirouter/publish-scripts` versions 2.3.31 and 2.3.32](https://github.com/ui-router/publish-scripts/compare/2.3.31...2.3.32)
 
