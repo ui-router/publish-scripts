@@ -102,6 +102,7 @@ if (!readlineSync.keyInYN('Ready to publish?')) {
 
 if (!yargs.argv.dryrun) {
   _exec(`git commit -m ${version} ${modifiedFiles.join(' ')}`);
+  _exec(`git add ${modifiedFiles.join(' ')}`); // in case prettier reformatted these files
 }
 
 if (!yargs.argv.dryrun) {
