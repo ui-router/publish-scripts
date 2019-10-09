@@ -1,8 +1,9 @@
 #!/usr/bin/env node
-
 const fs = require('fs');
+const path = require('path');
 const semver = require('semver');
 const util = require('./util');
+const resolve = require('resolve');
 const yargs = require('yargs')
     .option('help', {
       alias: 'h',
@@ -43,7 +44,7 @@ const visitedDeps = [];
 const peerDeps = [];
 
 const rootPackageJson = readFile(PACKAGEJSON);
-checkInstalledPackage(rootPackageJson);
+checkInstalledPackage(".", null);
 
 function getDependencies(packageJson) {
   const { name, dependencies = {}, peerDependencies = {} } = packageJson;
@@ -54,8 +55,31 @@ function getDependencies(packageJson) {
   };
 }
 
+function getPackagePath(basedir, packageName) {
+  let packagePath;
+  function packageFilter (pkg, pkgfile, dir) {
+    packagePath = pkgfile;
+    return pkg;
+  }
+  try {
+    resolve.sync(packageName, { basedir, packageFilter });
+  } catch (ignored) {
+    // resolve.sync throws if no main: is present
+    // Some packages (such as @types/*) do not have a main
+    // As long as we have a packagePath, it's fine
+  }
+  return packagePath;
+}
 
-function checkInstalledPackage(packageJson) {
+function checkInstalledPackage(basedir, packageName) {
+  if (resolve.isCore(packageName)) {
+    return;
+  }
+
+  const packagePath = packageName ? getPackagePath(basedir, packageName) : basedir;
+  const packageJsonPath = path.join(packagePath, PACKAGEJSON);
+  const packageJson = readFile(packageJsonPath);
+
   const { name, dependencies, peerDependencies } = getDependencies(packageJson);
   if (visitedDeps.includes(name)) {
     return;
@@ -67,11 +91,7 @@ function checkInstalledPackage(packageJson) {
   });
 
   dependencies.forEach(dependency => {
-    const dependencyName = dependency.name;
-    const installedPkgDir = `${NODEMODULES}/${dependencyName}`;
-    const nestedPkgJson = `${installedPkgDir}/${PACKAGEJSON}`;
-    const nestedPkg = readFile(nestedPkgJson);
-    checkInstalledPackage(nestedPkg)
+    checkInstalledPackage(packagePath, dependency.name)
   });
 }
 
