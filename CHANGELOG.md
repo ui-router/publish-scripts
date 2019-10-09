@@ -1,3 +1,18 @@
+## 2.3.34 (2019-10-09)
+[Compare `@uirouter/publish-scripts` versions 2.3.33 and 2.3.34](https://github.com/ui-router/publish-scripts/compare/2.3.33...2.3.34)
+
+### Bug Fixes
+
+* **check_peer_dependencies:** use node module resolution to find dependencies ([6c9cc3e](https://github.com/ui-router/publish-scripts/commit/6c9cc3e))
+
+
+### Features
+
+* **check_peer_dependencies:** don't require --yarn or --npm command line, infer it from package-lock.json or yarn.lock ([295b83f](https://github.com/ui-router/publish-scripts/commit/295b83f))
+
+
+
+
 ## 2.3.33 (2019-10-08)
 [Compare `@uirouter/publish-scripts` versions 2.3.32 and 2.3.33](https://github.com/ui-router/publish-scripts/compare/2.3.32...2.3.33)
 
