@@ -25,8 +25,6 @@ const yargs = require('yargs')
     .check(argv => {
       if (argv.yarn && argv.npm) {
         throw new Error('Specify either --yarn or --npm but not both');
-      } else if (!argv.yarn && !argv.npm) {
-        throw new Error('Specify either --yarn or --npm');
       }
       return true;
     });
@@ -192,16 +190,24 @@ if (missingPackages.length || incorrectPackages.length) {
   console.log();
 }
 
+function getPackageManager() {
+  if (yargs.argv.yarn) return 'yarn';
+  if (yargs.argv.npm) return 'npm';
+  if (fs.existsSync('yarn.lock')) return 'yarn';
+  if (fs.existsSync('package-lock.json')) return 'npm';
+}
+const packageManager = getPackageManager();
+
 function getCommandLines() {
   const commands = [];
-  if (yargs.argv.yarn) {
+  if (packageManager === 'yarn') {
     if (adds.length) {
       commands.push(`yarn add ${adds.join(' ')}`);
     }
     if (upgrades.length) {
       commands.push(`yarn upgrade ${upgrades.join(' ')}`);
     }
-  } else {
+  } else if (packageManager === 'npm') {
     commands.push(`npm install ${adds.concat(upgrades).join(' ')}`)
   }
   return commands;
