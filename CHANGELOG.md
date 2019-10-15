@@ -1,3 +1,9 @@
+## 2.3.35 (2019-10-15)
+[Compare `@uirouter/publish-scripts` versions 2.3.34 and 2.3.35](https://github.com/ui-router/publish-scripts/compare/2.3.34...2.3.35)
+
+refactor: Delete check_peer_dependencies.js in favor of using check-peer-dependencies npm package
+
+
 ## 2.3.34 (2019-10-09)
 [Compare `@uirouter/publish-scripts` versions 2.3.33 and 2.3.34](https://github.com/ui-router/publish-scripts/compare/2.3.33...2.3.34)
 
