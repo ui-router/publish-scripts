@@ -18,7 +18,6 @@
   },
   "bin": {
     "artifact_tagging": "./artifact_tagging.js",
-    "check_peer_dependencies": "./check_peer_dependencies.js",
     "ensure_clean_master": "./ensure_clean_master.js",
     "generate_docs": "./generate_docs.js",
     "modify_sourcemap_paths": "./modify_sourcemap_paths.js",
@@ -31,6 +30,7 @@
   },
   "dependencies": {
     "@types/resolve": "0.0.8",
+    "check-peer-dependencies": "^1.0.1",
     "conventional-changelog": "^3.1.10",
     "conventional-changelog-ui-router-core": "^1.4.2",
     "find-parent-dir": "^0.3.0",
