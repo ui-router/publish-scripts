@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@types/resolve": "0.0.8",
-    "check-peer-dependencies": "^1.0.1",
+    "check-peer-dependencies": "1.0.2",
     "conventional-changelog": "^3.1.10",
     "conventional-changelog-ui-router-core": "^1.4.2",
     "find-parent-dir": "^0.3.0",
