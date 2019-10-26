@@ -131,10 +131,10 @@ chalk@^2.4.1:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-check-peer-dependencies@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/check-peer-dependencies/-/check-peer-dependencies-1.0.3.tgz#40eb152491cb198ccb0192c9ca38e5e7dd5046b1"
-  integrity sha512-qHSfnxSrieowO2J9vNwTNO36rKydIhwNYoYnuynSLnBzGHiJYshRoA4aYLv3Pgk0UB9+bf/K8cyvXdgklYHXpQ==
+check-peer-dependencies@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/check-peer-dependencies/-/check-peer-dependencies-1.0.4.tgz#822e88e5c73ecdf4144748603c808ca02612cece"
+  integrity sha512-oNRaEINoFbSQjbJdIqF252XRuW2yUD+VOKN3+snd86Uf8cDhlYTZ1DPN4PY5ieVvaub2nWtGnF/wOR0os8c1/w==
   dependencies:
     semver "^6.3.0"
     shelljs "^0.8.3"
