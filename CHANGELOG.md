@@ -1,3 +1,13 @@
+## 2.3.36 (2019-10-26)
+[Compare `@uirouter/publish-scripts` versions 2.3.35 and 2.3.36](https://github.com/ui-router/publish-scripts/compare/2.3.35...2.3.36)
+
+### Features
+
+* update to check-peer-dependencies 1.0.3 ([24ac975](https://github.com/ui-router/publish-scripts/commit/24ac975))
+
+
+
+
 ## 2.3.35 (2019-10-15)
 [Compare `@uirouter/publish-scripts` versions 2.3.34 and 2.3.35](https://github.com/ui-router/publish-scripts/compare/2.3.34...2.3.35)
 
