@@ -51,6 +51,6 @@
     "typedoc-plugin-ui-router": "2.0.0",
     "ui-router-typedoc-themes": "1.0.2",
     "yalc": "^1.0.0-pre.34",
-    "yargs": "^14.0.0"
+    "yargs": "^15.0.1"
   }
 }
