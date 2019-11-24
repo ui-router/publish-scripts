@@ -1,3 +1,9 @@
+## 2.3.38 (2019-11-24)
+[Compare `@uirouter/publish-scripts` versions 2.3.37 and 2.3.38](https://github.com/ui-router/publish-scripts/compare/2.3.37...2.3.38)
+
+
+Update upstream lib to resolve security vulnerability
+
 ## 2.3.37 (2019-10-26)
 [Compare `@uirouter/publish-scripts` versions 2.3.36 and 2.3.37](https://github.com/ui-router/publish-scripts/compare/2.3.36...2.3.37)
 
