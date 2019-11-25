@@ -1,3 +1,22 @@
+## 2.3.40 (2019-11-25)
+[Compare `@uirouter/publish-scripts` versions 2.3.39 and 2.3.40](https://github.com/ui-router/publish-scripts/compare/2.3.39...2.3.40)
+
+
+---
+
+
+### Updated `check-peer-dependencies` from 1.0.6 to 1.0.7
+
+
+Changelog for `check-peer-dependencies`:
+
+
+[Compare `check-peer-dependencies` versions 1.0.6 and 1.0.7](https://github.com/christopherthielen/check-peer-dependencies/compare/1.0.6...1.0.7)
+
+### Bug Fixes
+
+* Update packageFilter for breaking change in resolve package ([15ade47](https://github.com/christopherthielen/check-peer-dependencies/commit/15ade47))
+
 ## 2.3.39 (2019-11-25)
 [Compare `@uirouter/publish-scripts` versions 2.3.38 and 2.3.39](https://github.com/ui-router/publish-scripts/compare/2.3.38...2.3.39)
 
