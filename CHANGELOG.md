@@ -1,3 +1,27 @@
+## 2.3.39 (2019-11-25)
+[Compare `@uirouter/publish-scripts` versions 2.3.38 and 2.3.39](https://github.com/ui-router/publish-scripts/compare/2.3.38...2.3.39)
+
+### Features
+
+* **publish:** If a distDir is found in package.json, run prepublishOnly script from the root directory before publishing to NPM ([63ded3f](https://github.com/ui-router/publish-scripts/commit/63ded3f))
+
+
+---
+
+
+### Updated `check-peer-dependencies` from 1.0.5 to 1.0.6
+
+
+Changelog for `check-peer-dependencies`:
+
+
+[Compare `check-peer-dependencies` versions 1.0.5 and 1.0.6](https://github.com/christopherthielen/check-peer-dependencies/compare/1.0.5...1.0.6)
+
+### Features
+
+* sort peer dependencies by depender package name first ([3d656a6](https://github.com/christopherthielen/check-peer-dependencies/commit/3d656a6))
+* when recursively installing peer deps, don't re-process previously unmet peer deps ([ce9fe3e](https://github.com/christopherthielen/check-peer-dependencies/commit/ce9fe3e))
+
 ## 2.3.38 (2019-11-24)
 [Compare `@uirouter/publish-scripts` versions 2.3.37 and 2.3.38](https://github.com/ui-router/publish-scripts/compare/2.3.37...2.3.38)
 
