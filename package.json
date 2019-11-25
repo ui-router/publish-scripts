@@ -1,6 +1,6 @@
 {
   "name": "@uirouter/publish-scripts",
-  "version": "2.3.40",
+  "version": "2.3.41",
   "description": "Helper scripts for publishing UI-Router projects",
   "main": "x",
   "repository": {

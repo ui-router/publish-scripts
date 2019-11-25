@@ -1,3 +1,10 @@
+## 2.3.41 (2019-11-25)
+[Compare `@uirouter/publish-scripts` versions 2.3.40 and 2.3.41](https://github.com/ui-router/publish-scripts/compare/2.3.40...2.3.41)
+
+### Bug Fixes
+
+* **publish:** Fix running of prepublishOnly script before publishing a package with a distDir ([d6e7114](https://github.com/ui-router/publish-scripts/commit/d6e7114))
+
 ## 2.3.40 (2019-11-25)
 [Compare `@uirouter/publish-scripts` versions 2.3.39 and 2.3.40](https://github.com/ui-router/publish-scripts/compare/2.3.39...2.3.40)
 
