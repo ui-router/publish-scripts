@@ -136,7 +136,7 @@ function fetchDownstreamProjects(downstreamConfig, prefix, downstreamTreeNode) {
     const nestedDownstreamConfigPath = path.resolve(DOWNSTREAM_CACHE, installDir, 'downstream_projects.json');
     if (fs.existsSync(nestedDownstreamConfigPath)) {
       const nestedDownstreamConfig = JSON.parse(fs.readFileSync(nestedDownstreamConfigPath));
-      fetchDownstreamProjects(nestedDownstreamConfig, installDir, children);
+      fetchDownstreamProjects(nestedDownstreamConfig.projects || nestedDownstreamConfig, installDir, children);
     }
   });
 }
