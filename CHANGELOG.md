@@ -1,3 +1,10 @@
+## 2.3.42 (2019-12-08)
+[Compare `@uirouter/publish-scripts` versions 2.3.41 and 2.3.42](https://github.com/ui-router/publish-scripts/compare/2.3.41...2.3.42)
+
+### Bug Fixes
+
+* **test_downstream_projects:** read nested config projects correctly when projects property is defined inside downstream_projects.json config ([ef80552](https://github.com/ui-router/publish-scripts/commit/ef80552))
+
 ## 2.3.41 (2019-11-25)
 [Compare `@uirouter/publish-scripts` versions 2.3.40 and 2.3.41](https://github.com/ui-router/publish-scripts/compare/2.3.40...2.3.41)
 
