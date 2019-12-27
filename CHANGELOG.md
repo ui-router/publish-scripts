@@ -1,3 +1,29 @@
+## 2.3.43 (2019-12-27)
+[Compare `@uirouter/publish-scripts` versions 2.3.42 and 2.3.43](https://github.com/ui-router/publish-scripts/compare/2.3.42...2.3.43)
+
+### Features
+
+* **ci:** create a dockerfile for running uirouter ci ([37cdcb0](https://github.com/ui-router/publish-scripts/commit/37cdcb0))
+* **gha:** Add support for collapsing of output when run in Github Actions ([89d50e0](https://github.com/ui-router/publish-scripts/commit/89d50e0))
+* **test_downstrem_projects:** add support for grouping downstream projects in the config file ([d9201a1](https://github.com/ui-router/publish-scripts/commit/d9201a1))
+* **test_downstrem_projects:** Print out a summary of success/failed/skipped downstream tests at the end ([e9847e8](https://github.com/ui-router/publish-scripts/commit/e9847e8))
+
+
+---
+
+
+### Updated `check-peer-dependencies` from 1.0.7 to 1.0.8
+
+
+Changelog for `check-peer-dependencies`:
+
+
+[Compare `check-peer-dependencies` versions 1.0.7 and 1.0.8](https://github.com/christopherthielen/check-peer-dependencies/compare/1.0.7...1.0.8)
+
+### Bug Fixes
+
+* Revert fix for breaking change in resolve package after they reverted the breaking change itself. ([d25c43a](https://github.com/christopherthielen/check-peer-dependencies/commit/d25c43a))
+
 ## 2.3.42 (2019-12-08)
 [Compare `@uirouter/publish-scripts` versions 2.3.41 and 2.3.42](https://github.com/ui-router/publish-scripts/compare/2.3.41...2.3.42)
 
