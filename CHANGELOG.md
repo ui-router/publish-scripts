@@ -1,3 +1,10 @@
+## 2.3.44 (2019-12-27)
+[Compare `@uirouter/publish-scripts` versions 2.3.43 and 2.3.44](https://github.com/ui-router/publish-scripts/compare/2.3.43...2.3.44)
+
+### Bug Fixes
+
+* **test_downstream_projects:** push the full name to the success log (not just the project key to the success log. ([8cd2585](https://github.com/ui-router/publish-scripts/commit/8cd2585))
+
 ## 2.3.43 (2019-12-27)
 [Compare `@uirouter/publish-scripts` versions 2.3.42 and 2.3.43](https://github.com/ui-router/publish-scripts/compare/2.3.42...2.3.43)
 
