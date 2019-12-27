@@ -3,9 +3,15 @@ const fs = require('fs');
 const path = require('path');
 const tmp = require('tmp');
 const shelljs = require('shelljs');
+const _ = require('lodash');
 const IS_TRAVIS = !!process.env.TRAVIS;
 
 const yargs = require('yargs')
+    .option('group', {
+      alias: 'g',
+      default: 'all',
+      description: 'the group of projects to test (from downstream_projects.json "group" key)',
+    })
     .option('workspace', {
       alias: 'ws',
       description: 'use yarn workspace to save space',
@@ -24,18 +30,38 @@ const util = require('./util');
 util.packageDir();
 const PKG_DIR = process.cwd();
 
-const config = JSON.parse(fs.readFileSync('downstream_projects.json'));
 const pkgjson = JSON.parse(fs.readFileSync('package.json'));
-const projects = config.projects || config;
-const nohoist = (config.projects && config.nohoist) || [];
-
 const DOWNSTREAM_PKGS = (process.env.DOWNSTREAM_PKGS || '').split(',').filter(x => x);
-const UPSTREAM_PKGS = (process.env.UPSTREAM_PKGS || '').split(',').filter(x => x);
 
 const TEMP = tmp.dirSync();
 const TEMP_DIR = TEMP.name;
 const TEMP_DOWNSTREAM_CACHE = path.resolve(TEMP_DIR, '.downstream_cache');
 const DOWNSTREAM_CACHE = path.resolve(PKG_DIR, '.downstream_cache');
+
+function parseConfig() {
+  const config = JSON.parse(fs.readFileSync('downstream_projects.json'));
+  const configBlock = _.toPairs(config.projects || config);
+
+  // Object values are groups (nested config).  string values are github url or local file path
+  const isGroup = ([key, value]) => typeof value === 'object';
+  const groupsAsPairs = configBlock.filter(pair => isGroup(pair));
+  const ungroupedProjectsAsPairs = configBlock.filter(pair => !isGroup(pair));
+
+  const allGroupedProjectPairs = _.flatten(groupsAsPairs.map(([name, groupedProjects]) => _.toPairs(groupedProjects)));
+
+  const groups = _.fromPairs(groupsAsPairs);
+  groups.all = _.fromPairs(allGroupedProjectPairs.concat(ungroupedProjectsAsPairs));
+
+  const projects = groups[yargs.argv.group];
+  if (!projects) {
+    throw new Error(`Attempting to run tests for a group named ${yargs.argv.group}, but no matching group was found in downstream_projects.json`);
+  }
+
+  const nohoist = (config.projects && config.nohoist) || [];
+  return { projects, nohoist };
+}
+
+const { projects, nohoist } = parseConfig();
 
 function makeDownstreamCache() {
   if (!fs.existsSync(DOWNSTREAM_CACHE)) {
