@@ -29,8 +29,8 @@
     "util": "./util.js"
   },
   "dependencies": {
-    "check-peer-dependencies": "1.0.7",
-    "conventional-changelog": "^3.1.15",
+    "check-peer-dependencies": "1.0.8",
+    "conventional-changelog": "^3.1.18",
     "conventional-changelog-ui-router-core": "^1.4.2",
     "find-parent-dir": "^0.3.0",
     "git-semver-tags": "^3.0.1",
@@ -43,7 +43,7 @@
     "shx": "^0.3.1",
     "tmp": "^0.1.0",
     "tweak-sourcemap-paths": "0.0.4",
-    "typedoc": "0.15.3",
+    "typedoc": "0.15.6",
     "typedoc-plugin-external-module-name": "2.1.0",
     "typedoc-plugin-internal-external": "2.0.2",
     "typedoc-plugin-ui-router": "2.0.0",
