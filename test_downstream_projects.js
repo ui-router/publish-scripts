@@ -225,7 +225,7 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
   console.log(`           ===> '${name}': Running tests <===`);
   runTests();
 
-  successLog.push(key);
+  successLog.push(name);
   runningTestsFor = undefined;
 
   console.log(`           ===> '${name}': Reverting working copy <===`);
