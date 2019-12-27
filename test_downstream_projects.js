@@ -4,7 +4,8 @@ const path = require('path');
 const tmp = require('tmp');
 const shelljs = require('shelljs');
 const _ = require('lodash');
-const IS_TRAVIS = !!process.env.TRAVIS;
+const isTravis = !!process.env.TRAVIS;
+const isGithubActions = !!process.env.GITHUB_ACTIONS;
 
 const yargs = require('yargs')
     .option('group', {
@@ -20,9 +21,14 @@ const yargs = require('yargs')
 const nodeCleanup = require('node-cleanup');
 const publishYalcPackage = require('./publish_yalc_package');
 const foldStart = (message) => {
-  IS_TRAVIS && console.log('travis_fold:start:' + message.replace(/\s+/g, '.'));
+  isTravis && console.log('travis_fold:start:' + message.replace(/\s+/g, '.'));
+  isGithubActions && console.log('::group::' + message);
   console.log(message);
-  return () => IS_TRAVIS && console.log('travis_fold:end:' + message.replace(/\s+/g, '.'));
+  return () => {
+    isTravis && console.log('travis_fold:end:' + message.replace(/\s+/g, '.'));
+    isGithubActions && console.log(message);
+    isGithubActions && console.log('::endgroup::');
+  };
 };
 let foldEnd = () => null;
 
