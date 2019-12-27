@@ -197,6 +197,7 @@ function installWorkspaceDependencies(downstreamInstallDirs) {
   util._exec('yarn');
 }
 
+let runningTestsFor;
 function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLog) {
   if (DOWNSTREAM_PKGS.length && DOWNSTREAM_PKGS.indexOf(key) === -1) {
     console.log(`           ===> ${key} not in DOWNSTREAM_PKGS, skipping... <===`);
@@ -208,6 +209,7 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
   const name = downstreamTreeNode.installDir;
 
   foldEnd = foldStart(`Running downstream tests: '${name}'`)
+  runningTestsFor = name;
 
   console.log(`           ===> '${name}': prepping tests <===`);
   process.chdir(downstreamTreeNode.installDir);
@@ -224,6 +226,7 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
   runTests();
 
   successLog.push(key);
+  runningTestsFor = undefined;
 
   console.log(`           ===> '${name}': Reverting working copy <===`);
   revertLocalChanges(downstreamTreeNode.installSource);
@@ -267,13 +270,31 @@ if (yargs.argv.workspace) {
 console.log(`           ===> Moving working directory to temp dir ${TEMP_DIR} <===`);
 shelljs.mv(DOWNSTREAM_CACHE, TEMP_DIR);
 
+function getAllProjectKeys(tree, keyPrefix) {
+  const children = Object.keys(tree.children || {});
+  const grandChildren = children.map(child => getAllProjectKeys(tree.children[child], child));
+  return children.concat(...grandChildren).map(key => keyPrefix ? `${keyPrefix}.${key}` : key);
+}
+
 const successLog = [];
+const allProjectKeys = getAllProjectKeys(tree);
 nodeCleanup(() => {
   shelljs.mv(TEMP_DOWNSTREAM_CACHE, PKG_DIR);
   console.log(`           ===> Successfully ran downstream tests for: ${successLog.join(', ')} <===`);
+  if (runningTestsFor) {
+    console.log(`           ===> Failed to run downstream tests for: ${runningTestsFor} <===`);
+  }
+  const skipped = _.difference(allProjectKeys, successLog.concat(runningTestsFor));
+  if (skipped.length) {
+    console.log(`           ===> Did not try to run downstream tests for: ${skipped.join(', ')} <===`);
+  }
 });
 
-console.log(`           ===> Running downstream tests <===`);
+console.log(`           ===> Running the following downstream tests <===`);
+allProjectKeys.forEach(key => {
+  console.log(`           ===> ${_.padEnd(key, 38)} <===`);
+});
+
 Object.keys(tree.children).forEach(key => {
   runDownstreamTests(key, [pkgjson.name], tree.children[key], successLog);
 });
