@@ -133,10 +133,10 @@ chalk@^2.4.1:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-check-peer-dependencies@1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/check-peer-dependencies/-/check-peer-dependencies-1.0.8.tgz#963c332606b18953deed887732408d6493077f15"
-  integrity sha512-ScnUImTZnbdijUMIdMAVzx4L+o7IBqpHl8uESmG6wG63de8Gb2r2/ehHssRGPRKnrLarBEyEYqbervFlmlUu8w==
+check-peer-dependencies@1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/check-peer-dependencies/-/check-peer-dependencies-1.0.9.tgz#b12253de63acd824b0c2d8bf4f6d89315e80f9e7"
+  integrity sha512-Mqd0i+SipSvkugBT3PajpYCBJaQt/VPYQwbd1z2R0ISTJh+f/3+LaQCG8Gjb8a2TS+2CKsa1S5G4DSWcJLCfRg==
   dependencies:
     resolve "^1.14.1"
     semver "^7.1.1"
@@ -1117,10 +1117,6 @@ path-key@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
-path-parse@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
-
 path-parse@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
@@ -1276,13 +1272,7 @@ require-main-filename@^2.0.0:
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-2.0.0.tgz#d0b329ecc7cc0f61649f62215be69af54aa8989b"
   integrity sha512-NKN5kMDylKuldxYLSUfrbo5Tuzh4hd+2E8NPPX02mZtn1VuREQToYe/ZdlJy+J3uCpfaiGF05e7B8W0iXbQHmg==
 
-resolve@^1.1.6:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.8.1.tgz#82f1ec19a423ac1fbd080b0bab06ba36e84a7a26"
-  dependencies:
-    path-parse "^1.0.5"
-
-resolve@^1.14.1:
+resolve@^1.1.6, resolve@^1.14.1:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.14.1.tgz#9e018c540fcf0c427d678b9931cbf45e984bcaff"
   integrity sha512-fn5Wobh4cxbLzuHaE+nphztHy43/b++4M6SsGFC2gB8uYwf0C8LcarfCz1un7UTW8OFQg9iNjZ4xpcFVGebDPg==
@@ -1343,15 +1333,7 @@ shell-quote@^1.6.1:
     array-reduce "~0.0.0"
     jsonify "~0.0.0"
 
-shelljs@^0.8.1:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.8.2.tgz#345b7df7763f4c2340d584abb532c5f752ca9e35"
-  dependencies:
-    glob "^7.0.0"
-    interpret "^1.0.0"
-    rechoir "^0.6.2"
-
-shelljs@^0.8.3:
+shelljs@^0.8.1, shelljs@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.8.3.tgz#a7f3319520ebf09ee81275b2368adb286659b097"
   integrity sha512-fc0BKlAWiLpwZljmOvAOTE/gXawtCoNrP5oaY7KIaQbbyHeQVg01pSEuEGvGh3HEdBU4baCD7wQBwADmM/7f7A==
