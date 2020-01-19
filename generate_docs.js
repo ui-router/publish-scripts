@@ -19,16 +19,21 @@ const kebob = (string) => string
 
 const PACKAGE_JSON = JSON.parse(fs.readFileSync('./package.json'));
 const TS_CONFIG = JSON.parse(fs.readFileSync('./tsconfig.json'));
-const TYPEDOC_CONFIG = JSON.parse(fs.readFileSync('./typedoc.json'));
+const TYPEDOC_CONFIG_FILENAME = getTypedocConfigFilename();
+const TYPEDOC_CONFIG = JSON.parse(fs.readFileSync(TYPEDOC_CONFIG_FILENAME));
 const PACKAGE_DIR = process.cwd();
 const DOWNSTREAM_CACHE = path.join(PACKAGE_DIR, '.downstream_cache');
 const DOCGEN_DIR = tmp.dirSync().name;
 const DOCGEN_PACKAGE_DIR = path.join(DOCGEN_DIR, kebob(PACKAGE_JSON.name));
 
+function getTypedocConfigFilename() {
+  return ['./typedoc.json', 'tsconfig.typedoc.json'].find(filename => fs.existsSync(filename));
+}
+
 const requiredKeys = [ 'typedoc', 'typedoc.generateOptions' ];
 const missing = requiredKeys.find(key => !has(TYPEDOC_CONFIG, key));
 if (missing) {
-  console.error(`typedoc.json does not contain configuration key: "${missing}"`);
+  console.error(`${TYPEDOC_CONFIG_FILENAME} does not contain configuration key: "${missing}"`);
   process.exit(1);
 }
 
@@ -63,9 +68,9 @@ includes.forEach(include => {
   publishYalcPackage(path.join(DOCGEN_DIR, kebob(package)), repo, flags);
 });
 
-// symlink node_modules, package.json, typedoc.json into temp dir
+// symlink node_modules, package.json, tsconfig.typedoc.json into temp dir
 shelljs.ln('-s', path.join(PACKAGE_DIR, 'package.json'), path.join(DOCGEN_DIR, 'package.json'));
-shelljs.ln('-s', path.join(PACKAGE_DIR, 'typedoc.json'), path.join(DOCGEN_DIR, 'typedoc.json'));
+shelljs.ln('-s', path.join(PACKAGE_DIR, TYPEDOC_CONFIG_FILENAME), path.join(DOCGEN_DIR, TYPEDOC_CONFIG_FILENAME));
 shelljs.mkdir(path.join(DOCGEN_DIR, 'node_modules'));
 fs.readdirSync(path.join(PACKAGE_DIR, 'node_modules')).forEach(module => {
   const source = path.join(PACKAGE_DIR, 'node_modules', module);

@@ -29,7 +29,7 @@
     "util": "./util.js"
   },
   "dependencies": {
-    "check-peer-dependencies": "1.0.8",
+    "check-peer-dependencies": "1.0.9",
     "conventional-changelog": "^3.1.18",
     "conventional-changelog-ui-router-core": "^1.4.2",
     "find-parent-dir": "^0.3.0",
@@ -43,12 +43,12 @@
     "shx": "^0.3.1",
     "tmp": "^0.1.0",
     "tweak-sourcemap-paths": "0.0.4",
-    "typedoc": "0.15.6",
-    "typedoc-plugin-external-module-name": "2.1.0",
-    "typedoc-plugin-internal-external": "2.0.2",
-    "typedoc-plugin-ui-router": "2.0.0",
+    "typedoc": "0.16.7",
+    "typedoc-plugin-external-module-name": "3.0.0",
+    "typedoc-plugin-internal-external": "2.1.1",
+    "typedoc-plugin-ui-router": "2.0.1",
     "ui-router-typedoc-themes": "1.0.2",
-    "yalc": "^1.0.0-pre.34",
-    "yargs": "^15.0.2"
+    "yalc": "^1.0.0-pre.35",
+    "yargs": "^15.1.0"
   }
 }
