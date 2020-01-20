@@ -1558,10 +1558,10 @@ typedoc-plugin-internal-external@2.0.2:
   resolved "https://registry.yarnpkg.com/typedoc-plugin-internal-external/-/typedoc-plugin-internal-external-2.0.2.tgz#6ced269be25e1b23559443c2ce6a5483860d53c3"
   integrity sha512-ZWDJvHT2TGIKSkOkyKc7fiSbz/mBHjXzppyzuQlEEAFJmi9YElEVRC34v0xJz4qGUtVT5nNw7gbD1umKowG4wQ==
 
-typedoc-plugin-ui-router@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/typedoc-plugin-ui-router/-/typedoc-plugin-ui-router-2.0.0.tgz#e498885d9dfd48cd6d5b819ee35b183dabe16bbd"
-  integrity sha512-okp4VXtjE99UszKVALhDeIjWBkMq8ZOuW1mbW51EqbOGi0gw4QBdXiAD6Bu7XT80j5yxy1gpf+2Syi+s3IoiKw==
+typedoc-plugin-ui-router@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-ui-router/-/typedoc-plugin-ui-router-2.0.1.tgz#4c84aa88696454ecb022cf4ff035a08f069fe3e8"
+  integrity sha512-bPLFrsvMUL5a7ZR8b1+Wvu+hEGB7dcBXhlBLgPy2JeiL97YwDDtEYYBEzo9IMAYoD/uscq4FLfWonxrOU63L6g==
 
 typedoc@0.15.6:
   version "0.15.6"
