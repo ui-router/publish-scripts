@@ -45,7 +45,7 @@
     "tweak-sourcemap-paths": "0.0.4",
     "typedoc": "0.15.6",
     "typedoc-plugin-external-module-name": "2.1.0",
-    "typedoc-plugin-internal-external": "2.0.2",
+    "typedoc-plugin-internal-external": "2.1.1",
     "typedoc-plugin-ui-router": "2.0.0",
     "ui-router-typedoc-themes": "1.0.2",
     "yalc": "^1.0.0-pre.34",
