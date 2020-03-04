@@ -1,3 +1,28 @@
+## 2.3.45 (2020-03-04)
+[Compare `@uirouter/publish-scripts` versions 2.3.44 and 2.3.45](https://github.com/ui-router/publish-scripts/compare/2.3.44...2.3.45)
+
+### Features
+
+* support typedoc.json and tsconfig.typedoc.json. upgrade to latest deps ([b80c285](https://github.com/ui-router/publish-scripts/commit/b80c285))
+
+
+---
+
+
+### Updated `check-peer-dependencies` from 1.0.8 to 1.0.10
+
+
+Changelog for `check-peer-dependencies`:
+
+
+[Compare `check-peer-dependencies` versions 1.0.8 and 1.0.10](https://github.com/christopherthielen/check-peer-dependencies/compare/1.0.8...1.0.10)
+
+### Features
+
+* **debug:** Added a --debug cli flag ([862232e](https://github.com/christopherthielen/check-peer-dependencies/commit/862232e))
+* **orderBy:** Added a --orderBy cli flag ([9e7b8af](https://github.com/christopherthielen/check-peer-dependencies/commit/9e7b8af))
+* **verbose:** Turn off verbose logging by default ([04cde8a](https://github.com/christopherthielen/check-peer-dependencies/commit/04cde8a))
+
 ## 2.3.44 (2019-12-27)
 [Compare `@uirouter/publish-scripts` versions 2.3.43 and 2.3.44](https://github.com/ui-router/publish-scripts/compare/2.3.43...2.3.44)
 
