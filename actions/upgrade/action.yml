@@ -1,0 +1,24 @@
+name: 'Upgrade dependencies'
+description: 'Upgrade dependencies'
+inputs:
+  deptype:
+    description: 'dependencies or devDependencies'
+    required: true
+    default: 'dependencies'
+  exclude:
+    description: 'packages to exclude'
+    required: false
+  latest:
+    description: 'if `true`, uses yarn upgrade --latest'
+    required: true
+    default: 'false'
+outputs:
+  upgrades: # id of output
+    description: 'The packages@versions that were updated'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.deptype }}
+    - ${{ inputs.exclude }}
+    - ${{ inputs.latest }}
