@@ -44,8 +44,9 @@ const TEMP_DIR = TEMP.name;
 const TEMP_DOWNSTREAM_CACHE = path.resolve(TEMP_DIR, '.downstream_cache');
 const DOWNSTREAM_CACHE = path.resolve(PKG_DIR, '.downstream_cache');
 
-function parseConfig() {
-  const config = JSON.parse(fs.readFileSync('downstream_projects.json'));
+function parseConfig(configFilePath, limitToGroup = 'all') {
+  console.log('parsing config for ' + configFilePath);
+  const config = JSON.parse(fs.readFileSync(configFilePath).toString());
   const configBlock = _.toPairs(config.projects || config);
 
   // Object values are groups (nested config).  string values are github url or local file path
@@ -58,7 +59,7 @@ function parseConfig() {
   const groups = _.fromPairs(groupsAsPairs);
   groups.all = _.fromPairs(allGroupedProjectPairs.concat(ungroupedProjectsAsPairs));
 
-  const projects = groups[yargs.argv.group];
+  const projects = groups[limitToGroup];
   if (!projects) {
     throw new Error(`Attempting to run tests for a group named ${yargs.argv.group}, but no matching group was found in downstream_projects.json`);
   }
@@ -67,7 +68,7 @@ function parseConfig() {
   return { projects, nohoist };
 }
 
-const { projects, nohoist } = parseConfig();
+const { projects, nohoist } = parseConfig('downstream_projects.json', yargs.argv.group);
 
 function makeDownstreamCache() {
   if (!fs.existsSync(DOWNSTREAM_CACHE)) {
@@ -167,8 +168,9 @@ function fetchDownstreamProjects(downstreamConfig, prefix, downstreamTreeNode) {
 
     const nestedDownstreamConfigPath = path.resolve(DOWNSTREAM_CACHE, installDir, 'downstream_projects.json');
     if (fs.existsSync(nestedDownstreamConfigPath)) {
-      const nestedDownstreamConfig = JSON.parse(fs.readFileSync(nestedDownstreamConfigPath));
-      fetchDownstreamProjects(nestedDownstreamConfig.projects || nestedDownstreamConfig, installDir, children);
+      const { projects } = parseConfig(nestedDownstreamConfigPath);
+      console.log({ projects });
+      fetchDownstreamProjects(projects, installDir, children);
     }
   });
 }
