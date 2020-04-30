@@ -1,3 +1,15 @@
+## 2.3.46 (2020-04-30)
+[Compare `@uirouter/publish-scripts` versions 2.3.45 and 2.3.46](https://github.com/ui-router/publish-scripts/compare/2.3.45...2.3.46)
+
+### Bug Fixes
+
+* **test_downstream_projects:** When supplying --group to test_downstream_projects, only apply the --group to the top level project.  However, parse all downstream_projects.json with group support. ([4aeac16](https://github.com/ui-router/publish-scripts/commit/4aeac16))
+
+
+### Features
+
+* **upgrade:** Create a github action to yarn upgrade ([1c8680f](https://github.com/ui-router/publish-scripts/commit/1c8680f))
+
 ## 2.3.45 (2020-03-04)
 [Compare `@uirouter/publish-scripts` versions 2.3.44 and 2.3.45](https://github.com/ui-router/publish-scripts/compare/2.3.44...2.3.45)
 
