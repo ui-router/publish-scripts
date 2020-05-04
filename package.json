@@ -44,7 +44,7 @@
     "tmp": "^0.1.0",
     "tweak-sourcemap-paths": "0.0.4",
     "typedoc": "^0.16.11",
-    "typedoc-plugin-external-module-name": "3.0.0",
+    "typedoc-plugin-external-module-name": "3.1.0",
     "typedoc-plugin-internal-external": "2.1.1",
     "typedoc-plugin-ui-router": "2.0.1",
     "ui-router-typedoc-themes": "1.0.2",
