@@ -41,7 +41,7 @@
     "readline-sync": "^1.4.10",
     "shelljs": "^0.8.3",
     "shx": "^0.3.1",
-    "tmp": "^0.1.0",
+    "tmp": "^0.2.1",
     "tweak-sourcemap-paths": "0.0.4",
     "typedoc": "^0.16.11",
     "typedoc-plugin-external-module-name": "3.0.0",
