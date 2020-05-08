@@ -5,9 +5,9 @@ const lockfile = require("@yarnpkg/lockfile");
 
 // dependencies or devDependencies
 const depType = process.env.INPUT_DEPTYPE || "dependencies";
-const exclude = (process.env.INPUT_EXCLUDE || "").split("s*,s*").filter(x=>x);
+const excludes = (process.env.INPUT_EXCLUDES || "").split("s*,s*").filter(x=>x);
 const latest = process.env.INPUT_LATEST === 'true' ? " --latest" : "";
-console.log({ depType, exclude, latest });
+console.log({ depType, excludes, latest });
 
 function getDeclaredDeps() {
   const pkg = JSON.parse(fs.readFileSync("package.json").toString());
@@ -22,7 +22,7 @@ function getResolvedDeps() {
 
 console.log({ declared: getDeclaredDeps() });
 const packages = Object.keys(getDeclaredDeps()).filter(
-  (pkg) => !exclude.includes(pkg)
+  (pkg) => !excludes.includes(pkg)
 );
 
 function getResolvedSemverMapping() {
@@ -56,4 +56,4 @@ const upgrades = changed
 childProcess.execSync(`git status`, { stdio: "inherit" });
 console.log(`::set-output name=upgrades::${upgrades}`);
 console.log(`::set-output name=upgradecount::${changed.length}`);
-console.log(`::set-output name=upgradestrategy::${process.env.INPUT_LATEST === 'true' ? 'matching semver range' : 'latest'}`);
+console.log(`::set-output name=upgradestrategy::${process.env.INPUT_LATEST === 'true' ? 'latest' : 'matching semver range'}`);

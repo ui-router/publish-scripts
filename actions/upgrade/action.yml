@@ -5,13 +5,13 @@ inputs:
     description: 'dependencies or devDependencies'
     required: true
     default: 'dependencies'
-  exclude:
-    description: 'packages to exclude'
-    required: false
   latest:
     description: 'if `true`, uses yarn upgrade --latest'
     required: true
     default: 'false'
+  excludes:
+    description: 'packages to exclude'
+    required: false
 outputs:
   upgrades: # id of output
     description: 'The packages@versions that were updated'
@@ -22,7 +22,3 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.deptype }}
-    - ${{ inputs.exclude }}
-    - ${{ inputs.latest }}
