@@ -29,7 +29,7 @@
     "util": "./util.js"
   },
   "dependencies": {
-    "check-peer-dependencies": "1.0.10",
+    "check-peer-dependencies": "2.0.1",
     "conventional-changelog": "^3.1.18",
     "conventional-changelog-ui-router-core": "^1.4.2",
     "find-parent-dir": "^0.3.0",
@@ -37,19 +37,19 @@
     "lodash": "^4.17.15",
     "node-cleanup": "^2.1.2",
     "npm-run-all": "^4.1.5",
-    "open": "^7.0.2",
+    "open": "^7.0.3",
     "readline-sync": "^1.4.10",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.4",
     "shx": "^0.3.1",
-    "tmp": "^0.1.0",
+    "tmp": "^0.2.1",
     "tweak-sourcemap-paths": "0.0.4",
-    "typedoc": "^0.16.11",
-    "typedoc-plugin-external-module-name": "3.0.0",
+    "typedoc": "^0.17.6",
+    "typedoc-plugin-external-module-name": "3.1.0",
     "typedoc-plugin-internal-external": "2.1.1",
     "typedoc-plugin-ui-router": "2.0.1",
     "ui-router-typedoc-themes": "1.0.2",
     "yalc": "^1.0.0-pre.35",
-    "yargs": "^15.1.0"
+    "yargs": "^15.3.1"
   },
   "resolutions": {
     "npm-packlist": "1.4.6"
