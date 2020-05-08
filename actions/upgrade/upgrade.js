@@ -50,11 +50,10 @@ const changed = packages.filter(
 );
 
 const upgrades = changed
-  .map((pkg) => `${pkg}@${after[pkg].resolved}`)
-  .join(" ");
+  .map((pkg) => `${pkg}@${before[pkg].declared}: ${before[pkg].resolved} -> ${after[pkg].resolved}`)
+  .join("%0A");
 
 childProcess.execSync(`git status`, { stdio: "inherit" });
 console.log(`::set-output name=upgrades::${upgrades}`);
 console.log(`::set-output name=upgrade-count::${changed.length}`);
 console.log(`::set-output name=upgrade-strategy::${process.env.INPUT_LATEST === 'true' ? 'matching semver range' : 'latest'}`);
-
