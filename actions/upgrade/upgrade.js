@@ -55,5 +55,5 @@ const upgrades = changed
 
 childProcess.execSync(`git status`, { stdio: "inherit" });
 console.log(`::set-output name=upgrades::${upgrades}`);
-console.log(`::set-output name=upgrade-count::${changed.length}`);
-console.log(`::set-output name=upgrade-strategy::${process.env.INPUT_LATEST === 'true' ? 'matching semver range' : 'latest'}`);
+console.log(`::set-output name=upgradecount::${changed.length}`);
+console.log(`::set-output name=upgradestrategy::${process.env.INPUT_LATEST === 'true' ? 'matching semver range' : 'latest'}`);

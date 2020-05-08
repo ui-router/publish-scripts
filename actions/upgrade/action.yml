@@ -15,9 +15,9 @@ inputs:
 outputs:
   upgrades: # id of output
     description: 'The packages@versions that were updated'
-  upgrade-count:
+  upgradecount:
     description: 'The number of packages that were updated'
-  upgrade-strategy:
+  upgradestrategy:
     description: 'A description of the strategy used either a) latest or b) matching semver range'
 runs:
   using: 'docker'
