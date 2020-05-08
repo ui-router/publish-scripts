@@ -1,3 +1,33 @@
+## 2.3.47 (2020-05-08)
+[Compare `@uirouter/publish-scripts` versions 2.3.46 and 2.3.47](https://github.com/ui-router/publish-scripts/compare/2.3.46...2.3.47)
+
+### Features
+
+* **upgrade:** add upgrade-count and upgrade-strategy outputs ([7b79bd2](https://github.com/ui-router/publish-scripts/commit/7b79bd2))
+* **upgrade:** add upgrade-count and upgrade-strategy outputs ([d8e94aa](https://github.com/ui-router/publish-scripts/commit/d8e94aa))
+
+
+---
+
+
+### Updated `check-peer-dependencies` from 1.0.10 to 2.0.1
+
+
+Changelog for `check-peer-dependencies`:
+
+
+[Compare `check-peer-dependencies` versions 1.0.10 and 2.0.1](https://github.com/christopherthielen/check-peer-dependencies/compare/1.0.10...2.0.1)
+
+### Bug Fixes
+
+* **peerDevDependencies:** Use an array of package names in 'peerDevDependencies' in conjunction with the standard 'peerDependencies' object to install peer deps as devDependencies. ([681a80b](https://github.com/christopherthielen/check-peer-dependencies/commit/681a80b))
+
+
+### Features
+
+* **check-peer-dependencies-optional-dependency:** Added a workaround for yarn swallowing postinstall script output ([a9c9fdf](https://github.com/christopherthielen/check-peer-dependencies/commit/a9c9fdf))
+* **peerDevDependencies:** Add support for 'peerDevDependencies' -- 'peerDependencies' that should be installed as 'devDependencies' ([47d40ef](https://github.com/christopherthielen/check-peer-dependencies/commit/47d40ef))
+
 ## 2.3.46 (2020-04-30)
 [Compare `@uirouter/publish-scripts` versions 2.3.45 and 2.3.46](https://github.com/ui-router/publish-scripts/compare/2.3.45...2.3.46)
 
