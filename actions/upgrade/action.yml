@@ -10,7 +10,7 @@ inputs:
     required: true
     default: 'false'
   excludes:
-    description: 'packages to exclude'
+    description: 'comma separated list of packages to exclude from upgrades'
     required: false
 outputs:
   upgrades: # id of output

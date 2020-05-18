@@ -159,8 +159,15 @@ function fetchDownstreamProjects(downstreamConfig, prefix, downstreamTreeNode) {
     const installSource = downstreamConfig[key];
     const isFile = /^\./.exec(installSource);
     const installSourcePath = prefix ? path.resolve(DOWNSTREAM_CACHE, prefix, installSource) : path.resolve(PKG_DIR, installSource);
-    const installSourceForYalc = isFile ? './' + path.relative(process.cwd(), installSourcePath) : installSource;
+    const installSourceNormalized = isFile ? './' + path.relative(process.cwd(), installSourcePath) : installSource;
+    // Extract optional git repo branch, i.e.: https://github.com/ui-router/core.git@somebranch
+    const [orig, gitRepoOnly, branch] = /^(.*?)(?:\.git@(.*))?$/.exec(installSourceNormalized);
+    const installSourceForYalc = branch ? gitRepoOnly : orig;
     const flags = { noBuild: true, noPublish: true, noInstall: true };
+    if (branch) {
+      flags.branch = `origin/${branch}`;
+    }
+
     publishYalcPackage(path.resolve(DOWNSTREAM_CACHE, installDir), installSourceForYalc, flags);
 
     const children = {};
