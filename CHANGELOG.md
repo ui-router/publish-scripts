@@ -1,3 +1,11 @@
+## 2.3.48 (2020-05-18)
+[Compare `@uirouter/publish-scripts` versions 2.3.47 and 2.3.48](https://github.com/ui-router/publish-scripts/compare/2.3.47...2.3.48)
+
+### Features
+
+* **test_downstream_projects:** add branch selection support for downstream git repositories ([6017917](https://github.com/ui-router/publish-scripts/commit/6017917))
+* **upgrade.js:** Encode newlines in the upgrades output ([4b196ba](https://github.com/ui-router/publish-scripts/commit/4b196ba))
+
 ## 2.3.47 (2020-05-08)
 [Compare `@uirouter/publish-scripts` versions 2.3.46 and 2.3.47](https://github.com/ui-router/publish-scripts/compare/2.3.46...2.3.47)
 
