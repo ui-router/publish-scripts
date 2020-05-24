@@ -81,7 +81,6 @@ function localPublish(packageDir) {
   packageDir = packageDir || PKG_DIR;
   process.chdir(packageDir);
   console.log(`           ===> Building ${packageDir} and publishing using yalc... <===`);
-  util._exec('yarn build');
 
   // Un-yalc any deps in the package.json (after building, but before yalc publishing)
   const packageString = fs.readFileSync('package.json');
