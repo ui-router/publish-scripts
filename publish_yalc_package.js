@@ -45,6 +45,7 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
   if (isRemoteSource) {
     process.chdir(installTargetDir);
     util._exec('git fetch origin');
+    util._exec(`git checkout ${branch}`);
     util._exec(`git reset --hard ${branch}`);
     util._exec('git clean --force -d');
   } else {

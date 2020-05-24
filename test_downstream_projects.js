@@ -141,13 +141,6 @@ function runTests() {
   util._exec(`npm test`);
 }
 
-function revertLocalChanges(source) {
-  const isRemoteSource = source[0] !== '.';
-  const ref = isRemoteSource ? 'origin/master' : 'master';
-  util._exec(`git reset --hard ${ref}`);
-  util._exec('git clean --force -d');
-}
-
 function fetchDownstreamProjects(downstreamConfig, prefix, downstreamTreeNode) {
   prefix = prefix || "";
 
@@ -235,9 +228,6 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
 
   successLog.push(name);
   runningTestsFor = undefined;
-
-  console.log(`           ===> '${name}': Reverting working copy <===`);
-  revertLocalChanges(downstreamTreeNode.installSource);
 
   foldEnd();
 
