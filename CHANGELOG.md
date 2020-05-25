@@ -1,3 +1,34 @@
+## 2.3.49 (2020-05-25)
+[Compare `@uirouter/publish-scripts` versions 2.3.48 and 2.3.49](https://github.com/ui-router/publish-scripts/compare/2.3.48...2.3.49)
+
+### Features
+
+* **generate_docs:** Generate docs from the current directory, and without using symlinks for node_modules ([3661919](https://github.com/ui-router/publish-scripts/commit/3661919))
+* **publish_yalc_package:** Do not double build (rely on yalc publish calling prepublishOnly script) ([75ce2fe](https://github.com/ui-router/publish-scripts/commit/75ce2fe))
+* **test_downstream_projects:** support testing of branches.  Do not revert changes after running tests to improve debugging of failed runs ([a35785f](https://github.com/ui-router/publish-scripts/commit/a35785f))
+
+
+---
+
+
+### Updated `check-peer-dependencies` from 2.0.1 to 2.0.2
+
+
+Changelog for `check-peer-dependencies`:
+
+
+[Compare `check-peer-dependencies` versions 2.0.1 and 2.0.2](https://github.com/christopherthielen/check-peer-dependencies/compare/2.0.1...2.0.2)
+
+### Bug Fixes
+
+* **peerDevDependencies:** Make peerDevDependency includes check a bit safer ([2a1a183](https://github.com/christopherthielen/check-peer-dependencies/commit/2a1a183))
+* **walkPackageDependency:** only walk dev deps for the root package ([e69c385](https://github.com/christopherthielen/check-peer-dependencies/commit/e69c385))
+
+
+### Features
+
+* **walkPackageDependencyTree:** Check devDependencies too ([9eba197](https://github.com/christopherthielen/check-peer-dependencies/commit/9eba197))
+
 ## 2.3.48 (2020-05-18)
 [Compare `@uirouter/publish-scripts` versions 2.3.47 and 2.3.48](https://github.com/ui-router/publish-scripts/compare/2.3.47...2.3.48)
 
