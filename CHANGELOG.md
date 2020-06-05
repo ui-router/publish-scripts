@@ -1,3 +1,10 @@
+# 2.4.0 (2020-06-05)
+[Compare `@uirouter/publish-scripts` versions 2.3.49 and 2.4.0](https://github.com/ui-router/publish-scripts/compare/2.3.49...2.4.0)
+
+### Features
+
+* Improve generate_docs ([e41798b](https://github.com/ui-router/publish-scripts/commit/e41798b))
+
 ## 2.3.49 (2020-05-25)
 [Compare `@uirouter/publish-scripts` versions 2.3.48 and 2.3.49](https://github.com/ui-router/publish-scripts/compare/2.3.48...2.3.49)
 
