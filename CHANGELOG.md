@@ -1,3 +1,10 @@
+## 2.4.1 (2020-06-05)
+[Compare `@uirouter/publish-scripts` versions 2.4.0 and 2.4.1](https://github.com/ui-router/publish-scripts/compare/2.4.0...2.4.1)
+
+### Bug Fixes
+
+* **generate_docs:** Support 'branch' configuration in docgen.json for included repos ([1f715dd](https://github.com/ui-router/publish-scripts/commit/1f715dd))
+
 # 2.4.0 (2020-06-05)
 [Compare `@uirouter/publish-scripts` versions 2.3.49 and 2.4.0](https://github.com/ui-router/publish-scripts/compare/2.3.49...2.4.0)
 
