@@ -23,16 +23,16 @@ if (!fs.existsSync(DOCGENCONFIG_PATH)) { throw new Error(`${DOCGENCONFIG_PATH} d
 
 const PACKAGEJSON = JSON.parse(fs.readFileSync(PACKAGEJSON_PATH));
 const DOCGENCONFIG = getDocgenConfig();
-const TSCONFIG_ORIG = JSON.parse(fs.readFileSync(TSCONFIG_PATH));
-const TSCONFIG_COPY = _.cloneDeep(TSCONFIG_ORIG);
+const TSCONFIG_ORIG_BINARY = fs.readFileSync(TSCONFIG_PATH);
+const TSCONFIG_COPY = JSON.parse(TSCONFIG_ORIG_BINARY.toString());
 
 const cleanupFns = [];
 
 // Merge tsconfig block from docgen.json into tsconfig.json
 _.defaultsDeep(TSCONFIG_COPY, DOCGENCONFIG.tsconfig);
 fs.writeFileSync(TSCONFIG_PATH, JSON.stringify(TSCONFIG_COPY, null, 2));
-cleanupFns.push(() => fs.writeFileSync(TSCONFIG_PATH, JSON.stringify(TSCONFIG_ORIG, null, 2)));
-shelljs.cat(TSCONFIG_PATH);
+cleanupFns.push(() => fs.writeFileSync(TSCONFIG_PATH, TSCONFIG_ORIG_BINARY));
+_exec(`cat ${TSCONFIG_PATH}`);
 
 function getDocgenConfig() {
   const config = JSON.parse(fs.readFileSync(DOCGENCONFIG_PATH));
@@ -56,7 +56,7 @@ nodeCleanup(() => {
 // Fetch all included packages (i.e., core module)
 const includes = DOCGENCONFIG.include || [];
 includes.forEach((include) => {
-  const { pkg, repo } = include;
+  const { pkg, repo, branch } = include;
   const semver = ['peerDependencies', 'dependencies', 'devDependencies']
     .map((key) => (PACKAGEJSON[key] || {})[pkg])
     .find((x) => !!x);
@@ -68,7 +68,7 @@ includes.forEach((include) => {
     cleanupFns.push(() => shelljs.rm('-rf', INSTALLDIR));
   }
 
-  const version = findSemverPackage(pkg, semver);
+  const version = branch || findSemverPackage(pkg, semver);
   shelljs.pushd(INSTALLDIR)
   _exec(`git checkout ${version}`);
   shelljs.popd()
