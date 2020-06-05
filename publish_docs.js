@@ -10,23 +10,24 @@ const _exec = util._exec;
 const sh = require('shelljs');
 const readlineSync = require('readline-sync');
 
-const CONFIG = JSON.parse(fs.readFileSync('./typedoc.json'));
+const CONFIG = JSON.parse(fs.readFileSync('./docgen.json'));
+const TYPEDOC_CONFIG = JSON.parse(fs.readFileSync('./typedoc.json'));
 const pkg = JSON.parse(fs.readFileSync('./package.json'));
 const version = pkg.version;
 
 const GIT_URL = "git@github.com:ui-router/ui-router.github.io.git";
 const installTargetDir = path.join(".downstream_cache", "ui-router.gihub.io");
-const PAGES_DIR = path.join(installTargetDir, CONFIG.typedoc.publishDir);
+const PAGES_DIR = path.join(installTargetDir, CONFIG.publishDir);
 
 publishYalcPackage(installTargetDir, GIT_URL, { noInstall: true, noBuild: true, noPublish: true });
 
 util.packageDir();
 
 sh.rm('-rf', path.join(PAGES_DIR, 'latest'));
-sh.cp('-r', CONFIG.typedoc.generateOptions.out, path.join(PAGES_DIR, 'latest'));
+sh.cp('-r', TYPEDOC_CONFIG.out, path.join(PAGES_DIR, 'latest'));
 
 sh.rm('-rf', path.join(PAGES_DIR, version));
-sh.cp('-r', CONFIG.typedoc.generateOptions.out, path.join(PAGES_DIR, version));
+sh.cp('-r', TYPEDOC_CONFIG.out, path.join(PAGES_DIR, version));
 
 sh.cd(PAGES_DIR);
 _exec("./process_docs.sh");

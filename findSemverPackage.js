@@ -9,7 +9,7 @@ module.exports = function findSemverPackage(packageName, semver) {
   } else if (lines.length === 1) {
     return lines[ 0 ];
   } else {
-    const line = stdout.split(/\n/).pop().trim();
+    const line = stdout.trim().split(/\n/).pop().trim();
     const [, version] = /.* '(.*)'$/.exec(line) || [];
     if (!version) {
       console.log({ stdout, line });

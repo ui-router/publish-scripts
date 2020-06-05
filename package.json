@@ -28,8 +28,12 @@
     "test_downstream_projects": "./test_downstream_projects.js",
     "util": "./util.js"
   },
+  "peerDependencies": {
+    "typedoc": "~0.17.7",
+    "typedoc-plugin-ui-router": "^3.0.1"
+  },
   "dependencies": {
-    "check-peer-dependencies": "2.0.2",
+    "check-peer-dependencies": "^2.0.2",
     "conventional-changelog": "^3.1.21",
     "conventional-changelog-ui-router-core": "^1.4.2",
     "find-parent-dir": "^0.3.0",
@@ -43,11 +47,6 @@
     "shx": "^0.3.1",
     "tmp": "^0.2.1",
     "tweak-sourcemap-paths": "0.0.4",
-    "typedoc": "^0.17.7",
-    "typedoc-plugin-external-module-name": "3.1.0",
-    "typedoc-plugin-internal-external": "2.1.1",
-    "typedoc-plugin-ui-router": "2.0.2",
-    "ui-router-typedoc-themes": "1.0.2",
     "yalc": "^1.0.0-pre.35",
     "yargs": "^15.3.1"
   },
