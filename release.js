@@ -113,8 +113,8 @@ if (!yargs.argv.dryrun) {
 // Publish to NPM and push to github
 if (!yargs.argv.dryrun) {
   const distDir = packageJson.distDir || '.';
-  if (distDir !== '.' && packageJson.scripts && packageJson.scripts.prepublishOnly) {
-    _exec('npm run prepublishOnly')
+  if (distDir !== '.' && packageJson.scripts && packageJson.scripts.build) {
+    _exec('npm run build')
   }
   shelljs.pushd(distDir);
   _exec(`npm publish`);

@@ -108,6 +108,10 @@ function localPublish(packageDir) {
     fs.writeFileSync('package.json', JSON.stringify(package, null, 2));
   }
 
+  if (distDir !== '.' && package.scripts && package.scripts.build) {
+    util._exec('npm run build')
+  }
+
   shelljs.pushd(distDir);
   util._exec('npx yalc publish');
   shelljs.popd();
