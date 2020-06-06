@@ -19,7 +19,8 @@ const GIT_URL = "git@github.com:ui-router/ui-router.github.io.git";
 const installTargetDir = path.join(".downstream_cache", "ui-router.gihub.io");
 const PAGES_DIR = path.join(installTargetDir, CONFIG.publishDir);
 
-publishYalcPackage(installTargetDir, GIT_URL, { noInstall: true, noBuild: true, noPublish: true });
+sh.rm('-rf', installTargetDir);
+_exec(`git clone ${GIT_URL} ${installTargetDir}`);
 
 util.packageDir();
 

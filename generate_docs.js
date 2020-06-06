@@ -32,6 +32,7 @@ const cleanupFns = [];
 _.defaultsDeep(TSCONFIG_COPY, DOCGENCONFIG.tsconfig);
 fs.writeFileSync(TSCONFIG_PATH, JSON.stringify(TSCONFIG_COPY, null, 2));
 cleanupFns.push(() => fs.writeFileSync(TSCONFIG_PATH, TSCONFIG_ORIG_BINARY));
+_exec(`sed -i'' -e 's/Globals/{{name}}/' node_modules/typedoc-default-themes/bin/default/partials/breadcrumb.hbs`);
 _exec(`cat ${TSCONFIG_PATH}`);
 
 function getDocgenConfig() {
