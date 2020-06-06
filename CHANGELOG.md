@@ -1,3 +1,10 @@
+## 2.4.3 (2020-06-06)
+[Compare `@uirouter/publish-scripts` versions 2.4.2 and 2.4.3](https://github.com/ui-router/publish-scripts/compare/2.4.2...2.4.3)
+
+### Bug Fixes
+
+* **release+downstream:** call 'npm runbuild' for projects that have a distDir ([d39f693](https://github.com/ui-router/publish-scripts/commit/d39f693))
+
 ## 2.4.2 (2020-06-06)
 [Compare `@uirouter/publish-scripts` versions 2.4.1 and 2.4.2](https://github.com/ui-router/publish-scripts/compare/2.4.1...2.4.2)
 
