@@ -1,3 +1,10 @@
+## 2.4.2 (2020-06-06)
+[Compare `@uirouter/publish-scripts` versions 2.4.1 and 2.4.2](https://github.com/ui-router/publish-scripts/compare/2.4.1...2.4.2)
+
+### Bug Fixes
+
+* **generate_docs:** Replace "Globals" with {{name}} in breadcrumbs. ([7f723a9](https://github.com/ui-router/publish-scripts/commit/7f723a9))
+
 ## 2.4.1 (2020-06-05)
 [Compare `@uirouter/publish-scripts` versions 2.4.0 and 2.4.1](https://github.com/ui-router/publish-scripts/compare/2.4.0...2.4.1)
 
