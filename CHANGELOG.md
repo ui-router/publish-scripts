@@ -1,3 +1,10 @@
+# 2.5.0 (2020-07-18)
+[Compare `@uirouter/publish-scripts` versions 2.4.3 and 2.5.0](https://github.com/ui-router/publish-scripts/compare/2.4.3...2.5.0)
+
+### Features
+
+* **docgen:** Create a docker image uirouter:docgen which generates docs so projects do not need a direct dependency on typedoc ([bd52998](https://github.com/ui-router/publish-scripts/commit/bd52998))
+
 ## 2.4.3 (2020-06-06)
 [Compare `@uirouter/publish-scripts` versions 2.4.2 and 2.4.3](https://github.com/ui-router/publish-scripts/compare/2.4.2...2.4.3)
 
