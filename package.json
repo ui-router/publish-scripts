@@ -19,7 +19,7 @@
   "bin": {
     "artifact_tagging": "./artifact_tagging.js",
     "ensure_clean_master": "./ensure_clean_master.js",
-    "generate_docs": "./generate_docs.js",
+    "generate_docs": "./docgen_via_docker.sh",
     "modify_sourcemap_paths": "./modify_sourcemap_paths.js",
     "publish_docs": "./publish_docs.js",
     "publish_yalc_package": "./publish_yalc_package.js",
