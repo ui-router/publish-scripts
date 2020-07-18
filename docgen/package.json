@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "lodash": "^4.17.19",
+    "find-parent-dir": "^0.3.0",
+    "typedoc": "0.17.8",
+    "typescript": "3.9.7",
+    "typedoc-plugin-ui-router": "3.0.2"
+  }
+}
