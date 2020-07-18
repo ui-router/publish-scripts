@@ -23,3 +23,4 @@ cp $WORK/project/$README .
 ./prep_docgen.js
 bash ./clone_repos.sh
 npx typedoc
+rm -rf project/src/includes
