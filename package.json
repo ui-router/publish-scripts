@@ -28,10 +28,6 @@
     "test_downstream_projects": "./test_downstream_projects.js",
     "util": "./util.js"
   },
-  "peerDependencies": {
-    "typedoc": "~0.17.7",
-    "typedoc-plugin-ui-router": "^3.0.1"
-  },
   "dependencies": {
     "check-peer-dependencies": "^2.0.2",
     "conventional-changelog": "^3.1.21",
