@@ -1,3 +1,10 @@
+## 2.5.3 (2020-07-20)
+[Compare `@uirouter/publish-scripts` versions 2.5.2 and 2.5.3](https://github.com/ui-router/publish-scripts/compare/2.5.2...2.5.3)
+
+### Bug Fixes
+
+* Do not run docker with -it, maybe it works in github actions? ([7ef06bc](https://github.com/ui-router/publish-scripts/commit/7ef06bc))
+
 ## 2.5.2 (2020-07-20)
 [Compare `@uirouter/publish-scripts` versions 2.5.1 and 2.5.2](https://github.com/ui-router/publish-scripts/compare/2.5.1...2.5.2)
 
