@@ -1,3 +1,15 @@
+## 2.5.2 (2020-07-20)
+[Compare `@uirouter/publish-scripts` versions 2.5.1 and 2.5.2](https://github.com/ui-router/publish-scripts/compare/2.5.1...2.5.2)
+
+### Bug Fixes
+
+* **docgen:** delete the *correct* includes directory after generating docs ([7844255](https://github.com/ui-router/publish-scripts/commit/7844255))
+
+
+### Features
+
+* **docker_push:** tag a version with the current package version ([80d7b3c](https://github.com/ui-router/publish-scripts/commit/80d7b3c))
+
 ## 2.5.1 (2020-07-20)
 [Compare `@uirouter/publish-scripts` versions 2.5.0 and 2.5.1](https://github.com/ui-router/publish-scripts/compare/2.5.0...2.5.1)
 
