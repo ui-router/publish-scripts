@@ -1,8 +1,16 @@
+## 2.5.1 (2020-07-20)
+[Compare `@uirouter/publish-scripts` versions 2.5.0 and 2.5.1](https://github.com/ui-router/publish-scripts/compare/2.5.0...2.5.1)
+
+### Bug Fixes
+
+* **docgen:** delete the includes directory after generating docs ([7a8da38](https://github.com/ui-router/publish-scripts/commit/7a8da38))
+
 # 2.5.0 (2020-07-18)
 [Compare `@uirouter/publish-scripts` versions 2.4.3 and 2.5.0](https://github.com/ui-router/publish-scripts/compare/2.4.3...2.5.0)
 
 ### Features
 
+* **docgen** Read docgen config from package.json
 * **docgen:** Create a docker image uirouter:docgen which generates docs so projects do not need a direct dependency on typedoc ([bd52998](https://github.com/ui-router/publish-scripts/commit/bd52998))
 
 ## 2.4.3 (2020-06-06)
