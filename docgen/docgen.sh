@@ -15,12 +15,13 @@ PROJECT=${WORK}/project
 }
 
 pushd $WORK
-cp $WORK/project/docgen.json .
-cp $WORK/project/typedoc.json .
+[[ -e typedoc.json ]] && rm typedoc.json
+ln -s $WORK/project/typedoc.json .
 README=$(jq -r .readme < typedoc.json)
 cp $WORK/project/$README .
 
 ./prep_docgen.js
 bash ./clone_repos.sh
-npx typedoc
+cd project
+../node_modules/.bin/typedoc --tsconfig tsconfig.docgen.json
 rm -rf project/src/includes

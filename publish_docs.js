@@ -10,14 +10,14 @@ const _exec = util._exec;
 const sh = require('shelljs');
 const readlineSync = require('readline-sync');
 
-const CONFIG = JSON.parse(fs.readFileSync('./docgen.json'));
 const TYPEDOC_CONFIG = JSON.parse(fs.readFileSync('./typedoc.json'));
-const pkg = JSON.parse(fs.readFileSync('./package.json'));
-const version = pkg.version;
+const PKGJSON = JSON.parse(fs.readFileSync('./package.json'));
+const DOCGEN_CONFIG = PKGJSON.docgen || {};
+const version = PKGJSON.version;
 
 const GIT_URL = "git@github.com:ui-router/ui-router.github.io.git";
 const installTargetDir = path.join(".downstream_cache", "ui-router.gihub.io");
-const PAGES_DIR = path.join(installTargetDir, CONFIG.publishDir);
+const PAGES_DIR = path.join(installTargetDir, DOCGEN_CONFIG.publishDir);
 
 sh.rm('-rf', installTargetDir);
 _exec(`git clone ${GIT_URL} ${installTargetDir}`);

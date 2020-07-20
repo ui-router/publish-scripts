@@ -10,6 +10,5 @@ RUN sed -i'' -e 's/Globals/{{name}}/' node_modules/typedoc-default-themes/bin/de
 COPY clone.sh /home/node/work
 COPY docgen.sh /home/node/work
 COPY prep_docgen.js /home/node/work
-COPY findSemverPackage.js /home/node/work
 
 ENTRYPOINT ["/home/node/work/docgen.sh"]

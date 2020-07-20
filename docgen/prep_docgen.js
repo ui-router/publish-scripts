@@ -1,35 +1,26 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const childProcess = require('child_process');
-const _ = require('lodash');
 
 const WORKDIR = process.cwd();
 const PACKAGE_DIR = `${WORKDIR}/project`;
 const SRC_DIR = `${PACKAGE_DIR}/src`;
-const DOCGENCONFIG_PATH = `${PACKAGE_DIR}/docgen.json`;
-const TSCONFIG_PATH = `${PACKAGE_DIR}/tsconfig.json`;
 const PACKAGEJSON_PATH = `${PACKAGE_DIR}/package.json`;
 
 if (!fs.existsSync(SRC_DIR)) { throw new Error(`${SRC_DIR} does not exist`) }
-if (!fs.existsSync(DOCGENCONFIG_PATH)) { throw new Error(`${DOCGENCONFIG_PATH} does not exist`); }
+if (!fs.existsSync(PACKAGEJSON_PATH)) { throw new Error(`${PACKAGEJSON_PATH} does not exist`); }
 
 const PACKAGEJSON = JSON.parse(fs.readFileSync(PACKAGEJSON_PATH));
-const DOCGENCONFIG = getDocgenConfig();
-const TSCONFIG_COPY = JSON.parse(fs.readFileSync(TSCONFIG_PATH).toString());
+const DOCGENCONFIG = getDocgenConfig(PACKAGEJSON);
 
-// Merge tsconfig block from docgen.json into tsconfig.json
-_.merge(TSCONFIG_COPY, DOCGENCONFIG.tsconfig);
-fs.writeFileSync(`${WORKDIR}/tsconfig.json`, JSON.stringify(TSCONFIG_COPY, null, 2));
-
-function getDocgenConfig() {
-  const config = JSON.parse(fs.readFileSync(DOCGENCONFIG_PATH));
-  const requiredKeys = ['navigation', 'tsconfig'];
-  const missing = requiredKeys.find((key) => !_.has(config, key));
+function getDocgenConfig(packageJson) {
+  const requiredKeys = ['docgen', 'docgen.navigation', 'docgen.publishDir'];
+  const missing = requiredKeys.find((key) => key.split(".").reduce((acc, k) => acc && acc[k], packageJson) === undefined);
   if (missing) {
-    console.error(`${DOCGENCONFIG_PATH} does not contain configuration key: '${missing}'`);
+    console.error(`${PACKAGEJSON_PATH} does not contain configuration key: '${missing}'`);
     process.exit(1);
   }
-  return config;
+  return packageJson.docgen;
 }
 
 // Fetch all included packages (i.e., core module)
