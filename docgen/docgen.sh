@@ -24,4 +24,4 @@ cp $WORK/project/$README .
 bash ./clone_repos.sh
 cd project
 ../node_modules/.bin/typedoc --tsconfig tsconfig.docgen.json
-rm -rf project/src/includes
+rm -rf src/includes
