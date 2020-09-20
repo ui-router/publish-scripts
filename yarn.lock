@@ -172,10 +172,10 @@ chalk@^2.0.0, chalk@^2.4.1:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-check-peer-dependencies@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/check-peer-dependencies/-/check-peer-dependencies-2.0.2.tgz#f41ee03da90e9caa42b0d35b95d29ba5ec0d8f50"
-  integrity sha512-2ONozVlLrkoTtlHBNFBNDQn4pjzecvwD8NlkpiPxVcvio9YulTdORzEr4kzrm1k2M3oZ2B7uNCzoe8w/FM/6Cg==
+check-peer-dependencies@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/check-peer-dependencies/-/check-peer-dependencies-2.0.6.tgz#e407e6f3433eac6138765474a114c96a787d7c04"
+  integrity sha512-q++3UFY2vgZEcUlHSDLR6JmBispEf6az90wNFSfM3hiD+DuZUd0mD+eYGSQMTUVvvEZkaS+B71utvsKYiBPemg==
   dependencies:
     resolve "^1.14.1"
     semver "^7.1.1"
