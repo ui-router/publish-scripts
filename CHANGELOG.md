@@ -1,3 +1,29 @@
+## 2.5.4 (2020-09-20)
+[Compare `@uirouter/publish-scripts` versions 2.5.3 and 2.5.4](https://github.com/ui-router/publish-scripts/compare/2.5.3...2.5.4)
+
+
+---
+
+
+### Updated `check-peer-dependencies` from 2.0.2 to 2.0.6
+
+
+Changelog for `check-peer-dependencies`:
+
+
+[Compare `check-peer-dependencies` versions 2.0.2 and 2.0.6](https://github.com/christopherthielen/check-peer-dependencies/compare/2.0.2...2.0.6)
+
+### Bug Fixes
+
+* fix type error ([d117ef7](https://github.com/christopherthielen/check-peer-dependencies/commit/d117ef7))
+* Ignore missing optionalDependencies ([25a89a7](https://github.com/christopherthielen/check-peer-dependencies/commit/25a89a7))
+* print warning if dependency path is not found ([37c0296](https://github.com/christopherthielen/check-peer-dependencies/commit/37c0296))
+
+
+### Features
+
+* Add an option to run tool in consumer package root dependencies only.  ([#7](https://github.com/christopherthielen/check-peer-dependencies/issues/7)) ([cd8f75a](https://github.com/christopherthielen/check-peer-dependencies/commit/cd8f75a))
+
 ## 2.5.3 (2020-07-20)
 [Compare `@uirouter/publish-scripts` versions 2.5.2 and 2.5.3](https://github.com/ui-router/publish-scripts/compare/2.5.2...2.5.3)
 
