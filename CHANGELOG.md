@@ -1,3 +1,33 @@
+## 2.5.5 (2020-12-27)
+[Compare `@uirouter/publish-scripts` versions 2.5.4 and 2.5.5](https://github.com/ui-router/publish-scripts/compare/2.5.4...2.5.5)
+
+
+---
+
+
+### Updated `check-peer-dependencies` from 2.0.6 to 4.0.0
+
+
+Changelog for `check-peer-dependencies`:
+
+
+[Compare `check-peer-dependencies` versions 2.0.6 and 4.0.0](https://github.com/christopherthielen/check-peer-dependencies/compare/2.0.6...4.0.0)
+
+### Features
+
+* **findSolutions:** Add a toggle to find solutions and print installation commands. ([c34735a](https://github.com/christopherthielen/check-peer-dependencies/commit/c34735a))
+* **orderBy:** Change default orderBy to 'dependee' ([e77e069](https://github.com/christopherthielen/check-peer-dependencies/commit/e77e069))
+* **peerDependencyMeta:** support peerDependencyMeta in package.json to ignore optional peer dependencies ([4e3b757](https://github.com/christopherthielen/check-peer-dependencies/commit/4e3b757))
+* **prerelease:** include prerelease when  matching ranges, i.e. the range ">=6.0.0" matches "7.0.0-beta.1" ([0493379](https://github.com/christopherthielen/check-peer-dependencies/commit/0493379))
+* **report:** For a given unmet peer dependency, show every related peer dependency, even if currently met ([516a259](https://github.com/christopherthielen/check-peer-dependencies/commit/516a259))
+
+
+### BREAKING CHANGES
+
+* **prerelease:** Matches prerelease versions
+* **orderBy:** default order changed from 'depender' to 'dependee'
+* **findSolutions:** no longer prints installation commands by default, instead prints a message about using --install
+
 ## 2.5.4 (2020-09-20)
 [Compare `@uirouter/publish-scripts` versions 2.5.3 and 2.5.4](https://github.com/ui-router/publish-scripts/compare/2.5.3...2.5.4)
 
