@@ -44,7 +44,7 @@
     "tmp": "^0.2.1",
     "tweak-sourcemap-paths": "0.0.4",
     "yalc": "^1.0.0-pre.49",
-    "yargs": "^16.2.0"
+    "yargs": "^17.0.1"
   },
   "resolutions": {
     "npm-packlist": "1.4.6"
