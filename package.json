@@ -37,7 +37,7 @@
     "lodash": "^4.17.20",
     "node-cleanup": "^2.1.2",
     "npm-run-all": "^4.1.5",
-    "open": "^7.3.0",
+    "open": "^8.2.1",
     "readline-sync": "^1.4.10",
     "shelljs": "^0.8.4",
     "shx": "^0.3.3",
