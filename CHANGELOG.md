@@ -1,3 +1,28 @@
+# 2.6.0 (2021-12-01)
+[Compare `@uirouter/publish-scripts` versions 2.5.5 and 2.6.0](https://github.com/ui-router/publish-scripts/compare/2.5.5...2.6.0)
+
+
+---
+
+
+### Updated `check-peer-dependencies` from 4.0.0 to 4.1.0
+
+
+Changelog for `check-peer-dependencies`:
+
+
+[Compare `check-peer-dependencies` versions 4.0.0 and 4.1.0](https://github.com/christopherthielen/check-peer-dependencies/compare/4.0.0...4.1.0)
+
+### Bug Fixes
+
+* Install peer deps as devDependencies if the peer dep came from a dev dependency ([6ef3021](https://github.com/christopherthielen/check-peer-dependencies/commit/6ef3021)), closes [#21](https://github.com/christopherthielen/check-peer-dependencies/issues/21)
+
+
+### Features
+
+* Add support for ignoring peer dependencies (via cli option or config stored in package.json) ([5994c9c](https://github.com/christopherthielen/check-peer-dependencies/commit/5994c9c))
+* load checkPeerDependencies config from package.json (and merge with CLI options) ([e2f0fee](https://github.com/christopherthielen/check-peer-dependencies/commit/e2f0fee))
+
 ## 2.5.5 (2020-12-27)
 [Compare `@uirouter/publish-scripts` versions 2.5.4 and 2.5.5](https://github.com/ui-router/publish-scripts/compare/2.5.4...2.5.5)
 
