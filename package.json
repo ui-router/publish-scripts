@@ -29,22 +29,22 @@
     "util": "./util.js"
   },
   "dependencies": {
-    "check-peer-dependencies": "^4.0.0",
+    "check-peer-dependencies": "^4.1.0",
     "conventional-changelog": "^3.1.24",
     "conventional-changelog-ui-router-core": "^1.4.2",
-    "find-parent-dir": "^0.3.0",
+    "find-parent-dir": "^0.3.1",
     "git-semver-tags": "^4.1.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "node-cleanup": "^2.1.2",
     "npm-run-all": "^4.1.5",
-    "open": "^7.3.0",
+    "open": "^8.4.0",
     "readline-sync": "^1.4.10",
     "shelljs": "^0.8.4",
     "shx": "^0.3.3",
     "tmp": "^0.2.1",
     "tweak-sourcemap-paths": "0.0.4",
-    "yalc": "^1.0.0-pre.49",
-    "yargs": "^16.2.0"
+    "yalc": "^1.0.0-pre.53",
+    "yargs": "^17.3.0"
   },
   "resolutions": {
     "npm-packlist": "1.4.6"
