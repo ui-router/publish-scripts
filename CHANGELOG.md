@@ -1,3 +1,10 @@
+## 2.6.1 (2023-04-16)
+[Compare `@uirouter/publish-scripts` versions 2.6.0 and 2.6.1](https://github.com/ui-router/publish-scripts/compare/2.6.0...2.6.1)
+
+### Bug Fixes
+
+* ensure release script works in windows ([d3eb682](https://github.com/ui-router/publish-scripts/commit/d3eb682))
+
 # 2.6.0 (2021-12-01)
 [Compare `@uirouter/publish-scripts` versions 2.5.5 and 2.6.0](https://github.com/ui-router/publish-scripts/compare/2.5.5...2.6.0)
 
