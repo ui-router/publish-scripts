@@ -67,7 +67,7 @@ if (readlineSync.keyInYN('\n\nUpdate CHANGELOG?')) {
   const depsArg = yargs.argv.deps ? `--deps ${yargs.argv.deps.join(' ')}` : '';
   const show_changelog = path.resolve(__dirname, 'show_changelog.js');
 
-  changelog = _exec(`${show_changelog} ${depsArg}`, true).stdout;
+  changelog = _exec(`node ${show_changelog} ${depsArg}`, true).stdout;
 
   console.log('CHANGELOG:\n\n');
   console.log(changelog);

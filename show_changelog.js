@@ -52,7 +52,7 @@ if (deps.length) {
   // because conventional-changelog-core doesn't seem to have a callback to tap into
   const fromArg = (from ? ` --from ${from}` : '');
   const toArg = (to ? ` --to ${to}` : '');
-  let stdout = _exec(`${scriptPath} ${fromArg} ${toArg}`, true).stdout;
+  let stdout = _exec(`node ${scriptPath} ${fromArg} ${toArg}`, true).stdout;
   console.log(stdout.trim());
 
   shelljs.mkdir('.show_changelog.tmp');
