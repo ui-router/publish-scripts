@@ -1,3 +1,9 @@
+## 2.6.2 (2023-04-18)
+
+Publish package with correct line endings
+
+[Compare `@uirouter/publish-scripts` versions 2.6.1 and 2.6.2](https://github.com/ui-router/publish-scripts/compare/2.6.1...2.6.2)
+
 ## 2.6.1 (2023-04-16)
 [Compare `@uirouter/publish-scripts` versions 2.6.0 and 2.6.1](https://github.com/ui-router/publish-scripts/compare/2.6.0...2.6.1)
 
