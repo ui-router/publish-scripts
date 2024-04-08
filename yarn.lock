@@ -174,10 +174,10 @@ chalk@^4.1.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-check-peer-dependencies@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/check-peer-dependencies/-/check-peer-dependencies-4.1.0.tgz#17f2a5026df150f7dbe19b6aaa90a81e0740d6b9"
-  integrity sha512-nKBxfpKDFj0Pzd/8Myvb9ALnHarrOHupiCZ25AA84OIR9hOcLo7OQ0ofmxnIFLqUPVldF1RWPK0ayZq15ukcLw==
+check-peer-dependencies@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/check-peer-dependencies/-/check-peer-dependencies-4.3.0.tgz#0fec2f5dcf9ee14a28093a908cfb94bf86bace86"
+  integrity sha512-4JPrBFzI+D8Cw36Fvdnxnz7SmbigoXg0N0Pxk1KViOcuNWRqOvJOoI7D96uSMqiU0EKr9R3xg/h3ixJW0vzhfQ==
   dependencies:
     resolve "^1.19.0"
     semver "^7.3.4"
