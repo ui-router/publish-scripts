@@ -1,3 +1,24 @@
+## 2.6.3 (2024-04-08)
+[Compare `@uirouter/publish-scripts` versions 2.6.2 and 2.6.3](https://github.com/ui-router/publish-scripts/compare/2.6.2...2.6.3)
+
+
+---
+
+
+### Updated `check-peer-dependencies` from 4.1.0 to 4.3.0
+
+
+Changelog for `check-peer-dependencies`:
+
+
+[Compare `check-peer-dependencies` versions 4.1.0 and 4.3.0](https://github.com/christopherthielen/check-peer-dependencies/compare/4.1.0...4.3.0)
+
+### Bug Fixes
+
+* Install peer deps as devDependencies if the peer dep came from a dev dependency ([6ef3021](https://github.com/christopherthielen/check-peer-dependencies/commit/6ef3021)), closes [#21](https://github.com/christopherthielen/check-peer-dependencies/issues/21)
+* Method for determining the installed version fails [#27](https://github.com/christopherthielen/check-peer-dependencies/issues/27) ([8058585](https://github.com/christopherthielen/check-peer-dependencies/commit/8058585))
+* non-satisfied optional dependency should fail ([7d43b0d](https://github.com/christopherthielen/check-peer-dependencies/commit/7d43b0d))
+
 ## 2.6.2 (2023-04-18)
 
 Publish package with correct line endings
