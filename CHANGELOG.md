@@ -1,3 +1,27 @@
+## 2.6.5 (2026-01-01)
+[Compare `@uirouter/publish-scripts` versions 2.6.3 and 2.6.5](https://github.com/ui-router/publish-scripts/compare/2.6.3...2.6.5)
+
+### Bug Fixes
+
+* **yalc:** Use rsync to copy downstream tests to the .downstream_cache directory ([6532304](https://github.com/ui-router/publish-scripts/commit/6532304))
+
+
+---
+
+
+### Updated `check-peer-dependencies` from 4.3.0 to 4.3.2
+
+
+Changelog for `check-peer-dependencies`:
+
+
+[Compare `check-peer-dependencies` versions 4.3.0 and 4.3.2](https://github.com/christopherthielen/check-peer-dependencies/compare/4.3.0...4.3.2)
+
+### Bug Fixes
+
+* ?.endsWith to avoid NPE ([e605bbc](https://github.com/christopherthielen/check-peer-dependencies/commit/e605bbc))
+* fix yalc detection ([625b279](https://github.com/christopherthielen/check-peer-dependencies/commit/625b279))
+
 ## 2.6.4 (2025-12-30)
 [Compare `@uirouter/publish-scripts` versions 2.6.3 and 2.6.4](https://github.com/ui-router/publish-scripts/compare/2.6.3...2.6.4)
 
