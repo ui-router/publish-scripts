@@ -28,7 +28,7 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
   const installTargetDirTmp = path.join(installTargetDir, ".tmp");
   const installSourceDir = isRemoteSource ? null : path.resolve(installSource);
 
-  // Create directory and clone git repo
+  // Create directory and clone git repo or copy from directory, when no cached repo exists yet
   if (!fs.existsSync(path.join(installTargetDir, '.git'))) {
     if (isRemoteSource) {
       util._exec(`git clone ${installSource} ${installTargetDir}`);
@@ -41,35 +41,26 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
     }
   }
 
-  // Update git repo from source and make working copy match exactly
+  // Update the git repo (previously cached, or just created) with changes from the source repo or directory
   if (isRemoteSource) {
+    // Update git repo from source and make working copy match exactly
     process.chdir(installTargetDir);
     util._exec('git fetch origin');
     util._exec(`git checkout ${branch}`);
     util._exec(`git reset --hard ${branch}`);
     util._exec('git clean --force -d');
   } else {
-    // Create a tmp dir with a copy of the current package contents
-    shelljs.rm('-rf', installTargetDirTmp);
-    shelljs.cp('-r', installSourceDir, installTargetDirTmp);
-
-    // Copy the current .git metadata from the cache dir into the tmp dir
-    shelljs.cp('-r', path.join(installTargetDir, ".git"), installTargetDirTmp);
-    process.chdir(installTargetDirTmp);
+    // Update the cached git repo with the current package contents
+    process.chdir(installTargetDir);
+    util._exec(`rsync -a --delete `+
+        `--exclude='/.git/' `+
+        `--exclude='**/.git/' `+
+        `--exclude='/node_modules/' `+
+        `--exclude='**/node_modules/' `+
+        `"${installSourceDir}"/ "${installTargetDir}"/`);
 
     // Commit the changes from the current package (if any)
     util._exec('git add . && git diff --staged --quiet || git commit -m "update from source directory"');
-
-    process.chdir(installTargetDir);
-
-    // Move the new .git metadata back into the cache dir
-    shelljs.rm('-rf', '.git');
-    shelljs.mv(path.join('.tmp', '.git'), ".");
-    shelljs.rm('-rf', installTargetDirTmp);
-
-    // Update the cache to match the current package contents
-    util._exec('git reset --hard master');
-    util._exec('git clean --force -d');
   }
 
   // Update dependencies
