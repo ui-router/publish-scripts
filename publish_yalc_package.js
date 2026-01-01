@@ -53,11 +53,13 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
     // Update the cached git repo with the current package contents
     process.chdir(installTargetDir);
     util._exec(`rsync -a --delete `+
+        `--exclude='/yarn.lock' `+
+        `--exclude='/yalc.lock' `+
         `--exclude='/.git/' `+
         `--exclude='**/.git/' `+
         `--exclude='/node_modules/' `+
         `--exclude='**/node_modules/' `+
-        `"${installSourceDir}"/ "${installTargetDir}"/`);
+        `"${installSourceDir}/" "${installTargetDir}/"`);
 
     // Commit the changes from the current package (if any)
     util._exec('git add . && git diff --staged --quiet || git commit -m "update from source directory"');
