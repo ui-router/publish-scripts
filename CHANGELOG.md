@@ -1,3 +1,10 @@
+## 2.6.6 (2026-01-01)
+[Compare `@uirouter/publish-scripts` versions 2.6.5 and 2.6.6](https://github.com/ui-router/publish-scripts/compare/2.6.5...2.6.6)
+
+### Bug Fixes
+
+* **yalc:** exclude yarn.lock deletion when rsync'ing from src to dest ([8eceed5](https://github.com/ui-router/publish-scripts/commit/8eceed5))
+
 ## 2.6.5 (2026-01-01)
 [Compare `@uirouter/publish-scripts` versions 2.6.3 and 2.6.5](https://github.com/ui-router/publish-scripts/compare/2.6.3...2.6.5)
 
