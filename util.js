@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const findParentDir = require('find-parent-dir');
 const fs = require('fs');
@@ -18,7 +18,7 @@ function packageDir() {
  */
 function detectPackageManager(dir) {
   dir = dir || process.cwd();
-  
+
   if (fs.existsSync(path.join(dir, 'yarn.lock'))) {
     return 'yarn';
   }
@@ -39,7 +39,7 @@ function detectPackageManager(dir) {
  */
 function getPackageManagerCommands(pm) {
   pm = pm || detectPackageManager();
-  
+
   const commands = {
     yarn: {
       install: (flags) => `yarn install${flags ? ' ' + flags : ''}`,
@@ -47,9 +47,10 @@ function getPackageManagerCommands(pm) {
       test: () => `yarn test`,
       add: (pkg, flags) => `yarn add ${pkg}${flags ? ' ' + flags : ''}`,
       addDev: (pkg) => `yarn add --dev ${pkg}`,
-      upgrade: (pkgs, flags) => pkgs 
-        ? `yarn upgrade ${Array.isArray(pkgs) ? pkgs.join(' ') : pkgs}${flags ? ' ' + flags : ''}`
-        : `yarn upgrade${flags ? ' ' + flags : ''}`,
+      upgrade: (pkgs, flags) =>
+        pkgs
+          ? `yarn upgrade ${Array.isArray(pkgs) ? pkgs.join(' ') : pkgs}${flags ? ' ' + flags : ''}`
+          : `yarn upgrade${flags ? ' ' + flags : ''}`,
       exec: (cmd) => `yarn ${cmd}`,
       lockfileName: 'yarn.lock',
     },
@@ -59,9 +60,10 @@ function getPackageManagerCommands(pm) {
       test: () => `npm test`,
       add: (pkg, flags) => `npm install ${pkg}${flags ? ' ' + flags : ''}`,
       addDev: (pkg) => `npm install --save-dev ${pkg}`,
-      upgrade: (pkgs, flags) => pkgs
-        ? `npm update ${Array.isArray(pkgs) ? pkgs.join(' ') : pkgs}${flags ? ' ' + flags : ''}`
-        : `npm update${flags ? ' ' + flags : ''}`,
+      upgrade: (pkgs, flags) =>
+        pkgs
+          ? `npm update ${Array.isArray(pkgs) ? pkgs.join(' ') : pkgs}${flags ? ' ' + flags : ''}`
+          : `npm update${flags ? ' ' + flags : ''}`,
       exec: (cmd) => `npx ${cmd}`,
       lockfileName: 'package-lock.json',
     },
@@ -71,14 +73,15 @@ function getPackageManagerCommands(pm) {
       test: () => `pnpm test`,
       add: (pkg, flags) => `pnpm add ${pkg}${flags ? ' ' + flags : ''}`,
       addDev: (pkg) => `pnpm add --save-dev ${pkg}`,
-      upgrade: (pkgs, flags) => pkgs
-        ? `pnpm update ${Array.isArray(pkgs) ? pkgs.join(' ') : pkgs}${flags ? ' ' + flags : ''}`
-        : `pnpm update${flags ? ' ' + flags : ''}`,
+      upgrade: (pkgs, flags) =>
+        pkgs
+          ? `pnpm update ${Array.isArray(pkgs) ? pkgs.join(' ') : pkgs}${flags ? ' ' + flags : ''}`
+          : `pnpm update${flags ? ' ' + flags : ''}`,
       exec: (cmd) => `pnpm exec ${cmd}`,
       lockfileName: 'pnpm-lock.yaml',
     },
   };
-  
+
   return commands[pm];
 }
 
@@ -104,8 +107,7 @@ function ensureCleanMaster(branch) {
   branch = branch || 'master';
   if (exec('git symbolic-ref HEAD').stdout.trim() !== `refs/heads/${branch}`)
     throw new Error(`Not on ${branch} branch, aborting`);
-  if (exec('git status --porcelain').stdout.trim() !== '')
-    throw new Error('Working copy is dirty, aborting');
+  if (exec('git status --porcelain').stdout.trim() !== '') throw new Error('Working copy is dirty, aborting');
 }
 
 function _exec(command, silent) {
@@ -118,7 +120,7 @@ function _exec(command, silent) {
   echo(`cwd: ${process.cwd()}`);
   echo(`Aborting; non-zero return value (${result.code}) from: ${command}`);
   console.error(result.stderr);
-  exit(result.code)
+  exit(result.code);
 }
 
 function _execInteractive(command) {
@@ -128,19 +130,25 @@ function _execInteractive(command) {
   const result = spawnSync(command, {
     stdio: 'inherit',
     shell: true,
-    cwd: process.cwd()
+    cwd: process.cwd(),
   });
   if (result.status === 0) return result;
   echo(`cwd: ${process.cwd()}`);
   echo(`Aborting; non-zero return value (${result.status}) from: ${command}`);
-  exit(result.status)
+  exit(result.status);
 }
 
-function asJson (obj) { return JSON.stringify(obj, null, 2); }
+function asJson(obj) {
+  return JSON.stringify(obj, null, 2);
+}
 
 let ensure = (type) => (path) => {
   let is = false;
-  try { is = fs.lstatSync(path)['is' + type](); } catch (e) { console.log(e); }
+  try {
+    is = fs.lstatSync(path)['is' + type]();
+  } catch (e) {
+    console.log(e);
+  }
   if (!is) echo(`Not a ${type}: ${path}`) && exit(-3);
 };
 let assertDir = ensure('Directory');

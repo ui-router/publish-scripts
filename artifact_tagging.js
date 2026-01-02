@@ -16,7 +16,9 @@ const COMMIT_ARTIFACTS = CONFIG.ARTIFACTS;
 const pkg = JSON.parse(fs.readFileSync('./package.json'));
 const version = pkg.version;
 
-let widen = false, npm = false, githubtag = false;
+let widen = false,
+  npm = false,
+  githubtag = false;
 let coreDep = pkg.dependencies['@uirouter/core'];
 let isNarrow = /^[[=~]?(\d.*)/.exec(coreDep);
 let widenedDep = isNarrow && '^' + isNarrow[1];
@@ -29,7 +31,6 @@ if (readlineSync.keyInYN('Publish to NPM')) {
   npm = true;
 }
 
-
 if (readlineSync.keyInYN('publish to Github Tag?')) {
   githubtag = true;
 }
@@ -38,17 +39,17 @@ if (!npm && !githubtag) {
   process.exit(1);
 }
 
-const label = githubtag && npm ? "npm package and github tag" : npm ? "npm package" : "github tag";
+const label = githubtag && npm ? 'npm package and github tag' : npm ? 'npm package' : 'github tag';
 
-const YYYYMMDD = (function() {
+const YYYYMMDD = (function () {
   const date = new Date();
   const year = date.getFullYear();
 
   let month = date.getMonth() + 1;
-  month = (month < 10 ? "0" : "") + month;
+  month = (month < 10 ? '0' : '') + month;
 
-  let day  = date.getDate();
-  day = (day < 10 ? "0" : "") + day;
+  let day = date.getDate();
+  day = (day < 10 ? '0' : '') + day;
 
   return year + month + day;
 })();
@@ -76,16 +77,17 @@ _exec(`git checkout -b ${tagname}-prep`);
 pkg.dependencies['@uirouter/core'] = widenedDep;
 pkg.version += pkgver;
 
-fs.writeFileSync("package.json", JSON.stringify(pkg, undefined, 2));
+fs.writeFileSync('package.json', JSON.stringify(pkg, undefined, 2));
 _exec(`git commit -m "Widening @uirouter/core dependency range to ${widenedDep}" package.json`);
 
 _exec(`npm run package`);
 
 if (npm) {
   let output = _exec(`npm dist-tag ls ${pkg.name}`).stdout;
-  let latest = output.split(/[\r\n]/)
-    .map(line => line.split(": "))
-    .filter(linedata => linedata[0] === 'latest')[0];
+  let latest = output
+    .split(/[\r\n]/)
+    .map((line) => line.split(': '))
+    .filter((linedata) => linedata[0] === 'latest')[0];
 
   if (!latest) {
     throw new Error(`Could not determine value of "latest" dist-tag for ${pkg.name}`);
@@ -107,4 +109,3 @@ if (githubtag) {
 
 _exec(`git checkout master`);
 _exec(`git branch -D ${tagname}-prep`);
-

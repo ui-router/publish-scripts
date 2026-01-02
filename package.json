@@ -14,7 +14,9 @@
   },
   "homepage": "https://github.com/ui-router/publish-scripts#readme",
   "scripts": {
-    "release": "node ./release.js --deps check-peer-dependencies"
+    "release": "node ./release.js --deps check-peer-dependencies",
+    "format": "prettier --write \"*.js\" \"actions/**/*.js\" \"docgen/*.js\"",
+    "prepare": "husky"
   },
   "bin": {
     "artifact_tagging": "./artifact_tagging.js",
@@ -48,5 +50,9 @@
   },
   "resolutions": {
     "npm-packlist": "1.4.6"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "prettier": "^3.7.4"
   }
 }

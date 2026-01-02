@@ -4,7 +4,6 @@ const util = require('./util');
 util.packageDir();
 
 let branch;
-if(require.main === module && process.argv[2])
-  branch = process.argv[2];
+if (require.main === module && process.argv[2]) branch = process.argv[2];
 
 util.ensureCleanMaster(branch);

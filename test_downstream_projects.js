@@ -8,15 +8,15 @@ const isTravis = !!process.env.TRAVIS;
 const isGithubActions = !!process.env.GITHUB_ACTIONS;
 
 const yargs = require('yargs')
-    .option('group', {
-      alias: 'g',
-      default: 'all',
-      description: 'the group of projects to test (from downstream_projects.json "group" key)',
-    })
-    .option('workspace', {
-      alias: 'ws',
-      description: 'use yarn workspace to save space (yarn only)',
-    });
+  .option('group', {
+    alias: 'g',
+    default: 'all',
+    description: 'the group of projects to test (from downstream_projects.json "group" key)',
+  })
+  .option('workspace', {
+    alias: 'ws',
+    description: 'use yarn workspace to save space (yarn only)',
+  });
 
 const nodeCleanup = require('node-cleanup');
 const publishYalcPackage = require('./publish_yalc_package');
@@ -39,7 +39,7 @@ const PKG_DIR = process.cwd();
 const detectedPm = pm();
 
 const pkgjson = JSON.parse(fs.readFileSync('package.json'));
-const DOWNSTREAM_PKGS = (process.env.DOWNSTREAM_PKGS || '').split(',').filter(x => x);
+const DOWNSTREAM_PKGS = (process.env.DOWNSTREAM_PKGS || '').split(',').filter((x) => x);
 
 const TEMP = tmp.dirSync();
 const TEMP_DIR = TEMP.name;
@@ -53,8 +53,8 @@ function parseConfig(configFilePath, limitToGroup = 'all') {
 
   // Object values are groups (nested config).  string values are github url or local file path
   const isGroup = ([key, value]) => typeof value === 'object';
-  const groupsAsPairs = configBlock.filter(pair => isGroup(pair));
-  const ungroupedProjectsAsPairs = configBlock.filter(pair => !isGroup(pair));
+  const groupsAsPairs = configBlock.filter((pair) => isGroup(pair));
+  const ungroupedProjectsAsPairs = configBlock.filter((pair) => !isGroup(pair));
 
   const allGroupedProjectPairs = _.flatten(groupsAsPairs.map(([name, groupedProjects]) => _.toPairs(groupedProjects)));
 
@@ -63,7 +63,9 @@ function parseConfig(configFilePath, limitToGroup = 'all') {
 
   const projects = groups[limitToGroup];
   if (!projects) {
-    throw new Error(`Attempting to run tests for a group named ${yargs.argv.group}, but no matching group was found in downstream_projects.json`);
+    throw new Error(
+      `Attempting to run tests for a group named ${yargs.argv.group}, but no matching group was found in downstream_projects.json`,
+    );
   }
 
   const nohoist = (config.projects && config.nohoist) || [];
@@ -87,13 +89,13 @@ function localPublish(packageDir) {
   // Un-yalc any deps in the package.json (after building, but before yalc publishing)
   const packageString = fs.readFileSync('package.json');
   const package = JSON.parse(packageString);
-  const distDir =  package.distDir || '.';
+  const distDir = package.distDir || '.';
   const { resolutions = {}, dependencies = {}, devDependencies = {} } = package;
 
   const yalcLockfile = fs.existsSync('yalc.lock') ? JSON.parse(fs.readFileSync('yalc.lock')) : {};
-  const yalcPackages = Object.keys(yalcLockfile.packages || {})
+  const yalcPackages = Object.keys(yalcLockfile.packages || {});
 
-  yalcPackages.forEach(pkg => {
+  yalcPackages.forEach((pkg) => {
     delete resolutions[pkg];
 
     if (dependencies[pkg]) {
@@ -107,12 +109,14 @@ function localPublish(packageDir) {
 
   if (yalcPackages.length) {
     const lockfileName = pkgMgrCommands().lockfileName;
-    console.log(`           ===> De-yalc'ed ${yalcPackages.join(', ')} from ${packageDir}/package.json using ${packageDir}/${lockfileName} <===`)
+    console.log(
+      `           ===> De-yalc'ed ${yalcPackages.join(', ')} from ${packageDir}/package.json using ${packageDir}/${lockfileName} <===`,
+    );
     fs.writeFileSync('package.json', JSON.stringify(package, null, 2));
   }
 
   if (distDir !== '.' && package.scripts && package.scripts.build) {
-    util._exec(pkgMgrCommands().run('build'))
+    util._exec(pkgMgrCommands().run('build'));
   }
 
   shelljs.pushd(distDir);
@@ -120,19 +124,19 @@ function localPublish(packageDir) {
   shelljs.popd();
 
   if (yalcPackages.length) {
-    console.log(`           ===> Restoring yalc'd manifest ${packageDir}/package.json <===`)
+    console.log(`           ===> Restoring yalc'd manifest ${packageDir}/package.json <===`);
     fs.writeFileSync('package.json', packageString);
   }
 }
 
 function installUpstreamDeps(upstreamPackages) {
-  upstreamPackages.forEach(upstream => {
+  upstreamPackages.forEach((upstream) => {
     util._exec('npx yalc add ' + upstream);
   });
 
   // Resolutions are yarn-specific, only add them for yarn
   if (detectedPm === 'yarn') {
-    upstreamPackages.forEach(upstream => {
+    upstreamPackages.forEach((upstream) => {
       const package = JSON.parse(fs.readFileSync('package.json'));
       const yalcDep = (package.dependencies || {})[upstream] || (package.devDependencies || {})[upstream];
       package.resolutions = package.resolutions || {};
@@ -141,7 +145,7 @@ function installUpstreamDeps(upstreamPackages) {
     });
   } else if (detectedPm === 'pnpm') {
     // pnpm uses overrides in package.json
-    upstreamPackages.forEach(upstream => {
+    upstreamPackages.forEach((upstream) => {
       const package = JSON.parse(fs.readFileSync('package.json'));
       const yalcDep = (package.dependencies || {})[upstream] || (package.devDependencies || {})[upstream];
       package.pnpm = package.pnpm || {};
@@ -151,7 +155,7 @@ function installUpstreamDeps(upstreamPackages) {
     });
   } else {
     // npm uses overrides in package.json (npm 8.3+)
-    upstreamPackages.forEach(upstream => {
+    upstreamPackages.forEach((upstream) => {
       const package = JSON.parse(fs.readFileSync('package.json'));
       const yalcDep = (package.dependencies || {})[upstream] || (package.devDependencies || {})[upstream];
       package.overrides = package.overrides || {};
@@ -171,15 +175,17 @@ function runTests() {
 }
 
 function fetchDownstreamProjects(downstreamConfig, prefix, downstreamTreeNode) {
-  prefix = prefix || "";
+  prefix = prefix || '';
 
-  Object.keys(downstreamConfig).forEach(key => {
+  Object.keys(downstreamConfig).forEach((key) => {
     const installDir = prefix ? `${prefix}.${key}` : key;
 
     console.log(`           ===> Fetching downstream project to '${installDir}' <===`);
     const installSource = downstreamConfig[key];
     const isFile = /^\./.exec(installSource);
-    const installSourcePath = prefix ? path.resolve(DOWNSTREAM_CACHE, prefix, installSource) : path.resolve(PKG_DIR, installSource);
+    const installSourcePath = prefix
+      ? path.resolve(DOWNSTREAM_CACHE, prefix, installSource)
+      : path.resolve(PKG_DIR, installSource);
     const installSourceNormalized = isFile ? './' + path.relative(process.cwd(), installSourcePath) : installSource;
     // Extract optional git repo branch, i.e.: https://github.com/ui-router/core.git@somebranch
     const [orig, gitRepoOnly, branch] = /^(.*?)(?:\.git@(.*))?$/.exec(installSourceNormalized);
@@ -205,26 +211,28 @@ function fetchDownstreamProjects(downstreamConfig, prefix, downstreamTreeNode) {
 
 function getDownstreamInstallDirs(downstreamTreeNode) {
   const children = Object.keys(downstreamTreeNode.children);
-  const childrenInstallDirs = children.map(key => getDownstreamInstallDirs(downstreamTreeNode.children[key]));
+  const childrenInstallDirs = children.map((key) => getDownstreamInstallDirs(downstreamTreeNode.children[key]));
   return [downstreamTreeNode.installDir]
-      .concat(childrenInstallDirs)
-      .reduce((acc, arr) => acc.concat(arr), [])
-      .filter(x => !!x);
+    .concat(childrenInstallDirs)
+    .reduce((acc, arr) => acc.concat(arr), [])
+    .filter((x) => !!x);
 }
 
 function installWorkspaceDependencies(downstreamInstallDirs) {
   if (detectedPm !== 'yarn') {
-    console.log(`           ===> WARNING: --workspace option is only supported with yarn, skipping workspace setup <===`);
+    console.log(
+      `           ===> WARNING: --workspace option is only supported with yarn, skipping workspace setup <===`,
+    );
     return;
   }
 
-  const yarnWorkspacePackageJsonPath = path.resolve(DOWNSTREAM_CACHE, "package.json");
+  const yarnWorkspacePackageJsonPath = path.resolve(DOWNSTREAM_CACHE, 'package.json');
   const yarnWorkspacePackageJson = {
     private: true,
-    "workspaces": {
-      "packages": downstreamInstallDirs,
-      "nohoist": nohoist.concat([ "**/webpack", "**/karma-webpack", ])
-    }
+    workspaces: {
+      packages: downstreamInstallDirs,
+      nohoist: nohoist.concat(['**/webpack', '**/karma-webpack']),
+    },
   };
 
   fs.writeFileSync(yarnWorkspacePackageJsonPath, JSON.stringify(yarnWorkspacePackageJson, null, 2));
@@ -243,7 +251,7 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
 
   const name = downstreamTreeNode.installDir;
 
-  foldEnd = foldStart(`Running downstream tests: '${name}'`)
+  foldEnd = foldStart(`Running downstream tests: '${name}'`);
   runningTestsFor = name;
 
   console.log(`           ===> '${name}': prepping tests <===`);
@@ -274,7 +282,7 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
     localPublish(process.cwd());
     foldEnd();
 
-    downstreamChildren.forEach(child => {
+    downstreamChildren.forEach((child) => {
       runDownstreamTests(child, upstreams, downstreamTreeNode.children[child], successLog);
     });
   }
@@ -289,7 +297,7 @@ foldEnd();
 
 foldEnd = foldStart(`Fetching downstream projects`);
 const tree = { children: {} };
-fetchDownstreamProjects(projects, "", tree.children);
+fetchDownstreamProjects(projects, '', tree.children);
 foldEnd();
 
 if (yargs.argv.workspace) {
@@ -304,8 +312,8 @@ shelljs.mv(DOWNSTREAM_CACHE, TEMP_DIR);
 
 function getAllProjectKeys(tree, keyPrefix) {
   const children = Object.keys(tree.children || {});
-  const grandChildren = children.map(child => getAllProjectKeys(tree.children[child], child));
-  return children.concat(...grandChildren).map(key => keyPrefix ? `${keyPrefix}.${key}` : key);
+  const grandChildren = children.map((child) => getAllProjectKeys(tree.children[child], child));
+  return children.concat(...grandChildren).map((key) => (keyPrefix ? `${keyPrefix}.${key}` : key));
 }
 
 const successLog = [];
@@ -323,10 +331,10 @@ nodeCleanup(() => {
 });
 
 console.log(`           ===> Running the following downstream tests <===`);
-allProjectKeys.forEach(key => {
+allProjectKeys.forEach((key) => {
   console.log(`           ===> ${_.padEnd(key, 38)} <===`);
 });
 
-Object.keys(tree.children).forEach(key => {
+Object.keys(tree.children).forEach((key) => {
   runDownstreamTests(key, [pkgjson.name], tree.children[key], successLog);
 });

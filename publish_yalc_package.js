@@ -21,9 +21,7 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
   const branch = flags.branch || 'origin/master';
 
   if (!installTargetDir || !installSource) {
-    throw new Error(
-      'Usage: publish_yalc_package [INSTALL_DIR] [GITHUB_URL|LOCAL_DIR]'
-    );
+    throw new Error('Usage: publish_yalc_package [INSTALL_DIR] [GITHUB_URL|LOCAL_DIR]');
   }
 
   installTargetDir = path.resolve(installTargetDir);
@@ -65,13 +63,11 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
         `--exclude='**/.git/' ` +
         `--exclude='/node_modules/' ` +
         `--exclude='**/node_modules/' ` +
-        `"${installSourceDir}/" "${installTargetDir}/"`
+        `"${installSourceDir}/" "${installTargetDir}/"`,
     );
 
     // Commit the changes from the current package (if any)
-    util._exec(
-      'git add . && git diff --staged --quiet || git commit -m "update from source directory"'
-    );
+    util._exec('git add . && git diff --staged --quiet || git commit -m "update from source directory"');
   }
 
   // Update dependencies
@@ -81,10 +77,7 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
 
   const TEMP = tmp.dirSync();
   const TEMP_DIR = TEMP.name;
-  const BUILD_TEMP_DIR = path.resolve(
-    TEMP_DIR,
-    path.basename(installTargetDir)
-  );
+  const BUILD_TEMP_DIR = path.resolve(TEMP_DIR, path.basename(installTargetDir));
   if (!flags.noBuild || !flags.noPublish) {
     try {
       shelljs.mv(installTargetDir, TEMP_DIR);

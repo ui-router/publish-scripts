@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-"use strict";
+'use strict';
 
 const shelljs = require('shelljs');
 const path = require('path');
@@ -7,27 +7,27 @@ const fs = require('fs');
 const conventionalChangelog = require('conventional-changelog');
 const _exec = require('./util')._exec;
 const yargs = require('yargs')
-    .option('from', {
-      description: 'The starting tag'
-    })
-    .option('to', {
-      description: 'The ending tag'
-    })
-    .option('deps', {
-      description: 'Include changelogs of dependencies',
-      array: true,
-    })
-    .check(argv => {
-      if (argv.to && !argv.from)
-        throw new Error(`If you specify a 'to', you should also specify a 'from'.`);
-      return true;
-    });
+  .option('from', {
+    description: 'The starting tag',
+  })
+  .option('to', {
+    description: 'The ending tag',
+  })
+  .option('deps', {
+    description: 'Include changelogs of dependencies',
+    array: true,
+  })
+  .check((argv) => {
+    if (argv.to && !argv.from) throw new Error(`If you specify a 'to', you should also specify a 'from'.`);
+    return true;
+  });
 
 let options = {
-  preset: 'ui-router-core'
+  preset: 'ui-router-core',
 };
 
-const context = {}, gitOpts = { merges: null };
+const context = {},
+  gitOpts = { merges: null };
 const to = yargs.argv.to;
 const from = yargs.argv.from;
 const deps = yargs.argv.deps || [];
@@ -50,8 +50,8 @@ if (deps.length) {
   // If --deps was used, shell out and re-run the show_changelog command without the --deps argument
   // This is an awful hack to flush the changelog to stdout before getting the dependency changelog(s)
   // because conventional-changelog-core doesn't seem to have a callback to tap into
-  const fromArg = (from ? ` --from ${from}` : '');
-  const toArg = (to ? ` --to ${to}` : '');
+  const fromArg = from ? ` --from ${from}` : '';
+  const toArg = to ? ` --to ${to}` : '';
   let stdout = _exec(`node ${scriptPath} ${fromArg} ${toArg}`, true).stdout;
   console.log(stdout.trim());
 
@@ -69,7 +69,7 @@ if (deps.length) {
 function showDepChangelog(dependency) {
   if (typeof dependency !== 'string') throw new Error('Expected dep to be a string: ' + dependency);
 
-  const tmpdir = path.resolve(cwd, '.show_changelog.tmp', dependency.replace(/[^a-zA-Z]/g, "_"));
+  const tmpdir = path.resolve(cwd, '.show_changelog.tmp', dependency.replace(/[^a-zA-Z]/g, '_'));
 
   const pkgPath = `${cwd}/node_modules/${dependency}/package.json`;
   const pkg = JSON.parse(fs.readFileSync(pkgPath));
@@ -87,10 +87,10 @@ function showDepChangelog(dependency) {
   giturl = giturl.replace(/^git\+/, '');
 
   const from = getDepVersion(dependency, 'tag', gitOpts.from);
-  const to = (function() {
+  const to = (function () {
     if (gitOpts.to) return getDepVersion(dependency, 'tag', gitOpts.to);
     return getDepVersion(dependency, 'workingcopy');
-  }());
+  })();
 
   if (from === to) return;
 
@@ -107,7 +107,12 @@ function showDepChangelog(dependency) {
     console.log(`Changelog for \`${dependency}\`:`);
     console.log(`\n`);
     let depChangelog = _exec(`node ${scriptPath} --from ${from} --to ${to}`, true).stdout.trim();
-    console.log(depChangelog.split(/[\r\n]/).slice(1).join('\n'));
+    console.log(
+      depChangelog
+        .split(/[\r\n]/)
+        .slice(1)
+        .join('\n'),
+    );
   } finally {
     shelljs.config.silent = true;
     shelljs.popd();
@@ -135,8 +140,8 @@ function showChangelog(context, gitOpts) {
     doFlush: true,
     generateOn: function () {
       return false;
-    }
+    },
   };
   const readable = conventionalChangelog(options, context, gitOpts, undefined, writerOpts).pipe(process.stdout);
-  return new Promise(resolve => readable.on('end', resolve));
+  return new Promise((resolve) => readable.on('end', resolve));
 }

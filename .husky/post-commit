@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Format source files after commit
+npx prettier --write "*.js" "actions/**/*.js" "docgen/*.js"
+
+# If files were changed, amend the commit
+if ! git diff --quiet; then
+  git add -A
+  git commit --amend --no-edit --no-verify
+fi
+
