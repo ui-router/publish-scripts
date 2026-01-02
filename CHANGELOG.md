@@ -1,3 +1,22 @@
+## 2.6.7 (2026-01-02)
+[Compare `@uirouter/publish-scripts` versions 2.6.6 and 2.6.7](https://github.com/ui-router/publish-scripts/compare/2.6.6...2.6.7)
+
+
+---
+
+
+### Updated `check-peer-dependencies` from 4.3.2 to 4.3.3
+
+
+Changelog for `check-peer-dependencies`:
+
+
+[Compare `check-peer-dependencies` versions 4.3.2 and 4.3.3](https://github.com/christopherthielen/check-peer-dependencies/compare/4.3.2...4.3.3)
+
+### Bug Fixes
+
+* fix resolving packages that have multiple/nested package.json files ([1088836](https://github.com/christopherthielen/check-peer-dependencies/commit/1088836))
+
 ## 2.6.6 (2026-01-01)
 [Compare `@uirouter/publish-scripts` versions 2.6.5 and 2.6.6](https://github.com/ui-router/publish-scripts/compare/2.6.5...2.6.6)
 
