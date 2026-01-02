@@ -30,6 +30,21 @@ function _exec(command, silent) {
   exit(result.code)
 }
 
+function _execInteractive(command) {
+  echo(command);
+  echo();
+  const { spawnSync } = require('child_process');
+  const result = spawnSync(command, {
+    stdio: 'inherit',
+    shell: true,
+    cwd: process.cwd()
+  });
+  if (result.status === 0) return result;
+  echo(`cwd: ${process.cwd()}`);
+  echo(`Aborting; non-zero return value (${result.status}) from: ${command}`);
+  exit(result.status)
+}
+
 function asJson (obj) { return JSON.stringify(obj, null, 2); }
 
 let ensure = (type) => (path) => {
@@ -43,6 +58,7 @@ let assertFile = ensure('File');
 module.exports = {
   ensureCleanMaster: ensureCleanMaster,
   _exec: _exec,
+  _execInteractive: _execInteractive,
   asJson: asJson,
   assertDir: assertDir,
   assertFile: assertFile,

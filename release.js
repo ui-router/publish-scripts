@@ -21,10 +21,17 @@ const yargs = require('yargs')
     .option('deps', {
       description: 'Deps to include in changelog',
       array: true,
+    })
+    .option('manual-publish', {
+      alias: ['m'],
+      description: 'Skip npm publish and print instructions for manual publishing',
+      boolean: true,
+      default: false,
     });
 
 const util = require('./util');
 const _exec = util._exec;
+const _execInteractive = util._execInteractive;
 
 if (yargs.argv.dryrun) {
   console.log('Dry run mode...')
@@ -110,18 +117,38 @@ if (!yargs.argv.dryrun) {
 }
 
 
-// Publish to NPM and push to github
+// Build, tag, push to github, and publish to NPM
 if (!yargs.argv.dryrun) {
   const distDir = packageJson.distDir || '.';
+  const publishDir = path.resolve(distDir);
+
+  // Build if needed
   if (distDir !== '.' && packageJson.scripts && packageJson.scripts.build) {
     _exec('npm run build')
   }
-  shelljs.pushd(distDir);
-  _exec(`npm publish`);
-  shelljs.popd();
+
+  // Git tag and push first (before npm publish, so if npm publish fails, you can retry)
   _exec(`git tag ${version}`);
   _exec(`git push origin master`);
   _exec(`git push origin ${version}`);
+
+  // Publish to NPM
+  if (yargs.argv['manual-publish']) {
+    console.log('\n\n=======================================================');
+    console.log('MANUAL NPM PUBLISH REQUIRED');
+    console.log('=======================================================');
+    console.log('\nGit tag and push completed successfully.');
+    console.log('\nTo publish to npm, run the following commands:\n');
+    console.log(`  cd ${publishDir}`);
+    console.log(`  npm publish`);
+    console.log('\nAfter publishing, you can continue with the release process below.');
+    console.log('=======================================================\n');
+  } else {
+    console.log('\nPublishing to npm (you may be prompted for 2FA)...\n');
+    shelljs.pushd(distDir);
+    _execInteractive(`npm publish`);
+    shelljs.popd();
+  }
 }
 
 

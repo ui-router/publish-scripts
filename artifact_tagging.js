@@ -8,6 +8,7 @@ const readlineSync = require('readline-sync');
 const fs = require('fs');
 const path = require('path');
 let _exec = util._exec;
+let _execInteractive = util._execInteractive;
 
 const CONFIG = JSON.parse(fs.readFileSync('./artifacts.json'));
 const COMMIT_ARTIFACTS = CONFIG.ARTIFACTS;
@@ -89,8 +90,9 @@ if (npm) {
   if (!latest) {
     throw new Error(`Could not determine value of "latest" dist-tag for ${pkg.name}`);
   }
-  
-  _exec(`npm publish`);
+
+  console.log('\nPublishing to npm (you may be prompted for 2FA)...\n');
+  _execInteractive(`npm publish`);
   _exec(`npm dist-tag add ${pkg.name}@${latest[1]} latest`);
 }
 
