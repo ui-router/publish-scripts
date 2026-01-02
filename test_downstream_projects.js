@@ -15,7 +15,7 @@ const yargs = require('yargs')
     })
     .option('workspace', {
       alias: 'ws',
-      description: 'use yarn workspace to save space',
+      description: 'use yarn workspace to save space (yarn only)',
     });
 
 const nodeCleanup = require('node-cleanup');
@@ -33,8 +33,10 @@ const foldStart = (message) => {
 let foldEnd = () => null;
 
 const util = require('./util');
+const { pkgMgrCommands, pm } = util;
 util.packageDir();
 const PKG_DIR = process.cwd();
+const detectedPm = pm();
 
 const pkgjson = JSON.parse(fs.readFileSync('package.json'));
 const DOWNSTREAM_PKGS = (process.env.DOWNSTREAM_PKGS || '').split(',').filter(x => x);
@@ -104,12 +106,13 @@ function localPublish(packageDir) {
   });
 
   if (yalcPackages.length) {
-    console.log(`           ===> De-yalc'ed ${yalcPackages.join(', ')} from ${packageDir}/package.json using ${packageDir}/yarn.lock <===`)
+    const lockfileName = pkgMgrCommands().lockfileName;
+    console.log(`           ===> De-yalc'ed ${yalcPackages.join(', ')} from ${packageDir}/package.json using ${packageDir}/${lockfileName} <===`)
     fs.writeFileSync('package.json', JSON.stringify(package, null, 2));
   }
 
   if (distDir !== '.' && package.scripts && package.scripts.build) {
-    util._exec('npm run build')
+    util._exec(pkgMgrCommands().run('build'))
   }
 
   shelljs.pushd(distDir);
@@ -127,22 +130,44 @@ function installUpstreamDeps(upstreamPackages) {
     util._exec('npx yalc add ' + upstream);
   });
 
-  upstreamPackages.forEach(upstream => {
-    const package = JSON.parse(fs.readFileSync('package.json'));
-    const yalcDep = (package.dependencies || {})[upstream] || (package.devDependencies || {})[upstream];
-    package.resolutions = package.resolutions || {};
-    package.resolutions[upstream] = yalcDep;
-    fs.writeFileSync('package.json', JSON.stringify(package, null, 2));
-  });
+  // Resolutions are yarn-specific, only add them for yarn
+  if (detectedPm === 'yarn') {
+    upstreamPackages.forEach(upstream => {
+      const package = JSON.parse(fs.readFileSync('package.json'));
+      const yalcDep = (package.dependencies || {})[upstream] || (package.devDependencies || {})[upstream];
+      package.resolutions = package.resolutions || {};
+      package.resolutions[upstream] = yalcDep;
+      fs.writeFileSync('package.json', JSON.stringify(package, null, 2));
+    });
+  } else if (detectedPm === 'pnpm') {
+    // pnpm uses overrides in package.json
+    upstreamPackages.forEach(upstream => {
+      const package = JSON.parse(fs.readFileSync('package.json'));
+      const yalcDep = (package.dependencies || {})[upstream] || (package.devDependencies || {})[upstream];
+      package.pnpm = package.pnpm || {};
+      package.pnpm.overrides = package.pnpm.overrides || {};
+      package.pnpm.overrides[upstream] = yalcDep;
+      fs.writeFileSync('package.json', JSON.stringify(package, null, 2));
+    });
+  } else {
+    // npm uses overrides in package.json (npm 8.3+)
+    upstreamPackages.forEach(upstream => {
+      const package = JSON.parse(fs.readFileSync('package.json'));
+      const yalcDep = (package.dependencies || {})[upstream] || (package.devDependencies || {})[upstream];
+      package.overrides = package.overrides || {};
+      package.overrides[upstream] = yalcDep;
+      fs.writeFileSync('package.json', JSON.stringify(package, null, 2));
+    });
+  }
 
   // Install updated deps from the upstream
   // If local changes point to a new version of @uirouter/core, for example
-  util._exec('npx yarn');
+  util._exec(pkgMgrCommands().install());
   util._exec('npx check-peer-dependencies --install');
 }
 
 function runTests() {
-  util._exec(`npm test`);
+  util._exec(pkgMgrCommands().test());
 }
 
 function fetchDownstreamProjects(downstreamConfig, prefix, downstreamTreeNode) {
@@ -188,6 +213,11 @@ function getDownstreamInstallDirs(downstreamTreeNode) {
 }
 
 function installWorkspaceDependencies(downstreamInstallDirs) {
+  if (detectedPm !== 'yarn') {
+    console.log(`           ===> WARNING: --workspace option is only supported with yarn, skipping workspace setup <===`);
+    return;
+  }
+
   const yarnWorkspacePackageJsonPath = path.resolve(DOWNSTREAM_CACHE, "package.json");
   const yarnWorkspacePackageJson = {
     private: true,
@@ -199,7 +229,7 @@ function installWorkspaceDependencies(downstreamInstallDirs) {
 
   fs.writeFileSync(yarnWorkspacePackageJsonPath, JSON.stringify(yarnWorkspacePackageJson, null, 2));
   process.chdir(DOWNSTREAM_CACHE);
-  util._exec('yarn');
+  util._exec(pkgMgrCommands().install());
 }
 
 let runningTestsFor;
@@ -221,7 +251,7 @@ function runDownstreamTests(key, upstreamPackages, downstreamTreeNode, successLo
 
   if (!yargs.argv.workspace) {
     console.log(`           ===> '${name}': Installing dependencies <===`);
-    util._exec('yarn');
+    util._exec(pkgMgrCommands().install());
   }
 
   console.log(`           ===> '${name}': Installing freshly built upstream packages <===`);
@@ -300,4 +330,3 @@ allProjectKeys.forEach(key => {
 Object.keys(tree.children).forEach(key => {
   runDownstreamTests(key, [pkgjson.name], tree.children[key], successLog);
 });
-

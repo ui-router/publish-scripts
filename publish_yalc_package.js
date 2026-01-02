@@ -6,12 +6,13 @@
 
 // The script leaves the files in place after publishing.
 // This can be handy in Travis which can cache the directory contents.
-// After caching, subsequent re-runs of this script won't have to fetch the git repository (or do much for `yarn install`).
+// After caching, subsequent re-runs of this script won't have to fetch the git repository (or do much for package install).
 const fs = require('fs');
 const path = require('path');
 const shelljs = require('shelljs');
 const tmp = require('tmp');
 const util = require('./util');
+const { pkgMgrCommands } = util;
 
 const ORIG_DIR = process.cwd();
 
@@ -20,12 +21,14 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
   const branch = flags.branch || 'origin/master';
 
   if (!installTargetDir || !installSource) {
-    throw new Error('Usage: publish_yalc_package [INSTALL_DIR] [GITHUB_URL|LOCAL_DIR]');
+    throw new Error(
+      'Usage: publish_yalc_package [INSTALL_DIR] [GITHUB_URL|LOCAL_DIR]'
+    );
   }
 
   installTargetDir = path.resolve(installTargetDir);
   const isRemoteSource = !/^\./.exec(installSource);
-  const installTargetDirTmp = path.join(installTargetDir, ".tmp");
+  const installTargetDirTmp = path.join(installTargetDir, '.tmp');
   const installSourceDir = isRemoteSource ? null : path.resolve(installSource);
 
   // Create directory and clone git repo or copy from directory, when no cached repo exists yet
@@ -52,27 +55,36 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
   } else {
     // Update the cached git repo with the current package contents
     process.chdir(installTargetDir);
-    util._exec(`rsync -a --delete `+
-        `--exclude='/yarn.lock' `+
-        `--exclude='/yalc.lock' `+
-        `--exclude='/.git/' `+
-        `--exclude='**/.git/' `+
-        `--exclude='/node_modules/' `+
-        `--exclude='**/node_modules/' `+
-        `"${installSourceDir}/" "${installTargetDir}/"`);
+    util._exec(
+      `rsync -a --delete ` +
+        `--exclude='/yarn.lock' ` +
+        `--exclude='/package-lock.json' ` +
+        `--exclude='/pnpm-lock.yaml' ` +
+        `--exclude='/yalc.lock' ` +
+        `--exclude='/.git/' ` +
+        `--exclude='**/.git/' ` +
+        `--exclude='/node_modules/' ` +
+        `--exclude='**/node_modules/' ` +
+        `"${installSourceDir}/" "${installTargetDir}/"`
+    );
 
     // Commit the changes from the current package (if any)
-    util._exec('git add . && git diff --staged --quiet || git commit -m "update from source directory"');
+    util._exec(
+      'git add . && git diff --staged --quiet || git commit -m "update from source directory"'
+    );
   }
 
   // Update dependencies
   if (!flags.noInstall) {
-    util._exec('yarn install --check-files');
+    util._exec(pkgMgrCommands().install());
   }
 
   const TEMP = tmp.dirSync();
   const TEMP_DIR = TEMP.name;
-  const BUILD_TEMP_DIR = path.resolve(TEMP_DIR, path.basename(installTargetDir));
+  const BUILD_TEMP_DIR = path.resolve(
+    TEMP_DIR,
+    path.basename(installTargetDir)
+  );
   if (!flags.noBuild || !flags.noPublish) {
     try {
       shelljs.mv(installTargetDir, TEMP_DIR);
@@ -82,7 +94,7 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
       if (!flags.noBuild) {
         // Build package
         if (pkgJson.scripts && pkgJson.scripts.build) {
-          util._exec('npm run build');
+          util._exec(pkgMgrCommands().run('build'));
         }
       }
 
@@ -104,7 +116,7 @@ function publishYalcPackage(installTargetDir, installSource, flags) {
 }
 
 if (require.main === module) {
-  publishYalcPackage(process.argv[2], process.argv[3])
+  publishYalcPackage(process.argv[2], process.argv[3]);
 }
 
 module.exports = publishYalcPackage;
