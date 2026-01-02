@@ -1,3 +1,13 @@
+## 2.6.8 (2026-01-02)
+[Compare `@uirouter/publish-scripts` versions 2.6.7 and 2.6.8](https://github.com/ui-router/publish-scripts/compare/2.6.7...2.6.8)
+
+### Features
+
+* add npm 2FA support and manual publish option ([ef720ff](https://github.com/ui-router/publish-scripts/commit/ef720ff))
+
+
+
+
 ## 2.6.7 (2026-01-02)
 [Compare `@uirouter/publish-scripts` versions 2.6.6 and 2.6.7](https://github.com/ui-router/publish-scripts/compare/2.6.6...2.6.7)
 
