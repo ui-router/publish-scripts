@@ -1,3 +1,10 @@
+# 2.7.0 (2026-01-02)
+[Compare `@uirouter/publish-scripts` versions 2.6.8 and 2.7.0](https://github.com/ui-router/publish-scripts/compare/2.6.8...2.7.0)
+
+### Features
+
+* add support for yarn, npm, and pnpm package managers ([edb3628](https://github.com/ui-router/publish-scripts/commit/edb3628))
+
 ## 2.6.8 (2026-01-02)
 [Compare `@uirouter/publish-scripts` versions 2.6.7 and 2.6.8](https://github.com/ui-router/publish-scripts/compare/2.6.7...2.6.8)
 
